@@ -1,0 +1,126 @@
+import React, { useState, useEffect } from "react";
+import { FloatingDock } from "@/components/ui/floating-dock";
+import { cn } from "@/lib/utils";
+import {
+    Home,
+    User,
+    ShoppingBag,
+    Award,
+    Leaf,
+    Mail
+} from "lucide-react";
+
+import logo from '../assets/logo-white.png';
+
+const Navbar = ({ isHome }) => {
+    const [isVisible, setIsVisible] = useState(!isHome);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            // Priority 1: Hide if footer is visible
+            const footer = document.getElementById('main-footer');
+            if (footer) {
+                const rect = footer.getBoundingClientRect();
+                // If footer is entering the viewport (with a small buffer)
+                if (rect.top < window.innerHeight) {
+                    setIsVisible(false);
+                    return;
+                }
+            }
+
+            // Priority 2: Non-home pages are always visible (unless footer is visible)
+            if (!isHome) {
+                setIsVisible(true);
+                return;
+            }
+
+            // Priority 3: Home page logic (IntroSequence)
+            // IntroSequence is now 200vh. Show navbar as it completes.
+            if (window.scrollY > window.innerHeight * 1.5) {
+                setIsVisible(true);
+            } else {
+                setIsVisible(false);
+            }
+        };
+
+        // Initial check
+        handleScroll();
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, [isHome]);
+
+    const links = [
+        {
+            title: "Asia Cotton",
+            icon: (
+                <img
+                    src={logo}
+                    className="h-full w-full object-contain rounded-full"
+                    alt="Asia Cotton"
+                />
+            ),
+            href: "/",
+            className: "bg-white dark:bg-white",
+        },
+        {
+            title: "Home",
+            icon: (
+                <Home className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+            ),
+            href: "/",
+        },
+        {
+            title: "About Us",
+            icon: (
+                <User className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+            ),
+            href: "/about",
+        },
+        {
+            title: "Products",
+            icon: (
+                <ShoppingBag className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+            ),
+            href: "/products",
+        },
+        {
+            title: "Certifications",
+            icon: (
+                <Award className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+            ),
+            href: "/certifications",
+        },
+        {
+            title: "Sustainability",
+            icon: (
+                <Leaf className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+            ),
+            href: "/sustainability",
+        },
+        {
+            title: "Contact",
+            icon: (
+                <Mail className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+            ),
+            href: "/contact",
+        },
+    ];
+
+    return (
+        <div className={cn(
+            "fixed z-50 pointer-events-none transition-all duration-500 ease-in-out",
+            "bottom-8 left-1/2 -translate-x-1/2 md:bottom-auto md:top-8 md:left-8 md:translate-x-0",
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 md:translate-y-0 md:-translate-x-4"
+        )}>
+            <div className="pointer-events-auto">
+                <FloatingDock
+                    items={links}
+                    mobileDirection="up"
+                />
+            </div>
+        </div>
+    );
+};
+
+export default Navbar;
