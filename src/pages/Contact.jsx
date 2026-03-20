@@ -47,9 +47,9 @@ const Contact = () => {
 
 
 
-            <main className="h-screen flex flex-row relative overflow-hidden pt-20">
+            <main className="min-h-screen flex flex-col md:flex-row relative overflow-hidden pt-20">
                 {/* Left Side (50%): Contact Content */}
-                <div className="w-1/2 h-full p-12 lg:p-24 flex flex-col justify-center bg-white/40 backdrop-blur-xl border-r border-[#2D6A6A]/10 z-20 relative">
+                <div className="w-full md:w-1/2 h-auto md:h-full px-6 py-12 md:p-12 lg:p-24 flex flex-col justify-center bg-white/40 backdrop-blur-xl md:border-r border-[#2D6A6A]/10 z-20 relative">
                     <BackgroundGrid color="#2D6A6A" opacity={0.02} />
 
                     <div className="relative z-10 text-left max-w-xl mx-auto w-full">
@@ -112,7 +112,7 @@ const Contact = () => {
                 </div>
 
                 {/* Right Side (50%): Map */}
-                <div className="w-1/2 h-full relative overflow-hidden p-12 lg:p-24">
+                <div className="w-full md:w-1/2 h-[50vh] md:h-full relative overflow-hidden p-6 md:p-12 lg:p-24">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98 }}
                         animate={{ opacity: 1, scale: 1 }}

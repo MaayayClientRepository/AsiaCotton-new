@@ -168,12 +168,12 @@ const IntroSequence = () => {
                         showCursor={true}
                         cursorCharacter="_"
                         cursorClassName="text-[#E11D48] font-bold"
-                        className="text-5xl md:text-8xl font-black text-black leading-tight selection:bg-[#E11D48]/20"
+                        className="text-3xl md:text-5xl lg:text-8xl font-black text-black leading-tight selection:bg-[#E11D48]/20"
                     />
                 </motion.div>
 
                 {/* Subtle Progress Bar */}
-                <div className="absolute left-10 top-1/2 -translate-y-1/2 h-32 w-[1px] bg-neutral-100 z-[90] transform-gpu">
+                <div className="absolute left-10 top-1/2 -translate-y-1/2 h-32 w-[1px] bg-neutral-100 z-[90] transform-gpu hidden md:block">
                     <motion.div
                         style={{ height: useTransform(smoothProgress, [0, 1], ["0%", "100%"]) }}
                         className="w-full bg-[#E11D48] origin-top transform-gpu"

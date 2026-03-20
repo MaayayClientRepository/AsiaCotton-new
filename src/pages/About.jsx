@@ -54,9 +54,9 @@ const AboutPage = () => {
     return (
         <div className="bg-[#F9FAFB] min-h-screen font-['Inter'] overflow-x-hidden transform-gpu">
             {/* Part 1: Integrated Hero Split View (Brand + Factory) */}
-            <section className="flex flex-col lg:flex-row min-h-[auto] md:min-h-[80vh] lg:min-h-[90vh] pt-0 pb-20 lg:pb-0 transform-gpu overflow-hidden">
+            <section className="flex flex-col lg:flex-row min-h-[auto] md:min-h-[80vh] lg:min-h-[90vh] pt-0 pb-12 lg:pb-0 transform-gpu overflow-hidden">
                 {/* Left Side: Brand Heritage (Cream) */}
-                <div className="w-full lg:w-1/2 bg-[#FDFCF0] px-6 py-12 md:px-12 lg:p-24 flex flex-col justify-center relative overflow-hidden transform-gpu">
+                <div className="w-full lg:w-1/2 bg-[#FDFCF0] px-6 py-10 md:px-12 lg:p-24 flex flex-col justify-center relative overflow-hidden transform-gpu pt-24 lg:pt-24">
                     <BackgroundGrid color="#2D6A6A" opacity={0.05} />
                     {/* Decorative background elements */}
                     <div className="absolute top-1/4 -left-20 w-80 h-80 bg-[#2D6A6A] rounded-full blur-[120px] opacity-10 transform-gpu"></div>
@@ -66,7 +66,7 @@ const AboutPage = () => {
                             initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                            className="text-[#2D6A6A] text-4xl md:text-6xl font-black leading-none tracking-tight transform-gpu will-change-transform"
+                            className="text-[#2D6A6A] text-3xl md:text-6xl font-black leading-none tracking-tight transform-gpu will-change-transform"
                         >
                             MORE THAN <br /> FABRIC
                         </motion.h1>
@@ -92,7 +92,7 @@ const AboutPage = () => {
                 </div>
 
                 {/* Right Side: Factory Showcase (Teal) */}
-                <div className="w-full lg:w-1/2 bg-[#2D6A6A] text-white px-6 py-12 md:px-12 lg:p-24 flex flex-col justify-center relative transform-gpu overflow-hidden">
+                <div className="w-full lg:w-1/2 bg-[#2D6A6A] text-white px-6 py-10 md:px-12 lg:p-24 flex flex-col justify-center relative transform-gpu overflow-hidden">
                     <BackgroundGrid color="#FFFFFF" opacity={0.08} />
                     {/* Decorative blur */}
                     <div className="absolute top-1/2 -right-20 w-80 h-80 bg-white/10 rounded-full blur-[120px] opacity-10 transform-gpu"></div>
@@ -151,29 +151,29 @@ const AboutPage = () => {
             </section>
 
             {/* Part 2: Commitment Section (Stay as requested with Bounce cards) */}
-            <section className="py-20 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 transform-gpu relative overflow-hidden">
+            <section className="py-12 md:py-20 max-w-7xl mx-auto px-6 md:px-12 lg:px-24 transform-gpu relative overflow-hidden">
                 <BackgroundGrid color="#000000" opacity={0.03} />
                 <div className="flex flex-col space-y-12 items-center transform-gpu relative z-10">
                     <div className="space-y-4 text-center max-w-2xl transform-gpu">
-                        <h2 className="text-[#1A1A1A] text-3xl md:text-5xl font-black uppercase tracking-tight leading-none">Our <br /><span className="text-[#2D6A6A]">Commitment</span></h2>
+                        <h2 className="text-[#1A1A1A] text-2xl md:text-5xl font-black uppercase tracking-tight leading-none">Our <br /><span className="text-[#2D6A6A]">Commitment</span></h2>
                         <div className="w-16 h-1 bg-[#2D6A6A] mx-auto"></div>
                         <p className="text-gray-600 text-lg leading-relaxed font-medium">
                             For over 25 years since our founding, we are driven by a passion to produce exceptional textiles while staying true to our values of responsibility, innovation, and integrity.
                         </p>
                     </div>
 
-                    <div className="w-full flex justify-center scale-90 md:scale-100 origin-top">
+                    <div className="w-full flex justify-center scale-75 md:scale-100 origin-top">
                         <BounceCards
                             data={features}
                             containerWidth="100%"
-                            containerHeight={550}
+                            containerHeight={400}
                         />
                     </div>
                 </div>
             </section>
 
             {/* Part 3: Sustainability */}
-            <section className="py-20 bg-[#2D6A6A] text-white transform-gpu relative overflow-hidden">
+            <section className="py-12 md:py-20 bg-[#2D6A6A] text-white transform-gpu relative overflow-hidden">
                 <BackgroundGrid color="#FFFFFF" opacity={0.1} />
                 <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 text-center transform-gpu relative z-10">
                     <motion.span
@@ -183,7 +183,7 @@ const AboutPage = () => {
                     >
                         🌿
                     </motion.span>
-                    <h2 className="text-3xl md:text-5xl font-black uppercase mb-6">Ethical & Sustainable <br /><span className="text-[#FACC15]">Manufacturing</span></h2>
+                    <h2 className="text-2xl md:text-5xl font-black uppercase mb-6">Ethical & Sustainable <br /><span className="text-[#FACC15]">Manufacturing</span></h2>
                     <p className="text-lg font-medium leading-relaxed opacity-90 max-w-2xl mx-auto mb-16">
                         Every product is crafted with care, using responsibly sourced materials and environmentally mindful processes, reflecting our deep commitment to ethical and sustainable manufacturing.
                     </p>

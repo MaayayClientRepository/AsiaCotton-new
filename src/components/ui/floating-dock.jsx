@@ -42,7 +42,7 @@ const FloatingDockMobile = ({
                         layoutId="nav"
                         className={cn(
                             "absolute flex flex-col gap-3 p-4 rounded-[2rem] bg-white/80 backdrop-blur-2xl border border-black/5 shadow-[0_20px_50px_rgba(0,0,0,0.15)]",
-                            direction === "up" ? "bottom-full mb-4 left-1/2 -translate-x-1/2 w-[85vw]" : "top-full mt-4 left-1/2 -translate-x-1/2 w-[85vw]"
+                            direction === "up" ? "bottom-full mb-4 right-0 w-[75vw] max-w-[320px]" : "top-full mt-4 right-0 w-[75vw] max-w-[320px]"
                         )}
                     >
                         {items.map((item, idx) => (

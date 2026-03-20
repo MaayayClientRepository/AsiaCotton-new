@@ -155,7 +155,7 @@ const Products = () => {
             <div className="grain-overlay" />
             <main className="min-h-screen lg:h-screen flex flex-col lg:flex-row relative lg:overflow-hidden transform-gpu">
                 {/* Left Side (25%): Navigation & Content */}
-                <div className="w-full lg:w-[25%] h-auto lg:h-full p-8 lg:p-12 xl:p-16 flex flex-col justify-center bg-white/40 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-black/5 z-20 relative pt-32 lg:pt-40">
+                <div className="w-full lg:w-[25%] h-auto lg:h-full p-6 md:p-8 lg:p-12 xl:p-16 flex flex-col justify-center bg-white/40 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-black/5 z-20 relative pt-24 lg:pt-40">
                     <BackgroundGrid color="#2D6A6A" opacity={0.02} />
 
                     <div className="relative z-10 text-left">
@@ -192,13 +192,13 @@ const Products = () => {
 
                 {/* Right Side (75%): Product Folders */}
                 <div className="w-full lg:w-[75%] h-auto lg:h-full bg-[#FDFCF0]/50 overflow-y-auto lg:overflow-hidden transform-gpu">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full h-full">
+                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 w-full h-full">
                         {categories.map((category) => (
                             <div
                                 key={category.id}
-                                className="flex flex-col items-center justify-center border-b border-r border-black/[0.03] last:border-r-0 p-4 hover:bg-white/10 transition-colors duration-300"
+                                className="flex flex-col items-center justify-center border-b border-r border-black/[0.03] last:border-r-0 p-3 md:p-4 hover:bg-white/10 transition-colors duration-300"
                             >
-                                <div className="h-[200px] lg:h-[240px] w-full flex items-center justify-center relative mb-4">
+                                <div className="h-[150px] md:h-[200px] lg:h-[240px] w-full flex items-center justify-center relative mb-2 md:mb-4">
                                     {activeFolderId === category.id ? (
                                         <div className="w-full h-full" />
                                     ) : (
@@ -210,18 +210,18 @@ const Products = () => {
                                                 color={category.color}
                                                 title={category.title}
                                                 images={category.allImages}
-                                                size={1.6}
+                                                size={typeof window !== 'undefined' && window.innerWidth < 768 ? 1.1 : 1.6}
                                                 onFolderClick={() => setActiveFolderId(category.id)}
                                             />
                                         </motion.div>
                                     )}
                                 </div>
 
-                                <div className="space-y-1 text-center">
-                                    <h3 className="text-sm lg:text-lg font-black uppercase tracking-tighter text-[#1A1A1A]">
+                                <div className="space-y-0.5 md:space-y-1 text-center">
+                                    <h3 className="text-xs md:text-lg font-black uppercase tracking-tighter text-[#1A1A1A]">
                                         {category.title}
                                     </h3>
-                                    <p className="text-[7px] tracking-[0.4em] font-black uppercase opacity-20">
+                                    <p className="text-[6px] md:text-[7px] tracking-[0.4em] font-black uppercase opacity-20">
                                         {category.tagline}
                                     </p>
                                 </div>

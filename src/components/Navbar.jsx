@@ -110,7 +110,7 @@ const Navbar = ({ isHome }) => {
     return (
         <div className={cn(
             "fixed z-50 pointer-events-none transition-all duration-500 ease-in-out",
-            "bottom-8 left-1/2 -translate-x-1/2 md:bottom-auto md:top-8 md:left-8 md:translate-x-0",
+            "bottom-6 right-6 md:bottom-auto md:right-auto md:top-8 md:left-8",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 md:translate-y-0 md:-translate-x-4"
         )}>
             <div className="pointer-events-auto">

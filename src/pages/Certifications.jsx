@@ -91,14 +91,14 @@ const Certifications = () => {
 
             <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen">
                 {/* Left Side: Title and Content */}
-                <div className="w-full lg:w-[40%] flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 pb-12 lg:py-0 relative z-20">
+                <div className="w-full lg:w-[40%] flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-20 pb-8 md:pt-24 md:pb-12 lg:py-0 relative z-20">
                     <motion.div
                         initial={{ opacity: 0, x: -30, scale: 0.98 }}
                         animate={{ opacity: 1, x: 0, scale: 1 }}
                         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                         className="transform-gpu will-change-transform text-center lg:text-left"
                     >
-                        <h1 className="text-[clamp(2.5rem,6vw,5.5rem)] font-bold leading-[0.85] tracking-tighter text-black mb-8 md:mb-12">
+                        <h1 className="text-[clamp(2rem,6vw,5.5rem)] font-bold leading-[0.85] tracking-tighter text-black mb-6 md:mb-12">
                             our <br className="hidden lg:block" /> accreditations
                         </h1>
                         <p className="text-base md:text-xl text-black/70 max-w-md mx-auto lg:mx-0 leading-relaxed font-medium">
@@ -108,7 +108,7 @@ const Certifications = () => {
                 </div>
 
                 {/* Right Side: Scroll Stack of Certificates */}
-                <div className="w-full lg:w-[60%] h-[60vh] lg:h-full relative z-10">
+                <div className="w-full lg:w-[60%] h-[55vh] md:h-[60vh] lg:h-full relative z-10">
                     <ScrollStack
                         itemDistance={40}
                         itemScale={0.02}
