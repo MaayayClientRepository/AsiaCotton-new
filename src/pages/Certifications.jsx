@@ -5,7 +5,6 @@ import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
 
 // Import certification images
 import cert1 from '../assets/cert/cert1.png';
-import cert2 from '../assets/cert/cert2.png';
 import cert3 from '../assets/cert/cert3.png';
 import cert4 from '../assets/cert/cert4.png';
 import cert5 from '../assets/cert/cert5.png';
@@ -21,13 +20,7 @@ const certificationData = [
         image: cert1,
         color: "#FDFBF2"
     },
-    {
-        name: "Sedex",
-        subtitle: "Responsible Trade",
-        desc: "Empowering responsible supply chains through data-driven collaboration.",
-        image: cert2,
-        color: "#F0F9FF"
-    },
+
     {
         name: "GOTS",
         subtitle: "Organic Textile Standard",
@@ -78,7 +71,7 @@ const Certifications = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#FEDC56] font-['Outfit'] selection:bg-black selection:text-[#FEDC56] relative overflow-hidden">
+        <div className="min-h-screen bg-[#FEDC56] font-['Outfit'] selection:bg-[#6a6664] selection:text-[#FEDC56] relative overflow-hidden">
             <BackgroundGrid color="#000000" opacity={0.05} />
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');

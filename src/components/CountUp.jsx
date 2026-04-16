@@ -10,6 +10,8 @@ export default function CountUp({
     className = '',
     startWhen = true,
     separator = '',
+    prefix = '',
+    suffix = '',
     onStart,
     onEnd
 }) {
@@ -54,10 +56,11 @@ export default function CountUp({
             };
 
             const formattedNumber = Intl.NumberFormat('en-US', options).format(latest);
-
-            return separator ? formattedNumber.replace(/,/g, separator) : formattedNumber;
+            const value = separator ? formattedNumber.replace(/,/g, separator) : formattedNumber;
+            
+            return `${prefix}${value}${suffix}`;
         },
-        [maxDecimals, separator]
+        [maxDecimals, separator, prefix, suffix]
     );
 
     useEffect(() => {

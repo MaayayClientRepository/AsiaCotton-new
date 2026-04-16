@@ -75,13 +75,13 @@ export const AnimatedTestimonials = ({
                 <div className="absolute bottom-4 right-4 flex gap-2 z-[100]">
                     <button
                         onClick={handlePrev}
-                        className="h-8 w-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors backdrop-blur-sm"
+                        className="h-8 w-8 rounded-full bg-[#6a6664]/50 hover:bg-[#6a6664]/70 flex items-center justify-center transition-colors backdrop-blur-sm"
                     >
                         <IconArrowLeft className="h-5 w-5 text-white" />
                     </button>
                     <button
                         onClick={handleNext}
-                        className="h-8 w-8 rounded-full bg-black/50 hover:bg-black/70 flex items-center justify-center transition-colors backdrop-blur-sm"
+                        className="h-8 w-8 rounded-full bg-[#6a6664]/50 hover:bg-[#6a6664]/70 flex items-center justify-center transition-colors backdrop-blur-sm"
                     >
                         <IconArrowRight className="h-5 w-5 text-white" />
                     </button>

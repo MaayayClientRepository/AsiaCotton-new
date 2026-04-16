@@ -23,11 +23,6 @@ const Home = () => {
         window.scrollTo(0, 0);
     }, []);
 
-    const stats = [
-        { to: 25, suffix: "+", label: "Years of Excellence", icon: <History className="w-8 h-8 text-[#E11D48]" /> },
-        { to: 100, suffix: "K+", label: "Sq Ft Production Facility", icon: <Factory className="w-8 h-8 text-[#E11D48]" /> }
-    ];
-
     return (
         <div className="min-h-screen bg-[#FDFBF2] font-['Outfit'] selection:bg-[#2B6B6D] selection:text-white">
             <style>{`
@@ -79,7 +74,7 @@ const Home = () => {
                             >
                                 <Link
                                     to="/about"
-                                    className="inline-flex items-center gap-3 bg-[#E11D48] text-white px-8 md:px-10 py-3 md:py-4 rounded-full font-black uppercase tracking-[0.2em] text-xs hover:bg-[#1A1A1A] transition-all duration-300 shadow-xl group"
+                                    className="inline-flex items-center gap-3 bg-[#E11D48] text-white px-8 md:px-10 py-3 md:py-4 rounded-full font-black uppercase tracking-[0.2em] text-xs hover:bg-[#6a6664] transition-all duration-300 shadow-xl group"
                                 >
                                     Learn More
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -104,7 +99,7 @@ const Home = () => {
                                 </h2>
                                 <div className="max-w-xl mx-auto">
                                     <TextGenerateEffect
-                                        words="Our 1,00,000+ sq ft state-of-the-art facility combines advanced technology with skilled craftsmanship to produce premium textiles that meet international standards."
+                                        words="Our state-of-the-art facility combines advanced technology with skilled craftsmanship to produce premium textiles that meet international standards."
                                         className="text-base md:text-xl text-black/80 font-medium leading-relaxed mb-8 md:mb-12"
                                         filter={false}
                                         onComplete={handleFactoryComplete}
@@ -119,7 +114,7 @@ const Home = () => {
                             >
                                 <Link
                                     to="/products"
-                                    className="inline-flex items-center gap-3 bg-[#E11D48] text-white px-8 md:px-10 py-3 md:py-4 rounded-full font-black uppercase tracking-[0.2em] text-xs hover:bg-[#1A1A1A] transition-all duration-300 shadow-xl group"
+                                    className="inline-flex items-center gap-3 bg-[#E11D48] text-white px-8 md:px-10 py-3 md:py-4 rounded-full font-black uppercase tracking-[0.2em] text-xs hover:bg-[#6a6664] transition-all duration-300 shadow-xl group"
                                 >
                                     Explore Products
                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -157,7 +152,7 @@ const Home = () => {
                         <div className="grid grid-cols-2 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
                             {[
                                 { value: 25, suffix: "+", label: "Years of Excellence", sub: "Since 1997" },
-                                { value: 100, suffix: "K+", label: "Sq Ft Production Facility", sub: "Capacity" }
+                                { value: 500, suffix: "+", label: "Artisans Employed", sub: "Craftsmanship" }
                             ].map((stat, idx) => (
                                 <motion.div
                                     key={idx}
@@ -214,7 +209,7 @@ const Home = () => {
                             className="aspect-video bg-[#2D6A6A] rounded-2xl md:rounded-[3rem] overflow-hidden relative shadow-2xl group transform-gpu will-change-transform"
                         >
                             <img src={cottonBg} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[3s] transform-gpu" />
-                            <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                            <div className="absolute inset-0 bg-[#6a6664]/20 flex items-center justify-center">
                                 <Globe className="text-white w-32 h-32 animate-spin-slow opacity-20 transform-gpu" />
                             </div>
                         </motion.div>
@@ -222,7 +217,7 @@ const Home = () => {
                 </section>
 
                 {/* 6. CTA Section */}
-                <section id="main-footer" className="pt-20 md:pt-40 pb-8 px-6 md:px-12 lg:px-24 bg-[#1A1A1A] text-white transform-gpu relative overflow-hidden">
+                <section id="main-footer" className="pt-20 md:pt-40 pb-8 px-6 md:px-12 lg:px-24 bg-[#6a6664] text-white transform-gpu relative overflow-hidden">>
                     <BackgroundGrid color="#FFFFFF" opacity={0.1} />
                     <div className="max-w-7xl mx-auto text-center space-y-12 relative z-10">
                         <motion.h2

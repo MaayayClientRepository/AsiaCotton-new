@@ -206,7 +206,7 @@ const Sustainability = () => {
                 </section>
 
                 {/* Stats Section */}
-                <section className="bg-[#1A1A1A] py-16 md:py-32 px-6 md:px-12 lg:px-24 text-white transform-gpu relative overflow-hidden">
+                <section className="bg-[#6a6664] py-16 md:py-32 px-6 md:px-12 lg:px-24 text-white transform-gpu relative overflow-hidden">
                     <BackgroundGrid color="#FFFFFF" opacity={0.1} />
                     <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12 text-center relative z-10">
                         {indicators.map((stat, idx) => (

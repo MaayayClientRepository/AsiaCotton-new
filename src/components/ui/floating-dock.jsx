@@ -61,7 +61,7 @@ const FloatingDockMobile = ({
                                 <Link
                                     to={item.href}
                                     onClick={() => setOpen(false)}
-                                    className="flex items-center gap-4 py-3 px-4 rounded-2xl hover:bg-black/5 transition-colors group active:scale-[0.98] transform-gpu"
+                                    className="flex items-center gap-4 py-3 px-4 rounded-2xl hover:bg-[#6a6664]/5 transition-colors group active:scale-[0.98] transform-gpu"
                                 >
                                     <div className="h-6 w-6 flex items-center justify-center text-neutral-600 group-hover:text-black transition-colors">{item.icon}</div>
                                     <span className="text-sm font-bold tracking-widest uppercase text-neutral-500 group-hover:text-black transition-colors">{item.title}</span>
@@ -78,15 +78,15 @@ const FloatingDockMobile = ({
                 <div className="relative w-6 h-6 flex items-center justify-center">
                     <motion.div
                         animate={{ rotate: open ? 45 : 0, y: open ? 0 : -2 }}
-                        className="absolute w-5 h-0.5 bg-black rounded-full"
+                        className="absolute w-5 h-0.5 bg-[#6a6664] rounded-full"
                     />
                     <motion.div
                         animate={{ opacity: open ? 0 : 1 }}
-                        className="absolute w-5 h-0.5 bg-black rounded-full"
+                        className="absolute w-5 h-0.5 bg-[#6a6664] rounded-full"
                     />
                     <motion.div
                         animate={{ rotate: open ? -45 : 0, y: open ? 0 : 2 }}
-                        className="absolute w-5 h-0.5 bg-black rounded-full"
+                        className="absolute w-5 h-0.5 bg-[#6a6664] rounded-full"
                     />
                 </div>
             </button>

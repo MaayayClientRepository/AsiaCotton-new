@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
 import TextType from './TextType';
+import logo from '../assets/logo.png';
 
 // Import images from assets/intro
 
@@ -155,9 +156,21 @@ const IntroSequence = () => {
                     }}
                     className="absolute z-[80] text-center max-w-5xl px-8 pointer-events-none transform-gpu"
                 >
-                    <h2 className="text-[12px] font-black tracking-[0.5em] uppercase text-black/40 mb-6 font-['Outfit']">
-                        Discover Asia Cotton
-                    </h2>
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={shouldStartTyping ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                        className="flex flex-col items-center mb-10"
+                    >
+                        <img src={logo} alt="Asia Cotton" className="h-16 md:h-24 w-auto mb-6" />
+                        <h2 className="text-[16px] md:text-[20px] font-black tracking-[0.6em] uppercase text-black font-['Outfit']">
+                            ASIA COTTON
+                        </h2>
+                        <div className="h-[2px] w-16 bg-[#E11D48] mt-4 mb-6"></div>
+                        <p className="text-[10px] font-black tracking-[0.5em] uppercase text-black/40">
+                            Est. 1997
+                        </p>
+                    </motion.div>
                     <TextType
                         text="Crafting Sustainable Luxury Since 1997"
                         as="h1"

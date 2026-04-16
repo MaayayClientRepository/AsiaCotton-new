@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export const Navbar = ({ children, className }) => {
     return (
         <nav className={cn("sticky top-0 inset-x-0 z-50 w-full px-4 md:px-6 py-4", className)}>
-            <div className="mx-auto max-w-7xl backdrop-blur-md bg-white/70 dark:bg-black/70 border border-black/5 dark:border-white/5 rounded-2xl shadow-sm px-4 py-2">
+            <div className="mx-auto max-w-7xl backdrop-blur-md bg-white/70 dark:bg-[#6a6664]/70 border border-black/5 dark:border-white/5 rounded-2xl shadow-sm px-4 py-2">
                 {children}
             </div>
         </nav>
@@ -48,7 +48,7 @@ export const NavbarLogo = ({ className, children }) => {
 
 export const NavbarButton = ({ children, className, variant = "primary", onClick }) => {
     const variants = {
-        primary: "bg-black text-white dark:bg-white dark:text-black shadow-md hover:opacity-90",
+        primary: "bg-[#6a6664] text-white dark:bg-white dark:text-black shadow-md hover:opacity-90",
         secondary: "bg-transparent text-neutral-600 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800",
     };
     return (

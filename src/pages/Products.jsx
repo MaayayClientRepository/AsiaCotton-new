@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { IconArrowUpRight, IconX, IconArrowsMaximize, IconLayoutGrid } from '@tabler/icons-react';
-import Folder from '../components/Folder';
+import { IconX } from '@tabler/icons-react';
 import BackgroundGrid from '../components/BackgroundGrid';
 import ScrollReveal from '../components/ScrollReveal';
 import { TextGenerateEffect } from '../components/TextGenerateEffect';
+import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
+import Folder from '../components/Folder';
 
 // Use Vite's glob import to get all images in the products directory
 const allProductImages = import.meta.glob('../assets/products/**/*.{jpg,jpeg,png}', {
@@ -29,7 +30,7 @@ const categoriesData = [
         title: 'KITCHEN',
         tagline: 'ARTISANAL DINING',
         description: 'Elegant kitchen and dining textiles that combine functionality with sophisticated design.',
-        color: '#1A1A1A',
+        color: '#6a6664',
         folder: 'Kithchen',
         items: ["Kitchen Towels", "Table Runners", "Apron Sets"]
     },
@@ -52,28 +53,37 @@ const categoriesData = [
         items: ["Cotton Throws", "Textured Knits", "Fringe Accents"]
     },
     {
-        id: 'cushion',
-        title: 'CUSHIONS',
-        tagline: 'ACCENT SOFTNESS',
-        description: 'Decorative and functional cushions that provide comfort and a pop of texture to your living space.',
+        id: 'cushion-outdoors',
+        title: 'CUSHIONS & OUTDOORS',
+        tagline: 'COMFORT EVERYWHERE',
+        description: 'Decorative cushions and durable outdoor textiles that bring style and comfort to every space, indoors and out.',
         color: '#B45309',
-        folder: 'cushion',
-        items: ["Velvet Cushions", "Embroidered Covers", "Floor Cushions"]
+        folders: ['cushion', 'Outdoors'],
+        items: ["Velvet Cushions", "Embroidered Covers", "Chair Pads", "Outdoor Cushions"]
     },
     {
-        id: 'outdoors',
-        title: 'OUTDOORS',
-        tagline: 'ELEGANT EXTERIORS',
-        description: 'Durable, weather-resistant textiles designed to make outdoor living as comfortable as being indoors.',
-        color: '#065F46',
-        folder: 'Outdoors',
-        items: ["Chair Pads", "Outdoor Cushions", "Patio Throws"]
+        id: 'baby',
+        title: 'BABY ESSENTIALS',
+        tagline: 'GENTLE CARE',
+        description: 'Ultra-soft organic cotton baby textiles designed with love for the most delicate skin.',
+        color: '#9333EA',
+        folder: 'baby',
+        items: ["Baby Blankets", "Swaddle Wraps", "Hooded Towels", "Crib Sheets"]
     }
 ];
 
 const Products = () => {
     const [activeFolderId, setActiveFolderId] = useState(null);
     const [viewedImage, setViewedImage] = useState(null);
+    const [showTutorial, setShowTutorial] = useState(false);
+
+    useEffect(() => {
+        if (activeFolderId) {
+            setShowTutorial(true);
+            const timer = setTimeout(() => setShowTutorial(false), 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [activeFolderId]);
 
     useEffect(() => {
         const html = document.documentElement;
@@ -108,18 +118,21 @@ const Products = () => {
             .map(([_, url]) => url);
     };
 
+    const getMultiFolderImages = (folders) => {
+        return folders.flatMap(folder =>
+            Object.entries(allProductImages)
+                .filter(([path]) => path.includes(`/products/${folder}/`))
+                .map(([_, url]) => url)
+        );
+    };
+
     const categories = categoriesData.map(cat => ({
         ...cat,
-        allImages: getCategoryImages(cat.folder),
-        heroImage: getCategoryImages(cat.folder)[0] || ''
+        allImages: cat.folders ? getMultiFolderImages(cat.folders) : getCategoryImages(cat.folder),
+        heroImage: (cat.folders ? getMultiFolderImages(cat.folders) : getCategoryImages(cat.folder))[0] || ''
     }));
 
-    const springTransition = {
-        type: "spring",
-        stiffness: 150,
-        damping: 25,
-        mass: 0.8
-    };
+    const activeCategory = categories.find(c => c.id === activeFolderId);
 
     return (
         <div className="min-h-screen bg-[#FDFCF0] text-[#1A1A1A] font-['Outfit'] selection:bg-[#E11D48] selection:text-white overflow-x-hidden relative">
@@ -218,7 +231,7 @@ const Products = () => {
                                 </div>
 
                                 <div className="space-y-0.5 md:space-y-1 text-center">
-                                    <h3 className="text-xs md:text-lg font-black uppercase tracking-tighter text-[#1A1A1A]">
+                                    <h3 className="text-[9px] md:text-lg font-black uppercase tracking-tighter text-[#1A1A1A]">
                                         {category.title}
                                     </h3>
                                     <p className="text-[6px] md:text-[7px] tracking-[0.4em] font-black uppercase opacity-20">
@@ -230,14 +243,14 @@ const Products = () => {
                     </div>
                 </div>
 
-                {/* Lightbox placeholder */}
+                {/* Lightbox */}
                 <AnimatePresence>
                     {viewedImage && (
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[2000] bg-black/95 flex items-center justify-center p-4"
+                            className="fixed inset-0 z-[2000] bg-[#6a6664]/95 flex items-center justify-center p-4"
                             onClick={() => setViewedImage(null)}
                         >
                             <motion.img
@@ -251,12 +264,12 @@ const Products = () => {
                 </AnimatePresence>
             </main>
 
-            {/* IMMUTABLE STUDIO PORTAL - Rendered outside main DOM hierarchy */}
+            {/* PRODUCT DETAIL PORTAL - ScrollStack style like Certifications */}
             {typeof document !== 'undefined' && ReactDOM.createPortal(
                 <AnimatePresence>
-                    {activeFolderId && (
+                    {activeFolderId && activeCategory && (
                         <div
-                            className="fixed inset-0 z-[99999] w-screen h-screen flex items-center justify-center overscroll-none touch-none"
+                            className="fixed inset-0 z-[99999] w-screen h-screen flex overscroll-none touch-none"
                             style={{
                                 position: 'fixed',
                                 top: 0,
@@ -264,78 +277,120 @@ const Products = () => {
                                 right: 0,
                                 bottom: 0
                             }}
-                            onWheel={(e) => { e.preventDefault(); e.stopPropagation(); }}
-                            onTouchMove={(e) => { e.preventDefault(); e.stopPropagation(); }}
                         >
-                            {/* Global Backdrop - Heavy Blur Lock */}
+                            {/* Backdrop */}
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 onClick={() => setActiveFolderId(null)}
-                                className="absolute inset-0 bg-[#FDFCF0]/95 backdrop-blur-[60px] cursor-pointer"
+                                className="absolute inset-0 bg-[#6a6664]/60 backdrop-blur-md cursor-pointer"
                             />
 
-                            {/* Static Studio Floor */}
+                            {/* Content Panel - Certificate-style layout */}
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95, y: 30 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.95, y: 30 }}
                                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                                style={{ transform: 'translateZ(0)', willChange: 'transform, opacity' }}
-                                className="relative z-10 w-[96vw] max-w-[1700px] h-[90vh] bg-white rounded-[40px] md:rounded-[64px] border border-black/5 shadow-[0_160px_300px_rgba(0,0,0,0.18)] flex flex-col items-center justify-end overflow-hidden pb-16 md:pb-32 cursor-default"
+                                style={{ backgroundColor: activeCategory.color, willChange: 'transform, opacity' }}
+                                className="relative z-10 w-[98vw] md:w-[96vw] max-w-[1600px] h-[95vh] md:h-[92vh] mx-auto my-auto rounded-[24px] md:rounded-[48px] border border-white/10 shadow-[0_80px_200px_rgba(0,0,0,0.4)] flex flex-col lg:flex-row overflow-hidden cursor-default transform-gpu"
                                 onClick={(e) => e.stopPropagation()}
                             >
+                                <BackgroundGrid color="#FFFFFF" opacity={0.08} />
+
                                 {/* Close Button */}
                                 <motion.button
                                     whileHover={{ scale: 1.1, rotate: 90 }}
                                     whileTap={{ scale: 0.9 }}
                                     onClick={() => setActiveFolderId(null)}
-                                    className="absolute top-10 right-10 z-[3000] p-6 bg-black/5 hover:bg-black/10 rounded-full text-black transition-colors"
+                                    className="absolute top-6 right-6 md:top-10 md:right-10 z-[3000] p-4 md:p-6 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors backdrop-blur-sm"
                                 >
-                                    <IconX size={32} />
+                                    <IconX size={24} />
                                 </motion.button>
 
-                                {/* Structural Brand Watermark - Massive Scale */}
-                                <div className="absolute top-[28%] left-1/2 -translate-x-1/2 opacity-[0.08] pointer-events-none select-none w-full text-center">
-                                    <h2 className="text-signature text-[24vw] font-black uppercase tracking-tighter leading-none whitespace-nowrap">
-                                        ASIA COTTON
-                                    </h2>
-                                </div>
-
-                                {/* Discovery Stage - Bottom Anchored */}
-                                <div className="absolute inset-x-0 bottom-0 top-0 flex items-center justify-center pointer-events-none">
-                                    {/* Category Text Reveal - Top Left Clean Layout */}
+                                {/* Left Side: Category Info */}
+                                <div className="w-full lg:w-[35%] flex flex-col justify-center px-5 md:px-12 lg:px-14 pt-16 pb-4 md:pt-14 md:pb-8 lg:py-0 relative z-20">
                                     <motion.div
                                         initial={{ opacity: 0, x: -30 }}
                                         animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                                        className="absolute top-[10%] left-[6%] z-20 pointer-events-auto text-left"
+                                        transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                        className="transform-gpu will-change-transform text-center lg:text-left"
                                     >
-                                        <div className="flex items-center gap-2 mb-3 opacity-30">
-                                            <div className="h-[1px] w-6 bg-black"></div>
-                                            <span className="text-[9px] font-black tracking-[0.3em] uppercase">Category 0{categories.findIndex(c => c.id === activeFolderId) + 1}</span>
+                                        <div className="flex items-center gap-2 mb-4 opacity-50 justify-center lg:justify-start">
+                                            <div className="h-[1px] w-6 bg-white"></div>
+                                            <span className="text-[9px] font-black tracking-[0.3em] uppercase text-white">
+                                                Category 0{categories.findIndex(c => c.id === activeFolderId) + 1}
+                                            </span>
                                         </div>
-                                        <h3 className="text-2xl md:text-4xl font-black uppercase text-[#1A1A1A] tracking-tighter mb-2 leading-[0.9]">
-                                            {categories.find(c => c.id === activeFolderId)?.title}
-                                        </h3>
-                                        <p className="text-[10px] md:text-xs text-[#1A1A1A]/70 font-medium max-w-[200px] leading-relaxed">
-                                            {categories.find(c => c.id === activeFolderId)?.description}
-                                        </p>
-                                    </motion.div>
 
-                                    <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 pointer-events-auto">
-                                        {activeFolderId && (
-                                            <Folder
-                                                color={categories.find(c => c.id === activeFolderId).color}
-                                                title={categories.find(c => c.id === activeFolderId).title}
-                                                images={categories.find(c => c.id === activeFolderId).allImages}
-                                                size={typeof window !== 'undefined' && window.innerWidth < 768 ? 2.2 : 4.2}
-                                                isOpen={true}
-                                                onFolderClick={() => setActiveFolderId(null)}
-                                            />
-                                        )}
-                                    </div>
+                                        <h1 className="text-[clamp(2rem,5vw,4.5rem)] font-black leading-[0.85] tracking-tighter text-white mb-4 md:mb-8">
+                                            {activeCategory.title.toLowerCase()}
+                                        </h1>
+
+                                        <p className="text-sm md:text-lg text-white/70 max-w-md mx-auto lg:mx-0 leading-relaxed font-medium mb-6 md:mb-10">
+                                            {activeCategory.description}
+                                        </p>
+
+                                        <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+                                            {activeCategory.items.map((item, idx) => (
+                                                <span
+                                                    key={idx}
+                                                    className="text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase text-white/90 bg-white/10 px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm"
+                                                >
+                                                    {item}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </motion.div>
+                                </div>
+
+                                {/* Tutorial Overlay */}
+                                <AnimatePresence>
+                                    {showTutorial && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -20 }}
+                                            className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[4000] pointer-events-none"
+                                        >
+                                            <p className="text-white text-xs font-black uppercase tracking-[0.4em] animate-pulse">
+                                                Scroll to explore
+                                            </p>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+
+                                {/* Right Side: ScrollStack of product images */}
+                                <div className="w-full lg:w-[65%] h-[55vh] md:h-[60vh] lg:h-full relative z-10">
+                                    <ScrollStack
+                                        itemDistance={150}
+                                        itemScale={0}
+                                        itemStackDistance={0}
+                                        baseScale={1}
+                                        stackPosition={typeof window !== 'undefined' && window.innerWidth < 1024 ? "20%" : "12%"}
+                                        className="h-full"
+                                    >
+                                        {activeCategory.allImages.map((img, idx) => (
+                                            <ScrollStackItem
+                                                key={idx}
+                                                itemClassName="!h-auto !p-3 md:!p-6 !rounded-[20px] md:!rounded-[28px] bg-white border border-black/5 max-w-[85vw] md:max-w-sm lg:max-w-md mx-auto shadow-2xl transition-shadow duration-500"
+                                            >
+                                                <div
+                                                    className="flex items-center justify-center cursor-pointer group"
+                                                    onClick={() => setViewedImage(img)}
+                                                >
+                                                    <div className="w-full aspect-[4/5] flex-shrink-0 bg-[#F9FAFB] rounded-lg md:rounded-xl overflow-hidden shadow-sm border border-black/5 flex items-center justify-center group-hover:shadow-lg transition-all duration-500 ease-out">
+                                                        <img
+                                                            src={img}
+                                                            alt={`${activeCategory.title} product ${idx + 1}`}
+                                                            className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </ScrollStackItem>
+                                        ))}
+                                    </ScrollStack>
                                 </div>
                             </motion.div>
                         </div>

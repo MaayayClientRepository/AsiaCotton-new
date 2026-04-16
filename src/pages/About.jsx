@@ -139,7 +139,7 @@ const AboutPage = () => {
                             >
                                 <img src={factoryExteriorImg} alt="Factory Exterior" className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-[1s] ease-in-out transform-gpu" />
 
-                                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent translate-y-6 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 transform-gpu">
+                                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#6a6664]/90 to-transparent translate-y-6 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 transform-gpu">
                                     <p className="text-[#FACC15] font-bold tracking-widest text-[10px] uppercase mb-1">Facility Node 01</p>
                                     <h3 className="text-lg font-bold text-white">State-of-the-Art Hub</h3>
                                 </div>

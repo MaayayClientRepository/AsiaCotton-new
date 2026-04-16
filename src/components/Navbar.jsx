@@ -17,30 +17,15 @@ const Navbar = ({ isHome }) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            // Priority 1: Hide if footer is visible
             const footer = document.getElementById('main-footer');
             if (footer) {
                 const rect = footer.getBoundingClientRect();
-                // If footer is entering the viewport (with a small buffer)
                 if (rect.top < window.innerHeight) {
                     setIsVisible(false);
                     return;
                 }
             }
-
-            // Priority 2: Non-home pages are always visible (unless footer is visible)
-            if (!isHome) {
-                setIsVisible(true);
-                return;
-            }
-
-            // Priority 3: Home page logic (IntroSequence)
-            // IntroSequence is now 200vh. Show navbar as it completes.
-            if (window.scrollY > window.innerHeight * 1.5) {
-                setIsVisible(true);
-            } else {
-                setIsVisible(false);
-            }
+            setIsVisible(true);
         };
 
         // Initial check
