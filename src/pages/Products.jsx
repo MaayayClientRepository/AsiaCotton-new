@@ -168,7 +168,7 @@ const Products = () => {
             <div className="grain-overlay" />
             <main className="min-h-screen lg:h-screen flex flex-col lg:flex-row relative lg:overflow-hidden transform-gpu">
                 {/* Left Side (25%): Navigation & Content */}
-                <div className="w-full lg:w-[25%] h-auto lg:h-full p-6 md:p-8 lg:p-12 xl:p-16 flex flex-col justify-center bg-white/40 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-black/5 z-20 relative pt-24 lg:pt-40">
+                <div className="w-full lg:w-[25%] h-auto lg:h-full p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 flex flex-col justify-center bg-white/40 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-black/5 z-20 relative pt-20 sm:pt-24 lg:pt-40">
                     <BackgroundGrid color="#2D6A6A" opacity={0.02} />
 
                     <div className="relative z-10 text-left">
@@ -205,7 +205,7 @@ const Products = () => {
 
                 {/* Right Side (75%): Product Folders */}
                 <div className="w-full lg:w-[75%] h-auto lg:h-full bg-[#FDFCF0]/50 overflow-y-auto lg:overflow-hidden transform-gpu">
-                    <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 w-full h-full">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-full h-full">
                         {categories.map((category) => (
                             <div
                                 key={category.id}
@@ -223,7 +223,7 @@ const Products = () => {
                                                 color={category.color}
                                                 title={category.title}
                                                 images={category.allImages}
-                                                size={typeof window !== 'undefined' && window.innerWidth < 768 ? 1.1 : 1.6}
+                                                size={typeof window !== 'undefined' && window.innerWidth < 480 ? 1.0 : (window.innerWidth < 768 ? 1.2 : 1.6)}
                                                 onFolderClick={() => setActiveFolderId(category.id)}
                                             />
                                         </motion.div>
@@ -304,13 +304,13 @@ const Products = () => {
                                     whileHover={{ scale: 1.1, rotate: 90 }}
                                     whileTap={{ scale: 0.9 }}
                                     onClick={() => setActiveFolderId(null)}
-                                    className="absolute top-6 right-6 md:top-10 md:right-10 z-[3000] p-4 md:p-6 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors backdrop-blur-sm"
+                                    className="absolute top-4 right-4 md:top-10 md:right-10 z-[3000] p-3 md:p-6 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors backdrop-blur-sm"
                                 >
-                                    <IconX size={24} />
+                                    <IconX size={20} className="md:w-6 md:h-6" />
                                 </motion.button>
 
                                 {/* Left Side: Category Info */}
-                                <div className="w-full lg:w-[35%] flex flex-col justify-center px-5 md:px-12 lg:px-14 pt-16 pb-4 md:pt-14 md:pb-8 lg:py-0 relative z-20">
+                                <div className="w-full lg:w-[35%] flex flex-col justify-center px-6 md:px-12 lg:px-14 pt-12 pb-6 md:pt-14 md:pb-8 lg:py-0 relative z-20">
                                     <motion.div
                                         initial={{ opacity: 0, x: -30 }}
                                         animate={{ opacity: 1, x: 0 }}
@@ -362,13 +362,13 @@ const Products = () => {
                                 </AnimatePresence>
 
                                 {/* Right Side: ScrollStack of product images */}
-                                <div className="w-full lg:w-[65%] h-[55vh] md:h-[60vh] lg:h-full relative z-10">
+                                <div className="w-full lg:w-[65%] h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-full relative z-10">
                                     <ScrollStack
-                                        itemDistance={150}
+                                        itemDistance={typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 150}
                                         itemScale={0}
                                         itemStackDistance={0}
                                         baseScale={1}
-                                        stackPosition={typeof window !== 'undefined' && window.innerWidth < 1024 ? "20%" : "12%"}
+                                        stackPosition={typeof window !== 'undefined' && window.innerWidth < 1024 ? "15%" : "12%"}
                                         className="h-full"
                                     >
                                         {activeCategory.allImages.map((img, idx) => (

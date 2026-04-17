@@ -217,7 +217,7 @@ const Home = () => {
                 </section>
 
                 {/* 6. CTA Section */}
-                <section id="main-footer" className="pt-20 md:pt-40 pb-8 px-6 md:px-12 lg:px-24 bg-[#6a6664] text-white transform-gpu relative overflow-hidden">>
+                <section id="main-footer" className="pt-20 md:pt-40 pb-8 px-6 md:px-12 lg:px-24 bg-[#0a0a0a] text-white transform-gpu relative overflow-hidden">
                     <BackgroundGrid color="#FFFFFF" opacity={0.1} />
                     <div className="max-w-7xl mx-auto text-center space-y-12 relative z-10">
                         <motion.h2
