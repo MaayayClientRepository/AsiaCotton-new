@@ -233,7 +233,19 @@ const Home = () => {
                         <p className="text-lg md:text-2xl font-medium max-w-2xl mx-auto text-white">
                             Seeking premium home textiles in bulk? We specialize in high-quality home products. Visit our Karur facility or contact us today for bulk orders.
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center mt-12 md:mt-20 border-t border-white/10 pt-10 md:pt-16">
+
+                        {/* CTA Button */}
+                        <div className="flex justify-center">
+                            <Link
+                                to="/contact"
+                                className="inline-flex items-center gap-3 bg-[#E11D48] text-white px-12 py-5 rounded-full font-black uppercase tracking-[0.25em] text-[11px] hover:bg-[#c01038] active:scale-95 transition-all duration-300 shadow-[0_8px_40px_rgba(225,29,72,0.4)] hover:shadow-[0_14px_50px_rgba(225,29,72,0.6)] hover:-translate-y-1 group"
+                            >
+                                Request a Quote
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+                            </Link>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 text-center mt-0 border-t border-white/10 pt-10 md:pt-16">
                             {/* Address */}
                             <div className="space-y-6">
                                 <h4 className="text-sm font-bold tracking-[0.2em] uppercase text-white">Headquarters</h4>
@@ -273,7 +285,7 @@ const Home = () => {
                         </div>
 
                         <div className="pt-8 md:pt-12 border-t border-white/10 flex flex-col justify-center items-center gap-6 text-xs text-white font-bold tracking-widest uppercase">
-                            <p>© 2025 ASIA COTTON. All Rights Reserved.</p>
+                            <p>© 2026 ASIA COTTON. ALL RIGHTS RESERVED.</p>
                         </div>
                     </div>
                 </section>
