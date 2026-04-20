@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="border-b border-white/5 py-16 md:py-20">
                 <div className="container mx-auto px-8 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8">
                     <div>
-                        <p className="text-[10px] font-black tracking-[0.4em] uppercase text-white/30 mb-2">Ready to order in bulk?</p>
+                        <p className="text-[10px] font-black tracking-[0.4em] uppercase text-white/30 mb-2 text-center md:text-left">Ready to order in bulk?</p>
                         <h3 className="text-2xl md:text-3xl font-black text-white leading-tight">
                             Let's Build Something <span className="text-[#E11D48]">Together.</span>
                         </h3>
@@ -32,12 +32,12 @@ const Footer = () => {
                     <Link to="/" className="group">
                         <img src={logo} alt="Asia Cotton" className="h-10 w-auto object-contain transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100 invert brightness-200" />
                     </Link>
-                    <div className="flex space-x-12 text-[11px] font-bold tracking-[0.5em] uppercase text-white/40">
+                    <div className="flex flex-wrap justify-center md:justify-start gap-6 sm:gap-10 text-[11px] font-bold tracking-[0.5em] uppercase text-white/40">
                         <a href="#" className="hover:text-white transition-colors duration-300">Instagram</a>
                         <a href="#" className="hover:text-white transition-colors duration-300">LinkedIn</a>
                         <a href="#" className="hover:text-white transition-colors duration-300">E-Mail</a>
                     </div>
-                    <div className="text-[11px] font-bold tracking-[0.4em] uppercase text-white/20">
+                    <div className="text-[9px] sm:text-[11px] font-bold tracking-[0.3em] sm:tracking-[0.4em] uppercase text-white/20 text-center md:text-right">
                         <span className="font-['Caveat'] text-2xl lowercase opacity-60 mr-4 text-white/40">Handcrafted by</span> &copy; 2026 ASIA COTTON. ALL RIGHTS RESERVED.
                     </div>
                 </div>

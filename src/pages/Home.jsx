@@ -225,12 +225,12 @@ const Home = () => {
                             whileInView={{ opacity: 1, scale: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                            className="serif-title text-3xl md:text-6xl lg:text-7xl font-black leading-[0.9] transform-gpu will-change-transform text-white"
+                            className="serif-title text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9] transform-gpu will-change-transform text-white"
                         >
                             Ready to Transform <br />
                             Your Space?
                         </motion.h2>
-                        <p className="text-lg md:text-2xl font-medium max-w-2xl mx-auto text-white">
+                        <p className="text-base md:text-xl lg:text-2xl font-medium max-w-2xl mx-auto text-white px-2">
                             Seeking premium home textiles in bulk? We specialize in high-quality home products. Visit our Karur facility or contact us today for bulk orders.
                         </p>
 

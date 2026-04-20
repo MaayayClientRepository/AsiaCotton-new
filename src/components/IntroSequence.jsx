@@ -43,8 +43,10 @@ const hotspots = [
 const IntroSequence = () => {
 
     const [hoveredId, setHoveredId] = useState(null);
+    const [tappedId, setTappedId] = useState(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });   // px relative to image container
     const imageContainerRef = useRef(null);
+    const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
 
     const handleMouseMove = useCallback((e) => {
         if (!imageContainerRef.current) return;
@@ -54,6 +56,12 @@ const IntroSequence = () => {
             y: e.clientY - rect.top,
         });
     }, []);
+
+    const handleTap = useCallback((id) => {
+        setTappedId(prev => prev === id ? null : id);
+        setTimeout(() => setTappedId(null), 2500);
+    }, []);
+
     const containerRef = useRef(null);
 
     // Track scroll progress over a 400vh area
@@ -153,11 +161,44 @@ const IntroSequence = () => {
                                     d={spot.hoverPath}
                                     fill="transparent"
                                     className="cursor-none"
-                                    onMouseEnter={() => setHoveredId(spot.id)}
-                                    onMouseLeave={() => setHoveredId(null)}
+                                    onMouseEnter={() => !isTouchDevice && setHoveredId(spot.id)}
+                                    onMouseLeave={() => !isTouchDevice && setHoveredId(null)}
+                                    onTouchStart={(e) => { e.preventDefault(); handleTap(spot.id); }}
                                 />
                             ))}
                         </svg>
+
+                        {/* Touch-friendly label pill (mobile only) */}
+                        {tappedId && (
+                            <div
+                                style={{
+                                    position: 'absolute',
+                                    bottom: '16%',
+                                    left: '50%',
+                                    transform: 'translateX(-50%)',
+                                    zIndex: 40,
+                                    pointerEvents: 'none',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    gap: '6px',
+                                    background: 'rgba(255,255,255,0.95)',
+                                    backdropFilter: 'blur(10px)',
+                                    border: '1px solid rgba(0,0,0,0.1)',
+                                    borderRadius: '999px',
+                                    padding: '10px 22px',
+                                    boxShadow: '0 12px 32px rgba(0,0,0,0.12)',
+                                    whiteSpace: 'nowrap',
+                                }}
+                            >
+                                <span style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.4em', color: '#E11D48', textTransform: 'uppercase' }}>
+                                    {hotspotInfo[tappedId]?.label}
+                                </span>
+                                <span style={{ fontSize: '13px', fontWeight: 400, color: '#000', opacity: 0.75, letterSpacing: '0.01em' }}>
+                                    {hotspotInfo[tappedId]?.desc}
+                                </span>
+                            </div>
+                        )}
 
                         {/* ── Mouse-following callout tooltip ── */}
                         {hoveredId && (() => {
@@ -299,7 +340,7 @@ const IntroSequence = () => {
                         filter: homeRevealBlur,
                         willChange: "transform, opacity, filter"
                     }}
-                    className="absolute z-[80] text-center max-w-5xl px-8 pointer-events-none transform-gpu"
+                    className="absolute z-[80] text-center max-w-5xl px-4 sm:px-8 w-full pointer-events-none transform-gpu"
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
@@ -326,7 +367,7 @@ const IntroSequence = () => {
                         showCursor={true}
                         cursorCharacter="_"
                         cursorClassName="text-[#E11D48] font-bold"
-                        className="text-3xl md:text-5xl lg:text-8xl font-black text-black leading-tight selection:bg-[#E11D48]/20"
+                        className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl xl:text-8xl font-black text-black leading-tight selection:bg-[#E11D48]/20"
                     />
                 </motion.div>
 

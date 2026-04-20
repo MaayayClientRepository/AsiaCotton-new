@@ -75,16 +75,11 @@ const Certifications = () => {
             <BackgroundGrid color="#000000" opacity={0.05} />
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
-                
-                body {
-                    background-color: #FEDC56;
-                    overflow: hidden;
-                }
             `}</style>
 
-            <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen">
+            <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen lg:overflow-hidden">
                 {/* Left Side: Title and Content */}
-                <div className="w-full lg:w-[40%] flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-20 pb-8 md:pt-24 md:pb-12 lg:py-0 relative z-20">
+                <div className="w-full lg:w-[40%] flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 pb-8 md:pt-28 md:pb-12 lg:py-0 relative z-20">
                     <motion.div
                         initial={{ opacity: 0, x: -30, scale: 0.98 }}
                         animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -101,7 +96,7 @@ const Certifications = () => {
                 </div>
 
                 {/* Right Side: Scroll Stack of Certificates */}
-                <div className="w-full lg:w-[60%] h-[55vh] md:h-[60vh] lg:h-full relative z-10">
+                <div className="w-full lg:w-[60%] h-[65vh] md:h-[70vh] lg:h-full relative z-10">
                     <ScrollStack
                         itemDistance={40}
                         itemScale={0.02}

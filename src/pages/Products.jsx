@@ -168,7 +168,7 @@ const Products = () => {
             <div className="grain-overlay" />
             <main className="min-h-screen lg:h-screen flex flex-col lg:flex-row relative lg:overflow-hidden transform-gpu">
                 {/* Left Side (25%): Navigation & Content */}
-                <div className="w-full lg:w-[25%] h-auto lg:h-full p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 flex flex-col justify-center bg-white/40 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-black/5 z-20 relative pt-20 sm:pt-24 lg:pt-40">
+                <div className="w-full lg:w-[25%] h-auto lg:h-full p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16 flex flex-col justify-center bg-white/40 backdrop-blur-xl border-b lg:border-b-0 lg:border-r border-black/5 z-20 relative pt-16 sm:pt-20 lg:pt-40">
                     <BackgroundGrid color="#2D6A6A" opacity={0.02} />
 
                     <div className="relative z-10 text-left">
@@ -294,7 +294,7 @@ const Products = () => {
                                 exit={{ opacity: 0, scale: 0.95, y: 30 }}
                                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                                 style={{ backgroundColor: activeCategory.color, willChange: 'transform, opacity' }}
-                                className="relative z-10 w-[98vw] md:w-[96vw] max-w-[1600px] h-[95vh] md:h-[92vh] mx-auto my-auto rounded-[24px] md:rounded-[48px] border border-white/10 shadow-[0_80px_200px_rgba(0,0,0,0.4)] flex flex-col lg:flex-row overflow-hidden cursor-default transform-gpu"
+                                className="relative z-10 w-[98vw] md:w-[96vw] max-w-[1600px] h-[92vh] md:h-[90vh] mx-auto my-auto rounded-[20px] md:rounded-[48px] border border-white/10 shadow-[0_80px_200px_rgba(0,0,0,0.4)] flex flex-col lg:flex-row overflow-hidden cursor-default transform-gpu"
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <BackgroundGrid color="#FFFFFF" opacity={0.08} />
@@ -304,13 +304,13 @@ const Products = () => {
                                     whileHover={{ scale: 1.1, rotate: 90 }}
                                     whileTap={{ scale: 0.9 }}
                                     onClick={() => setActiveFolderId(null)}
-                                    className="absolute top-4 right-4 md:top-10 md:right-10 z-[3000] p-3 md:p-6 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors backdrop-blur-sm"
+                                    className="absolute top-3 right-3 md:top-10 md:right-10 z-[3000] p-2.5 md:p-6 bg-white/10 hover:bg-white/20 rounded-full text-white transition-colors backdrop-blur-sm"
                                 >
                                     <IconX size={20} className="md:w-6 md:h-6" />
                                 </motion.button>
 
                                 {/* Left Side: Category Info */}
-                                <div className="w-full lg:w-[35%] flex flex-col justify-center px-6 md:px-12 lg:px-14 pt-12 pb-6 md:pt-14 md:pb-8 lg:py-0 relative z-20">
+                                <div className="w-full lg:w-[35%] flex flex-col justify-start lg:justify-center px-5 md:px-12 lg:px-14 pt-10 pb-4 md:pt-12 md:pb-6 lg:py-0 relative z-20">
                                     <motion.div
                                         initial={{ opacity: 0, x: -30 }}
                                         animate={{ opacity: 1, x: 0 }}
@@ -362,7 +362,7 @@ const Products = () => {
                                 </AnimatePresence>
 
                                 {/* Right Side: ScrollStack of product images */}
-                                <div className="w-full lg:w-[65%] h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-full relative z-10">
+                                <div className="w-full lg:w-[65%] h-[45vh] sm:h-[50vh] md:h-[55vh] lg:h-full relative z-10">
                                     <ScrollStack
                                         itemDistance={typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 150}
                                         itemScale={0}

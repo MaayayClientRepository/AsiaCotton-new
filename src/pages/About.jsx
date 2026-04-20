@@ -56,7 +56,7 @@ const AboutPage = () => {
             {/* Part 1: Integrated Hero Split View (Brand + Factory) */}
             <section className="flex flex-col lg:flex-row min-h-[auto] md:min-h-[80vh] lg:min-h-[90vh] pt-0 pb-12 lg:pb-0 transform-gpu overflow-hidden">
                 {/* Left Side: Brand Heritage (Cream) */}
-                <div className="w-full lg:w-1/2 bg-[#FDFCF0] px-6 py-10 md:px-12 lg:p-24 flex flex-col justify-center relative overflow-hidden transform-gpu pt-24 lg:pt-24">
+                <div className="w-full lg:w-1/2 bg-[#FDFCF0] px-6 py-10 md:px-12 lg:p-24 flex flex-col justify-center relative overflow-hidden transform-gpu pt-20 md:pt-24 lg:pt-24">
                     <BackgroundGrid color="#2D6A6A" opacity={0.05} />
                     {/* Decorative background elements */}
                     <div className="absolute top-1/4 -left-20 w-80 h-80 bg-[#2D6A6A] rounded-full blur-[120px] opacity-10 transform-gpu"></div>
@@ -162,7 +162,7 @@ const AboutPage = () => {
                         </p>
                     </div>
 
-                    <div className="w-full flex justify-center scale-75 md:scale-100 origin-top">
+                    <div className="w-full flex justify-center overflow-hidden scale-75 sm:scale-90 md:scale-100 origin-top">
                         <BounceCards
                             data={features}
                             containerWidth="100%"

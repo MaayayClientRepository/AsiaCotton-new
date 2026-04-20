@@ -30,7 +30,7 @@ const Contact = () => {
     ];
 
     return (
-        <div className="h-screen h-[100dvh] bg-[#FDFBF2] font-['Outfit'] selection:bg-[#2B6B6D] selection:text-white relative overflow-hidden">
+        <div className="min-h-screen bg-[#FDFBF2] font-['Outfit'] selection:bg-[#2B6B6D] selection:text-white relative overflow-x-hidden">
             <BackgroundGrid color="#2D6A6A" opacity={0.05} />
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
@@ -53,9 +53,9 @@ const Contact = () => {
                 }
             `}</style>
 
-            <main className="h-full flex flex-col md:flex-row relative pt-20 md:pt-0">
+            <main className="flex flex-col md:flex-row md:h-screen relative pt-16 md:pt-0">
                 {/* Left Side: Contact Content */}
-                <div className="w-full md:w-[40%] h-[45%] md:h-full px-6 py-4 md:p-8 lg:p-12 xl:p-20 flex flex-col justify-center bg-white/40 backdrop-blur-xl md:border-r border-[#2D6A6A]/10 z-20 relative overflow-y-auto hide-scrollbar">
+                <div className="w-full md:w-[40%] md:h-full px-6 py-8 md:p-8 lg:p-12 xl:p-20 flex flex-col justify-center bg-white/40 backdrop-blur-xl md:border-r border-[#2D6A6A]/10 z-20 relative overflow-y-auto hide-scrollbar">
                     <BackgroundGrid color="#2D6A6A" opacity={0.02} />
 
                     <div className="relative z-10 text-left max-w-xl mx-auto w-full">
@@ -115,7 +115,7 @@ const Contact = () => {
                 </div>
 
                 {/* Right Side: Map */}
-                <div className="w-full md:w-[60%] h-[55%] md:h-full relative overflow-hidden p-3 md:p-6 lg:p-10">
+                <div className="w-full md:w-[60%] h-[60vw] min-h-[300px] md:h-full relative overflow-hidden p-3 md:p-6 lg:p-10">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98 }}
                         animate={{ opacity: 1, scale: 1 }}

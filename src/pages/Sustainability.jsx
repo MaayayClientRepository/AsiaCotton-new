@@ -100,7 +100,7 @@ const Sustainability = () => {
                             <BackgroundGrid color="#2D6A6A" opacity={0.05} />
                         </div>
                         
-                        <div className="w-full lg:max-w-[576px] relative z-10 flex flex-col justify-center pt-24 pb-12 md:pt-32 md:pb-20 lg:py-40 px-6 md:px-12 lg:px-10 lg:pr-12 text-left min-h-[auto] lg:min-h-[50vh] xl:px-16 xl:pr-16">
+                        <div className="w-full lg:max-w-[576px] relative z-10 flex flex-col justify-center pt-20 pb-12 md:pt-28 md:pb-20 lg:py-40 px-6 md:px-12 lg:px-10 lg:pr-12 text-left min-h-[auto] lg:min-h-[50vh] xl:px-16 xl:pr-16">
                             <motion.div
                                 initial={{ opacity: 0, x: -30, scale: 0.98 }}
                                 animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -131,9 +131,9 @@ const Sustainability = () => {
                             <BackgroundGrid color="#FFFFFF" opacity={0.1} />
                         </div>
                         
-                        <div className="w-full lg:max-w-[704px] relative z-10 flex flex-col lg:flex-row items-start justify-center py-12 md:py-20 lg:py-40 px-6 md:px-12 lg:px-10 lg:pl-12 min-h-[auto] lg:min-h-[50vh] xl:px-16 xl:pl-16">
+                        <div className="w-full lg:max-w-[704px] relative z-10 flex flex-col items-start justify-center py-10 md:py-16 lg:py-40 px-6 md:px-12 lg:px-10 lg:pl-12 min-h-[auto] lg:min-h-[50vh] xl:px-16 xl:pl-16">
                             {/* Icons Column */}
-                            <div className="lg:w-2/5 xl:w-1/3 flex justify-center lg:justify-end xl:pr-6 mb-12 lg:mb-0 w-full pl-0">
+                            <div className="w-full lg:w-2/5 xl:w-1/3 flex justify-center lg:justify-end xl:pr-6 mb-10 lg:mb-0 pl-0">
                                 <GlassIcons
                                     items={pillars}
                                     className="grid-cols-2 gap-8 lg:gap-10"
@@ -142,7 +142,7 @@ const Sustainability = () => {
                             </div>
 
                             {/* Dynamic Content Container */}
-                            <div className="lg:w-3/5 xl:w-2/3 w-full pl-0 lg:pl-10 xl:pl-12 lg:border-l border-white/10 min-h-[280px] lg:min-h-[400px] flex items-start pt-4 text-white">
+                            <div className="w-full lg:w-3/5 xl:w-2/3 pl-0 lg:pl-10 xl:pl-12 lg:border-l border-white/10 min-h-[240px] lg:min-h-[400px] flex items-start pt-4 text-white">
                                 <motion.div
                                     key={activePillar.id}
                                     initial={{ opacity: 0, x: 20 }}
