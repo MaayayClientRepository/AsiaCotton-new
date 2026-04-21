@@ -46,7 +46,14 @@ const IntroSequence = () => {
     const [tappedId, setTappedId] = useState(null);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });   // px relative to image container
     const imageContainerRef = useRef(null);
-    const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
+    const isTouchDevice = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0 || isMobile);
+
+    React.useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 1024);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const handleMouseMove = useCallback((e) => {
         if (!imageContainerRef.current) return;
@@ -57,9 +64,15 @@ const IntroSequence = () => {
         });
     }, []);
 
+    const tapTimeoutRef = useRef(null);
     const handleTap = useCallback((id) => {
-        setTappedId(prev => prev === id ? null : id);
-        setTimeout(() => setTappedId(null), 2500);
+        if (tapTimeoutRef.current) clearTimeout(tapTimeoutRef.current);
+        
+        setTappedId(prev => (prev === id ? null : id));
+        
+        tapTimeoutRef.current = setTimeout(() => {
+            setTappedId(null);
+        }, 3000);
     }, []);
 
     const containerRef = useRef(null);
@@ -148,7 +161,7 @@ const IntroSequence = () => {
                                 src={spot.image}
                                 alt={spot.id}
                                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-[0.8s] ease-in-out pointer-events-none transform-gpu ${
-                                    hoveredId === spot.id ? 'opacity-100' : 'opacity-0'
+                                    (hoveredId === spot.id || tappedId === spot.id) ? 'opacity-100' : 'opacity-0'
                                 }`}
                             />
                         ))}
@@ -163,7 +176,7 @@ const IntroSequence = () => {
                                     className="cursor-none"
                                     onMouseEnter={() => !isTouchDevice && setHoveredId(spot.id)}
                                     onMouseLeave={() => !isTouchDevice && setHoveredId(null)}
-                                    onTouchStart={(e) => { e.preventDefault(); handleTap(spot.id); }}
+                                    onClick={() => handleTap(spot.id)}
                                 />
                             ))}
                         </svg>
@@ -200,8 +213,8 @@ const IntroSequence = () => {
                             </div>
                         )}
 
-                        {/* ── Mouse-following callout tooltip ── */}
-                        {hoveredId && (() => {
+                        {/* ── Mouse-following callout tooltip (Desktop only) ── */}
+                        {hoveredId && !isMobile && (() => {
                             const cardW = 320;
                             const cardH = 100;
                             
