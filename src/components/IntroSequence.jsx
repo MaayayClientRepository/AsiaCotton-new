@@ -110,7 +110,7 @@ const IntroSequence = () => {
     const homeRevealBlur = useTransform(smoothProgress, [0.4, 0.7], ["4px", "0px"]);
 
     // Final visibility of the entire sticky container
-    const sectionOpacity = useTransform(smoothProgress, [0.95, 1], [1, 1]);
+    const sectionOpacity = useTransform(smoothProgress, [0, 0.1, 0.9, 1], [1, 1, 1, 1]);
 
     return (
         <section ref={containerRef} className="relative h-[200vh] w-full bg-white z-[60]">
@@ -138,7 +138,7 @@ const IntroSequence = () => {
                         <img
                             src={homeOldImg}
                             alt="Asia Cotton Base"
-                            className="absolute inset-0 w-full h-full object-cover transform-gpu"
+                            className="absolute inset-0 w-full h-full object-cover transform-gpu pointer-events-none"
                         />
 
                         {/* Interactive Hotspot Layers */}
@@ -340,15 +340,15 @@ const IntroSequence = () => {
                         filter: homeRevealBlur,
                         willChange: "transform, opacity, filter"
                     }}
-                    className="absolute z-[80] text-center max-w-5xl px-4 sm:px-8 w-full pointer-events-none transform-gpu"
+                    className="absolute inset-0 z-[80] flex flex-col items-center justify-center text-center max-w-5xl mx-auto px-6 sm:px-10 w-full pointer-events-none transform-gpu"
                 >
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={shouldStartTyping ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
                         transition={{ duration: 1, delay: 0.2 }}
-                        className="flex flex-col items-center mb-10"
+                        className="flex flex-col items-center mb-8 md:mb-10"
                     >
-                        <img src={logo} alt="Asia Cotton" className="h-16 md:h-24 w-auto mb-6" />
+                        <img src={logo} alt="Asia Cotton" className="h-12 md:h-24 w-auto mb-4 md:mb-6" />
                         <h2 className="text-[16px] md:text-[20px] font-black tracking-[0.6em] uppercase text-black font-['Outfit']">
                             ASIA COTTON
                         </h2>
@@ -367,7 +367,7 @@ const IntroSequence = () => {
                         showCursor={true}
                         cursorCharacter="_"
                         cursorClassName="text-[#E11D48] font-bold"
-                        className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl xl:text-8xl font-black text-black leading-tight selection:bg-[#E11D48]/20"
+                        className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-black text-black leading-tight selection:bg-[#E11D48]/20"
                     />
                 </motion.div>
 
