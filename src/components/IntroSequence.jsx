@@ -283,8 +283,6 @@ const IntroSequence = () => {
     
     // Smooth branding motion
     const brandingX = useTransform(progress, [0.05, 0.12], [isMobile ? "0%" : "10%", "0%"]);
-    const rawBlur = useTransform(progress, [0.05, 0.12], ["blur(10px)", "blur(0px)"]);
-    const brandingBlur = useSpring(rawBlur, { stiffness: 100, damping: 30 }); // Smooth organic reveal
     
     const highlightColor = useTransform(progress, [0.08, 0.12], ["#000000", "#E11D48"]);
 
@@ -315,10 +313,9 @@ const IntroSequence = () => {
                 <motion.div
                     style={{ 
                         opacity: brandingOpacity,
-                        x: brandingX,
-                        filter: brandingBlur
+                        x: brandingX
                     }}
-                    className="absolute inset-0 z-[80] w-full h-full pointer-events-none transform-gpu flex items-center justify-center will-change-[transform,opacity,filter]"
+                    className="absolute inset-0 z-[80] w-full h-full pointer-events-none transform-gpu flex items-center justify-center will-change-[transform,opacity]"
                 >
                     <div className="grid grid-cols-1 md:grid-cols-[40%_60%] w-full max-w-[1600px] px-6 md:px-12 lg:px-20 h-auto md:h-[50vh] items-center">
                         
@@ -335,8 +332,7 @@ const IntroSequence = () => {
                                     style={{ 
                                         scale: logoScale,
                                         rotate: logoRotate,
-                                        y: logoY,
-                                        filter: brandingBlur
+                                        y: logoY
                                     }}
                                     className="mb-8 md:mb-10"
                                 >
@@ -346,12 +342,7 @@ const IntroSequence = () => {
                                         className="h-20 sm:h-24 md:h-36 lg:h-52 w-auto drop-shadow-2xl will-change-transform" 
                                     />
                                 </motion.div>
-                                <motion.h2 
-                                    style={{ opacity: brandingOpacity }}
-                                    className="text-[12px] sm:text-[14px] md:text-[20px] font-black uppercase text-black font-['Outfit'] tracking-[0.4em] opacity-40"
-                                >
-                                    ASIA COTTON
-                                </motion.h2>
+                                
                             </div>
                         </div>
 
