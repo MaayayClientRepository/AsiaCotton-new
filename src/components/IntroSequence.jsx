@@ -275,24 +275,23 @@ const IntroSequence = () => {
 
     // ── Editorial Reveal Logic: Grid/Split Layout + Color Animation ──
     const introOpacity = useTransform(progress, [0, 0.05, 0.12], [1, 1, 0]);
-    const brandingOpacity = useTransform(progress, [0.05, 0.12], [0, 1]);
-
-    // Adaptive Layout Shift: Slide left only on desktop
+    const brandingOpacity = useTransform(progress, [0, 0.02], [0, 1]); // Logo always visible
     const sketchX = useTransform(progress, [0.05, 0.12], ["0%", isMobile ? "0%" : "-15%"]);
     const sketchScale = useTransform(progress, [0.05, 0.12], [1, isMobile ? 1.05 : 0.85]);
 
     // Smooth branding motion
-    const brandingX = useTransform(progress, [0.05, 0.12], [isMobile ? "0%" : "15%", isMobile ? "0%" : "5%"]);
+    const brandingX = useTransform(progress, [0, 0.05, 0.12], [isMobile ? "0%" : "-10%", isMobile ? "0%" : "-10%", "0%"]);
 
     const highlightColor = useTransform(progress, [0.08, 0.12], ["#000000", "#E11D48"]);
 
     // Tutorial Hint Visibility
     const tutorialOpacity = useTransform(progress, [0, 0.01, 0.04, 0.05], [0, 1, 1, 0]);
 
-    // Logo Specific Cinematic Transforms
-    const logoScale = useTransform(progress, [0.05, 0.12], [0.6, 1]);
+    // Logo Specific Cinematic Transforms (Morph from Corner to Reveal)
+    const logoScale = useTransform(progress, [0, 0.05, 0.12], [0.35, 0.35, 1]);
     const logoRotate = useTransform(progress, [0.05, 0.12], [isMobile ? 0 : -10, 0]);
-    const logoY = useTransform(progress, [0.05, 0.12], [isMobile ? 20 : 50, 0]);
+    const logoY = useTransform(progress, [0, 0.05, 0.12], [isMobile ? -100 : -380, isMobile ? -100 : -380, 0]);
+    const logoX = useTransform(progress, [0, 0.05, 0.12], [isMobile ? "0px" : "-180px", isMobile ? "0px" : "-180px", "0px"]);
     const dividerHeight = useTransform(progress, [0.07, 0.12], ["0%", "80%"]);
 
     return (
@@ -361,7 +360,7 @@ const IntroSequence = () => {
                         </div>
 
                         {/* Right Side: Editorial Headline (Responsive Scaling) */}
-                        <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-4 lg:pl-6">
+                        <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-24 lg:pl-36">
                             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-10 md:mt-0">
                                 <AnimatedText text="Crafting" shouldStart={shouldStartTyping} />
                                 <br />
