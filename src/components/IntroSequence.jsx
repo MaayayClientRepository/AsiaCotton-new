@@ -274,35 +274,35 @@ const IntroSequence = () => {
     });
 
     // ── Editorial Reveal Logic: Grid/Split Layout + Color Animation ──
-    const introOpacity = useTransform(progress, [0, 0.05, 0.12], [1, 1, 0]);
-    const brandingOpacity = useTransform(progress, [0, 0.02], [0, 1]); // Logo always visible
-    const sketchX = useTransform(progress, [0.05, 0.12], ["0%", isMobile ? "0%" : "-15%"]);
-    const sketchScale = useTransform(progress, [0.05, 0.12], [1, isMobile ? 1.05 : 0.85]);
+    const introOpacity = useTransform(progress, [0, 0.01, 0.03], [1, 1, 0]);
+    const brandingOpacity = useTransform(progress, [0, 0.01], [0, 1]); // Logo always visible
+    const sketchX = useTransform(progress, [0.01, 0.04], ["0%", isMobile ? "0%" : "-15%"]);
+    const sketchScale = useTransform(progress, [0.01, 0.04], [1, isMobile ? 1.05 : 0.85]);
 
     // Smooth branding motion
-    const brandingX = useTransform(progress, [0, 0.05, 0.12], [isMobile ? "0%" : "-10%", isMobile ? "0%" : "-10%", "0%"]);
+    const brandingX = useTransform(progress, [0, 0.01, 0.04], [isMobile ? "0%" : "-10%", isMobile ? "0%" : "-10%", "0%"]);
 
     const highlightColor = useTransform(progress, [0.08, 0.12], ["#000000", "#E11D48"]);
 
     // Tutorial Hint Visibility
     const tutorialOpacity = useTransform(progress, [0, 0.01, 0.04, 0.05], [0, 1, 1, 0]);
 
-    // Logo Specific Cinematic Transforms (Morph from Corner to Reveal)
-    const logoScale = useTransform(progress, [0, 0.05, 0.12], [0.35, 0.35, 1]);
-    const logoRotate = useTransform(progress, [0.05, 0.12], [isMobile ? 0 : -10, 0]);
-    const logoY = useTransform(progress, [0, 0.05, 0.12], [isMobile ? -100 : -380, isMobile ? -100 : -380, 0]);
-    const logoX = useTransform(progress, [0, 0.05, 0.12], [isMobile ? "0px" : "-180px", isMobile ? "0px" : "-180px", "0px"]);
-    const dividerHeight = useTransform(progress, [0.07, 0.12], ["0%", "80%"]);
+    // Logo Specific Cinematic Transforms (In-Place Reveal)
+    const logoScale = useTransform(progress, [0, 0.01, 0.04], [0.25, 0.25, 1]);
+    const logoRotate = useTransform(progress, [0.01, 0.04], [isMobile ? 0 : -10, 0]);
+    const logoY = useTransform(progress, [0, 0.01, 0.04], [isMobile ? 20 : 50, isMobile ? 20 : 50, 0]);
+    const logoX = useTransform(progress, [0, 0.01, 0.04], ["0px", "0px", "0px"]);
+    const dividerHeight = useTransform(progress, [0.01, 0.04], ["0%", "80%"]);
 
     return (
-        <section ref={containerRef} className="relative h-[115vh] w-full bg-white z-[60]">
+        <section ref={containerRef} className="relative h-[105vh] md:h-[115vh] w-full bg-white z-[60]">
             {/* Sticky Container - Keeps everything centered while scrolling the travel distance */}
             <div className="sticky top-0 h-screen w-full overflow-hidden z-[60] bg-white flex flex-col items-center justify-center transform-gpu">
 
-                {/* Corner Branding: Vertical Layout (Aligned below Certifications icon) */}
+                {/* Corner Branding: Vertical Layout (Aligned below Certifications icon) - Hidden on Mobile */}
                 <motion.div
                     style={{ opacity: introOpacity }}
-                    className="absolute top-18 md:top-22 left-12 md:left-[270px] z-[95] flex flex-col items-center pointer-events-none"
+                    className="hidden md:flex absolute top-18 md:top-22 left-12 md:left-[270px] z-[95] flex-col items-center pointer-events-none"
                 >
                     <img
                         src={logo}
@@ -331,7 +331,7 @@ const IntroSequence = () => {
                     }}
                     className="absolute inset-0 z-[80] w-full h-full pointer-events-none transform-gpu flex items-center justify-center will-change-[transform,opacity]"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-[40%_60%] w-full max-w-[1600px] px-6 md:px-12 lg:px-20 h-auto md:h-[50vh] items-center transform -translate-y-10 md:-translate-y-16">
+                    <div className="grid grid-cols-1 md:grid-cols-[40%_60%] w-full max-w-[1600px] px-6 md:px-12 lg:px-20 h-auto md:h-[50vh] items-center">
 
                         {/* Left Side: Logo (Adaptive Size) */}
                         <div className="relative flex flex-col items-center justify-center h-full md:pr-16 lg:pr-24 mb-12 md:mb-0">
@@ -346,14 +346,17 @@ const IntroSequence = () => {
                                     style={{
                                         scale: logoScale,
                                         rotate: logoRotate,
-                                        y: logoY
+                                        y: logoY,
+                                        x: logoX
                                     }}
+                                    className="flex flex-col items-center"
                                 >
                                     <img
                                         src={logo}
                                         alt="Asia Cotton"
                                         className="h-32 sm:h-40 md:h-48 lg:h-56 w-auto drop-shadow-2xl will-change-transform"
                                     />
+                                    
                                 </motion.div>
 
                             </div>
@@ -361,7 +364,10 @@ const IntroSequence = () => {
 
                         {/* Right Side: Editorial Headline (Responsive Scaling) */}
                         <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-24 lg:pl-36">
-                            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-10 md:mt-0">
+                            <motion.h1 
+                                style={{ opacity: useTransform(progress, [0.01, 0.04], [0, 1]) }}
+                                className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-6 md:mt-0"
+                            >
                                 <AnimatedText text="Crafting" shouldStart={shouldStartTyping} />
                                 <br />
                                 <AnimatedText
@@ -379,13 +385,13 @@ const IntroSequence = () => {
                                 />
                                 <br />
                                 <AnimatedText text="Since 1997" shouldStart={shouldStartTyping} delay={0.9} />
-                            </h1>
+                            </motion.h1>
 
                             {/* Premium Accent */}
                             <motion.div
                                 animate={shouldStartTyping ? { width: "5rem", opacity: 1 } : { width: 0, opacity: 0 }}
                                 transition={{ duration: 1.5, ease: "circOut" }}
-                                className="h-[4px] bg-[#E11D48] mt-10"
+                                className="h-[4px] bg-[#E11D48] mt-4 md:mt-10"
                             />
                         </div>
                     </div>
