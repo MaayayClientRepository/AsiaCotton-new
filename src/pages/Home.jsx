@@ -24,7 +24,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-[#FDFBF2] font-['Outfit'] selection:bg-[#2B6B6D] selection:text-white">
+        <div className="min-h-screen bg-white font-['Outfit'] selection:bg-[#2B6B6D] selection:text-white">
             <style>{`
                 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
                 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@200..900&display=swap');
@@ -39,7 +39,7 @@ const Home = () => {
                 <IntroSequence />
 
                 {/* 2. Unified Story & Factory Section */}
-                <section className="pt-8 pb-16 md:pt-12 md:pb-32 px-6 md:px-12 lg:px-24 bg-white overflow-hidden transform-gpu relative">
+                <section className="pb-16 md:pb-32 px-6 md:px-12 lg:px-24 bg-white overflow-hidden transform-gpu relative">
                     <BackgroundGrid color="#2D6A6A" opacity={0.05} />
                     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start relative z-10">
                         {/* Left Side: Our Story */}
@@ -51,6 +51,8 @@ const Home = () => {
                             className="w-full text-center flex flex-col items-center h-full transform-gpu will-change-transform"
                         >
                             <div className="flex-1">
+
+
                                 <h4 className="text-[#E11D48] text-xs font-black tracking-[0.4em] uppercase mb-6 flex items-center justify-center gap-2">
                                     <History size={16} /> Since 1997
                                 </h4>
@@ -185,7 +187,7 @@ const Home = () => {
                 </section>
 
                 {/* 5. Connect Section */}
-                <section className="py-16 md:py-32 px-6 md:px-12 lg:px-24 bg-white border-y border-[#2D6A6A]/5 transform-gpu relative">
+                <section className="py-16 md:py-32 px-6 md:px-12 lg:px-24 bg-[#FDFBF2] border-y border-[#2D6A6A]/5 transform-gpu relative">
                     <BackgroundGrid color="#2D6A6A" opacity={0.05} />
                     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center relative z-10">
                         <motion.div
