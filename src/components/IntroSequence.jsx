@@ -26,15 +26,15 @@ const hotspotInfo = {
 };
 
 const hotspots = [
-    { id: 'centerPillow', image: centerPillowImg, hoverPath: 'M44,44 L71,44 L71,55 L44,55 Z' },
-    { id: 'centerBedsheet', image: centerBedsheetImg, hoverPath: 'M29,73 L29,70 L34,60 L40,60 L45,52 L50,53 L56,54 L61,54 L66,55 L71,56 L77,63 L77,68 L77,68 L71,85 L66,78 L61,76 L56,75 L50,75 L45,74 L40,73 L34,73 L29,78 Z' },
-    { id: 'leftBed', image: leftBedImg, hoverPath: 'M10,51 L38,51 L38,71 L10,71 Z' },
-    { id: 'leftPillow', image: leftPillowImg, hoverPath: 'M25,49 L34,49 L34,55 L25,55 Z' },
-    { id: 'sofaSheet', image: sofaSheetImg, hoverPath: 'M77,76 L88,76 L88,92 L77,92 Z' },
-    { id: 'sofaPillow', image: sofaPillowImg, hoverPath: 'M83,64 L97,64 L97,85 L83,85 Z' },
-    { id: 'windowCloth', image: windowClothImg, hoverPath: 'M12,0 L42,0 L42,40 L30,40 L12,25 Z M70,0 L90,0 L90,45 L70,45 Z' },
-    { id: 'bedMat', image: bedMatImg, hoverPath: 'M8,68 L82,68 L82,99 L8,99 Z' },
-    { id: 'upperSheet', image: upperSheetImg, hoverPath: 'M35,59 L35,59 L40,57 L44,55 L49,55 L53,55 L58,55 L62,56 L67,56 L72,58 L76,64 L76,72 L76,73 L72,68 L67,62 L62,61 L58,61 L53,60 L49,60 L44,60 L40,60 L35,60 Z' }
+    { id: 'centerPillow', image: centerPillowImg, hoverPath: 'M48,45 L67,45 L67,54 L48,54 Z' },
+    { id: 'centerBedsheet', image: centerBedsheetImg, hoverPath: 'M30,68 L32,60 L45,52 L56,54 L70,55 L77,63 L75,75 L65,75 L50,75 L35,78 Z' },
+    { id: 'leftBed', image: leftBedImg, hoverPath: 'M11,54 L35,54 L35,68 L11,68 Z' },
+    { id: 'leftPillow', image: leftPillowImg, hoverPath: 'M26,51 L33,51 L33,55 L26,55 Z' },
+    { id: 'sofaSheet', image: sofaSheetImg, hoverPath: 'M78,78 L95,78 L95,95 L78,95 Z' },
+    { id: 'sofaPillow', image: sofaPillowImg, hoverPath: 'M85,67 L94,67 L96,75 L94,80 L84,80 L83,75 Z' },
+    { id: 'windowCloth', image: windowClothImg, hoverPath: 'M37,4 L43,4 L43,50 L37,50 Z M73,4 L82,4 L82,60 L73,60 Z' },
+    { id: 'bedMat', image: bedMatImg, hoverPath: 'M25,75 L75,75 L95,100 L5,100 Z' },
+    { id: 'upperSheet', image: upperSheetImg, hoverPath: 'M38,58 L50,56 L62,56 L74,58 L74,68 L62,62 L50,61 L38,61 Z' }
 ];
 
 const InteractiveHotspotLayer = ({ isMobile }) => {
@@ -82,7 +82,7 @@ const InteractiveHotspotLayer = ({ isMobile }) => {
     const cardTop = useTransform(mouseY, val => val + (val < 200 ? 40 : -140));
 
     // Unified transition for perfect synchronization - Snappier for 'seamless' feel
-    const transition = { duration: 0.2, ease: "easeOut" }; 
+    const transition = { duration: 0.2, ease: "easeOut" };
 
     return (
         <div
@@ -111,7 +111,7 @@ const InteractiveHotspotLayer = ({ isMobile }) => {
                     src={spot.image}
                     alt={spot.id}
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: activeId === spot.id ? 1 : 0 }}
+                    animate={{ opacity: (activeId === spot.id || hoveredId === spot.id) ? 1 : 0 }}
                     transition={transition}
                     className="absolute inset-0 w-full h-full object-cover pointer-events-none transform-gpu z-[6] will-change-[opacity]"
                 />
@@ -155,7 +155,7 @@ const InteractiveHotspotLayer = ({ isMobile }) => {
 
                     {/* High-Performance Tooltip Card */}
                     <motion.div
-                        style={{ 
+                        style={{
                             x: cardLeft,
                             y: cardTop,
                             willChange: "transform"
@@ -194,7 +194,7 @@ const InteractiveHotspotLayer = ({ isMobile }) => {
 // ── Typing Animation Helper ──
 const AnimatedText = ({ text, shouldStart, delay = 0, colorStyle = {} }) => {
     const characters = text.split("");
-    
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: (i = 1) => ({
@@ -276,15 +276,18 @@ const IntroSequence = () => {
     // ── Editorial Reveal Logic: Grid/Split Layout + Color Animation ──
     const introOpacity = useTransform(progress, [0, 0.05, 0.12], [1, 1, 0]);
     const brandingOpacity = useTransform(progress, [0.05, 0.12], [0, 1]);
-    
+
     // Adaptive Layout Shift: Slide left only on desktop
     const sketchX = useTransform(progress, [0.05, 0.12], ["0%", isMobile ? "0%" : "-15%"]);
     const sketchScale = useTransform(progress, [0.05, 0.12], [1, isMobile ? 1.05 : 0.85]);
-    
+
     // Smooth branding motion
-    const brandingX = useTransform(progress, [0.05, 0.12], [isMobile ? "0%" : "10%", "0%"]);
-    
+    const brandingX = useTransform(progress, [0.05, 0.12], [isMobile ? "0%" : "15%", isMobile ? "0%" : "5%"]);
+
     const highlightColor = useTransform(progress, [0.08, 0.12], ["#000000", "#E11D48"]);
+
+    // Tutorial Hint Visibility
+    const tutorialOpacity = useTransform(progress, [0, 0.01, 0.04, 0.05], [0, 1, 1, 0]);
 
     // Logo Specific Cinematic Transforms
     const logoScale = useTransform(progress, [0.05, 0.12], [0.6, 1]);
@@ -296,10 +299,22 @@ const IntroSequence = () => {
         <section ref={containerRef} className="relative h-[115vh] w-full bg-white z-[60]">
             {/* Sticky Container - Keeps everything centered while scrolling the travel distance */}
             <div className="sticky top-0 h-screen w-full overflow-hidden z-[60] bg-white flex flex-col items-center justify-center transform-gpu">
-                
+
+                {/* Corner Branding: Vertical Layout (Aligned below Certifications icon) */}
+                <motion.div
+                    style={{ opacity: introOpacity }}
+                    className="absolute top-18 md:top-22 left-12 md:left-[270px] z-[95] flex flex-col items-center pointer-events-none"
+                >
+                    <img
+                        src={logo}
+                        alt="Asia Cotton"
+                        className="w-24 h-24 md:w-44 md:h-44 object-contain"
+                    />
+                </motion.div>
+
                 {/* Layer 1: Interactive Sketch Image (Slides Left) */}
                 <motion.div
-                    style={{ 
+                    style={{
                         opacity: introOpacity,
                         x: sketchX,
                         scale: sketchScale
@@ -311,63 +326,57 @@ const IntroSequence = () => {
 
                 {/* Layer 2: Editorial Branding Reveal (Adaptive Layout) */}
                 <motion.div
-                    style={{ 
+                    style={{
                         opacity: brandingOpacity,
                         x: brandingX
                     }}
                     className="absolute inset-0 z-[80] w-full h-full pointer-events-none transform-gpu flex items-center justify-center will-change-[transform,opacity]"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-[40%_60%] w-full max-w-[1600px] px-6 md:px-12 lg:px-20 h-auto md:h-[50vh] items-center">
-                        
+                    <div className="grid grid-cols-1 md:grid-cols-[40%_60%] w-full max-w-[1600px] px-6 md:px-12 lg:px-20 h-auto md:h-[50vh] items-center transform -translate-y-10 md:-translate-y-16">
+
                         {/* Left Side: Logo (Adaptive Size) */}
-                        <div className="relative flex flex-col items-center md:items-end justify-center h-full md:pr-16 lg:pr-24 mb-12 md:mb-0">
+                        <div className="relative flex flex-col items-center justify-center h-full md:pr-16 lg:pr-24 mb-12 md:mb-0">
                             {/* Animated Vertical Divider */}
-                            <motion.div 
+                            <motion.div
                                 style={{ height: dividerHeight }}
                                 className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-[1.5px] bg-black/10 origin-center"
                             />
 
-                            <div className="flex flex-col items-center md:items-end">
-                                <motion.div 
-                                    style={{ 
+                            <div className="flex flex-col items-center">
+                                <motion.div
+                                    style={{
                                         scale: logoScale,
                                         rotate: logoRotate,
                                         y: logoY
                                     }}
-                                    className="mb-10 md:mb-12"
                                 >
-                                    <img 
-                                        src={logo} 
-                                        alt="Asia Cotton" 
-                                        className="h-32 sm:h-40 md:h-48 lg:h-56 w-auto drop-shadow-2xl will-change-transform" 
+                                    <img
+                                        src={logo}
+                                        alt="Asia Cotton"
+                                        className="h-32 sm:h-40 md:h-48 lg:h-56 w-auto drop-shadow-2xl will-change-transform"
                                     />
                                 </motion.div>
-                                <motion.h2 
-                                    style={{ opacity: brandingOpacity }}
-                                    className="text-[16px] sm:text-[18px] md:text-[22px] font-black uppercase text-black font-['Outfit'] tracking-[0.4em] opacity-40"
-                                >
-                                    ASIA COTTON
-                                </motion.h2>
+
                             </div>
                         </div>
 
                         {/* Right Side: Editorial Headline (Responsive Scaling) */}
-                        <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-16 lg:pl-24">
+                        <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-4 lg:pl-6">
                             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-10 md:mt-0">
                                 <AnimatedText text="Crafting" shouldStart={shouldStartTyping} />
                                 <br />
-                                <AnimatedText 
-                                    text="Sustainable" 
-                                    shouldStart={shouldStartTyping} 
+                                <AnimatedText
+                                    text="Sustainable"
+                                    shouldStart={shouldStartTyping}
                                     delay={0.3}
-                                    colorStyle={{ color: highlightColor }} 
+                                    colorStyle={{ color: highlightColor }}
                                 />
                                 <br />
-                                <AnimatedText 
-                                    text="Luxury" 
-                                    shouldStart={shouldStartTyping} 
+                                <AnimatedText
+                                    text="Luxury"
+                                    shouldStart={shouldStartTyping}
                                     delay={0.6}
-                                    colorStyle={{ color: highlightColor }} 
+                                    colorStyle={{ color: highlightColor }}
                                 />
                                 <br />
                                 <AnimatedText text="Since 1997" shouldStart={shouldStartTyping} delay={0.9} />
@@ -381,6 +390,21 @@ const IntroSequence = () => {
                             />
                         </div>
                     </div>
+                </motion.div>
+
+                {/* Tutorial Hint: Hover/Touch to Explore */}
+                <motion.div
+                    style={{ opacity: tutorialOpacity }}
+                    className="absolute bottom-10 md:bottom-12 left-1/2 -translate-x-1/2 z-[90] flex flex-col items-center gap-3 pointer-events-none"
+                >
+                    <p className="text-black/40 text-[10px] md:text-[12px] font-bold uppercase tracking-[0.3em] font-['Outfit']">
+                        {isMobile ? "Touch to Explore" : "Hover to Explore"}
+                    </p>
+                    <motion.div
+                        animate={{ y: [0, 5, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        className="w-[1px] h-8 bg-black/20"
+                    />
                 </motion.div>
             </div>
         </section>
