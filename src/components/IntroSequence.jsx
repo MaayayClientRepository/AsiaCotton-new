@@ -334,21 +334,26 @@ const IntroSequence = () => {
                                         rotate: logoRotate,
                                         y: logoY
                                     }}
-                                    className="mb-8 md:mb-10"
+                                    className="mb-10 md:mb-12"
                                 >
                                     <img 
                                         src={logo} 
                                         alt="Asia Cotton" 
-                                        className="h-20 sm:h-24 md:h-36 lg:h-52 w-auto drop-shadow-2xl will-change-transform" 
+                                        className="h-32 sm:h-40 md:h-48 lg:h-56 w-auto drop-shadow-2xl will-change-transform" 
                                     />
                                 </motion.div>
-                                
+                                <motion.h2 
+                                    style={{ opacity: brandingOpacity }}
+                                    className="text-[16px] sm:text-[18px] md:text-[22px] font-black uppercase text-black font-['Outfit'] tracking-[0.4em] opacity-40"
+                                >
+                                    ASIA COTTON
+                                </motion.h2>
                             </div>
                         </div>
 
                         {/* Right Side: Editorial Headline (Responsive Scaling) */}
                         <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-16 lg:pl-24">
-                            <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left">
+                            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-10 md:mt-0">
                                 <AnimatedText text="Crafting" shouldStart={shouldStartTyping} />
                                 <br />
                                 <AnimatedText 
