@@ -302,12 +302,12 @@ const IntroSequence = () => {
                 {/* Corner Branding: Vertical Layout (Aligned below Certifications icon) - Hidden on Mobile */}
                 <motion.div
                     style={{ opacity: introOpacity }}
-                    className="hidden md:flex absolute top-18 md:top-22 left-12 md:left-[270px] z-[95] flex-col items-center pointer-events-none"
+                    className="hidden md:flex absolute top-18 md:top-22 left-12 md:left-[240px] z-[95] flex-col items-center pointer-events-none"
                 >
                     <img
                         src={logo}
                         alt="Asia Cotton"
-                        className="w-24 h-24 md:w-44 md:h-44 object-contain"
+                        className="w-32 h-32 md:w-64 md:h-64 object-contain"
                     />
                 </motion.div>
 
@@ -331,10 +331,10 @@ const IntroSequence = () => {
                     }}
                     className="absolute inset-0 z-[80] w-full h-full pointer-events-none transform-gpu flex items-center justify-center will-change-[transform,opacity]"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-[40%_60%] w-full max-w-[1600px] px-6 md:px-12 lg:px-20 h-auto md:h-[50vh] items-center">
+                    <div className="grid grid-cols-1 md:grid-cols-[42%_58%] w-full max-w-[1800px] px-6 md:px-12 lg:px-24 h-auto md:h-screen items-center">
 
                         {/* Left Side: Logo (Adaptive Size) */}
-                        <div className="relative flex flex-col items-center justify-center h-full md:pr-16 lg:pr-24 mb-12 md:mb-0">
+                        <div className="relative flex flex-col items-center justify-center h-full md:pr-12 lg:pr-16 mb-12 md:mb-0">
                             {/* Animated Vertical Divider */}
                             <motion.div
                                 style={{ height: dividerHeight }}
@@ -354,7 +354,7 @@ const IntroSequence = () => {
                                     <img
                                         src={logo}
                                         alt="Asia Cotton"
-                                        className="h-32 sm:h-40 md:h-48 lg:h-56 w-auto drop-shadow-2xl will-change-transform"
+                                        className="h-48 sm:h-64 md:h-[32rem] lg:h-[40rem] w-auto drop-shadow-2xl will-change-transform object-contain"
                                     />
                                     
                                 </motion.div>
@@ -363,7 +363,7 @@ const IntroSequence = () => {
                         </div>
 
                         {/* Right Side: Editorial Headline (Responsive Scaling) */}
-                        <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-24 lg:pl-36">
+                        <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-12 lg:pl-20">
                             <motion.h1 
                                 style={{ opacity: useTransform(progress, [0.01, 0.04], [0, 1]) }}
                                 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-6 md:mt-0"
