@@ -291,7 +291,7 @@ const IntroSequence = () => {
     const logoScale = useTransform(progress, [0, 0.01, 0.04], [0.25, 0.25, 1]);
     const logoRotate = useTransform(progress, [0.01, 0.04], [isMobile ? 0 : -10, 0]);
     const logoY = useTransform(progress, [0, 0.01, 0.04], [isMobile ? 20 : 50, isMobile ? 20 : 50, 0]);
-    const logoX = useTransform(progress, [0, 0.01, 0.04], ["40px", "40px", "40px"]);
+    const logoX = useTransform(progress, [0, 0.01, 0.04], ["0px", "0px", "0px"]);
     const dividerHeight = useTransform(progress, [0.01, 0.04], ["0%", "80%"]);
 
     return (
@@ -307,7 +307,7 @@ const IntroSequence = () => {
                     <img
                         src={logo}
                         alt="Asia Cotton"
-                        className="w-32 h-32 md:w-64 md:h-64 object-contain"
+                        className="w-32 h-32 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain"
                     />
                 </motion.div>
 
@@ -331,7 +331,7 @@ const IntroSequence = () => {
                     }}
                     className="absolute inset-0 z-[80] w-full h-full pointer-events-none transform-gpu flex items-center justify-center will-change-[transform,opacity]"
                 >
-                    <div className="grid grid-cols-1 md:grid-cols-[42%_58%] w-full max-w-[1800px] px-6 md:px-12 lg:px-24 h-auto md:h-screen items-center">
+                    <div className="grid grid-cols-1 md:grid-cols-[42%_58%] xl:grid-cols-[48%_52%] w-full max-w-[1800px] xl:max-w-[2200px] px-6 md:px-12 lg:px-24 h-auto md:h-screen items-center">
 
                         {/* Left Side: Logo (Adaptive Size) */}
                         <div className="relative flex flex-col items-center justify-center h-full md:pr-12 lg:pr-16 mb-12 md:mb-0">
@@ -354,7 +354,7 @@ const IntroSequence = () => {
                                     <img
                                         src={logo}
                                         alt="Asia Cotton"
-                                        className="h-48 sm:h-64 md:h-[32rem] lg:h-[40rem] w-auto drop-shadow-2xl will-change-transform object-contain"
+                                        className="h-64 md:h-[50vh] lg:h-[65vh] xl:h-[75vh] 2xl:h-[80vh] w-auto drop-shadow-2xl will-change-transform object-contain"
                                     />
                                     
                                 </motion.div>
