@@ -291,7 +291,7 @@ const IntroSequence = () => {
     const logoScale = useTransform(progress, [0, 0.01, 0.04], [0.25, 0.25, 1]);
     const logoRotate = useTransform(progress, [0.01, 0.04], [isMobile ? 0 : -10, 0]);
     const logoY = useTransform(progress, [0, 0.01, 0.04], [isMobile ? 20 : 50, isMobile ? 20 : 50, 0]);
-    const logoX = useTransform(progress, [0, 0.01, 0.04], ["0px", "0px", "0px"]);
+    const logoX = useTransform(progress, [0, 0.01, 0.04], ["40px", "40px", "40px"]);
     const dividerHeight = useTransform(progress, [0.01, 0.04], ["0%", "80%"]);
 
     return (
@@ -302,7 +302,7 @@ const IntroSequence = () => {
                 {/* Corner Branding: Vertical Layout (Aligned below Certifications icon) - Hidden on Mobile */}
                 <motion.div
                     style={{ opacity: introOpacity }}
-                    className="hidden md:flex absolute top-18 md:top-22 left-12 md:left-[240px] z-[95] flex-col items-center pointer-events-none"
+                    className="hidden md:flex absolute top-18 md:top-22 left-12 md:left-24 z-[95] flex-col items-center pointer-events-none"
                 >
                     <img
                         src={logo}
