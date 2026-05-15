@@ -16,7 +16,7 @@ import upperSheetImg from '../assets/intro/upper-bedsheet.jpg';
 const hotspotInfo = {
     centerPillow: { label: 'PILLOW', desc: 'Breathable pillow for deep, restful sleep.' },
     centerBedsheet: { label: 'BEDDING', desc: 'High thread-count bedding, made to last.' },
-    leftBed: { label: 'BEDDING', desc: 'High thread-count bedding, made to last.' },
+    leftBed: { label: 'BABY BLANKETS', desc: 'Premium cotton. Gentle on skin, warm, and ultra-soft.' },
     leftPillow: { label: 'PILLOW', desc: 'Breathable pillow for deep, restful sleep.' },
     sofaSheet: { label: 'THROW', desc: 'Throw that stays soft after every wash.' },
     sofaPillow: { label: 'CUSHION', desc: "Cushion you'll actually want to touch." },
@@ -302,12 +302,12 @@ const IntroSequence = () => {
                 {/* Corner Branding: Vertical Layout (Aligned below Certifications icon) - Hidden on Mobile */}
                 <motion.div
                     style={{ opacity: introOpacity }}
-                    className="hidden md:flex absolute top-18 md:top-22 left-12 md:left-24 z-[95] flex-col items-center pointer-events-none"
+                    className="flex absolute top-8 md:top-16 left-6 md:left-24 z-[95] flex-col items-center pointer-events-none"
                 >
                     <img
                         src={logo}
                         alt="Asia Cotton"
-                        className="w-32 h-32 md:w-48 md:h-48 lg:w-56 lg:h-56 object-contain"
+                        className="w-40 h-40 md:w-64 md:h-64 lg:w-80 lg:h-80 object-contain"
                     />
                 </motion.div>
 
@@ -354,7 +354,7 @@ const IntroSequence = () => {
                                     <img
                                         src={logo}
                                         alt="Asia Cotton"
-                                        className="h-64 md:h-[50vh] lg:h-[65vh] xl:h-[75vh] 2xl:h-[80vh] w-auto drop-shadow-2xl will-change-transform object-contain"
+                                        className="h-[50vh] md:h-[65vh] lg:h-[80vh] xl:h-[90vh] 2xl:h-[95vh] w-auto drop-shadow-2xl will-change-transform object-contain"
                                     />
 
                                 </motion.div>

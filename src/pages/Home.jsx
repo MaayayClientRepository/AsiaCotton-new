@@ -151,10 +151,9 @@ const Home = () => {
                             Quality and excellence measured through decades of dedication.
                         </ScrollReveal>
 
-                        <div className="grid grid-cols-2 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
+                        <div className="flex justify-center max-w-4xl mx-auto">
                             {[
-                                { value: 25, suffix: "+", label: "Years of Excellence", sub: "Since 1997" },
-                                { value: 500, suffix: "+", label: "Artisans Employed", sub: "Craftsmanship" }
+                                { value: 25, suffix: "+", label: "Years of Excellence", sub: "Since 1997" }
                             ].map((stat, idx) => (
                                 <motion.div
                                     key={idx}
@@ -269,7 +268,6 @@ const Home = () => {
                                 <div className="space-y-4 text-white">
                                     <a href="tel:+914324235518" className="block hover:text-white/80 transition-colors">+91 4324 235518</a>
                                     <a href="mailto:info@asiacotton.in" className="block hover:text-white/80 transition-colors">info@asiacotton.in</a>
-                                    <p>Mon-Fri: 9:00 AM – 5:00 PM</p>
                                 </div>
                             </div>
 
