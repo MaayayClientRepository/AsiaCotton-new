@@ -226,7 +226,7 @@ const AnimatedText = ({ text, shouldStart, delay = 0, colorStyle = {} }) => {
 
     return (
         <motion.span
-            style={{ display: "inline-block", ...colorStyle }}
+            style={{ display: "inline-block", whiteSpace: "nowrap", ...colorStyle }}
             variants={containerVariants}
             initial="hidden"
             animate={shouldStart ? "visible" : "hidden"}
@@ -302,12 +302,12 @@ const IntroSequence = () => {
                 {/* Corner Branding: Vertical Layout (Aligned below Certifications icon) - Hidden on Mobile */}
                 <motion.div
                     style={{ opacity: introOpacity }}
-                    className="flex absolute top-8 md:top-16 left-6 md:left-24 z-[95] flex-col items-center pointer-events-none"
+                    className="hidden md:flex absolute top-8 md:top-10 left-12 md:left-24 z-[95] flex-col items-center pointer-events-none"
                 >
                     <img
                         src={logo}
                         alt="Asia Cotton"
-                        className="w-40 h-40 md:w-64 md:h-64 lg:w-80 lg:h-80 object-contain"
+                        className="w-48 h-48 md:w-72 md:h-72 lg:w-80 lg:h-80 object-contain"
                     />
                 </motion.div>
 
@@ -334,7 +334,7 @@ const IntroSequence = () => {
                     <div className="grid grid-cols-1 md:grid-cols-[42%_58%] xl:grid-cols-[48%_52%] w-full max-w-[1800px] xl:max-w-[2200px] px-6 md:px-12 lg:px-24 h-auto md:h-screen items-center">
 
                         {/* Left Side: Logo (Adaptive Size) */}
-                        <div className="relative flex flex-col items-center justify-center h-full md:pr-12 lg:pr-16 mb-12 md:mb-0">
+                        <div className="relative flex flex-col items-center justify-center h-full md:pr-12 lg:pr-16 mb-4 md:mb-0">
                             {/* Animated Vertical Divider */}
                             <motion.div
                                 style={{ height: dividerHeight }}
@@ -354,7 +354,7 @@ const IntroSequence = () => {
                                     <img
                                         src={logo}
                                         alt="Asia Cotton"
-                                        className="h-[50vh] md:h-[65vh] lg:h-[80vh] xl:h-[90vh] 2xl:h-[95vh] w-auto drop-shadow-2xl will-change-transform object-contain"
+                                        className="h-64 md:h-[50vh] lg:h-[65vh] xl:h-[75vh] 2xl:h-[80vh] w-auto drop-shadow-2xl will-change-transform object-contain"
                                     />
 
                                 </motion.div>
