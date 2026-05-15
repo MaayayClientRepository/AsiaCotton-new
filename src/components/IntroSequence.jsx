@@ -26,13 +26,13 @@ const hotspotInfo = {
 };
 
 const hotspots = [
+    { id: 'windowCloth', image: windowClothImg, hoverPath: 'M37,4 L47,4 L47,85 L36,85 L36,65 L38,42 L37,20 L37,4 Z M68,4 L82,4 L82,20 L81,42 L82,65 L83,85 L68,85 L68,4 Z' },
     { id: 'centerPillow', image: centerPillowImg, hoverPath: 'M48,45 L67,45 L67,54 L48,54 Z' },
     { id: 'centerBedsheet', image: centerBedsheetImg, hoverPath: 'M30,68 L32,60 L45,52 L56,54 L70,55 L77,63 L75,75 L65,75 L50,75 L35,78 Z' },
     { id: 'leftBed', image: leftBedImg, hoverPath: 'M11,54 L35,54 L35,68 L11,68 Z' },
     { id: 'leftPillow', image: leftPillowImg, hoverPath: 'M26,51 L33,51 L33,55 L26,55 Z' },
     { id: 'sofaSheet', image: sofaSheetImg, hoverPath: 'M78,78 L95,78 L95,95 L78,95 Z' },
     { id: 'sofaPillow', image: sofaPillowImg, hoverPath: 'M85,67 L94,67 L96,75 L94,80 L84,80 L83,75 Z' },
-    { id: 'windowCloth', image: windowClothImg, hoverPath: 'M37,4 L43,4 L43,50 L37,50 Z M73,4 L82,4 L82,60 L73,60 Z' },
     { id: 'bedMat', image: bedMatImg, hoverPath: 'M25,75 L75,75 L95,100 L5,100 Z' },
     { id: 'upperSheet', image: upperSheetImg, hoverPath: 'M38,58 L50,56 L62,56 L74,58 L74,68 L62,62 L50,61 L38,61 Z' }
 ];
@@ -356,7 +356,7 @@ const IntroSequence = () => {
                                         alt="Asia Cotton"
                                         className="h-64 md:h-[50vh] lg:h-[65vh] xl:h-[75vh] 2xl:h-[80vh] w-auto drop-shadow-2xl will-change-transform object-contain"
                                     />
-                                    
+
                                 </motion.div>
 
                             </div>
@@ -364,7 +364,7 @@ const IntroSequence = () => {
 
                         {/* Right Side: Editorial Headline (Responsive Scaling) */}
                         <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-12 lg:pl-20">
-                            <motion.h1 
+                            <motion.h1
                                 style={{ opacity: useTransform(progress, [0.01, 0.04], [0, 1]) }}
                                 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-6 md:mt-0"
                             >
