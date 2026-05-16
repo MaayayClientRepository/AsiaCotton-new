@@ -268,14 +268,14 @@ const IntroSequence = () => {
 
     // Trigger typing reveal when branding reveal phase starts (using direct progress)
     useMotionValueEvent(progress, "change", (latest) => {
-        if (latest > 0.05 && !shouldStartTyping) {
+        if ((latest > 0.05 || isMobile) && !shouldStartTyping) {
             setShouldStartTyping(true);
         }
     });
 
     // ── Editorial Reveal Logic: Grid/Split Layout + Color Animation ──
-    const introOpacity = useTransform(progress, [0, 0.01, 0.03], [1, 1, 0]);
-    const brandingOpacity = useTransform(progress, [0, 0.01], [0, 1]); // Logo always visible
+    const introOpacity = useTransform(progress, isMobile ? [0, 1] : [0, 0.01, 0.03], isMobile ? [0, 0] : [1, 1, 0]);
+    const brandingOpacity = useTransform(progress, isMobile ? [0, 1] : [0, 0.01], isMobile ? [1, 1] : [0, 1]); 
     const sketchX = useTransform(progress, [0.01, 0.04], ["0%", isMobile ? "0%" : "-15%"]);
     const sketchScale = useTransform(progress, [0.01, 0.04], [1, isMobile ? 1.05 : 0.85]);
 
@@ -285,12 +285,12 @@ const IntroSequence = () => {
     const highlightColor = useTransform(progress, [0.08, 0.12], ["#000000", "#E11D48"]);
 
     // Tutorial Hint Visibility
-    const tutorialOpacity = useTransform(progress, [0, 0.01, 0.04, 0.05], [0, 1, 1, 0]);
+    const tutorialOpacity = useTransform(progress, isMobile ? [0, 1] : [0, 0.01, 0.04, 0.05], isMobile ? [0, 0] : [0, 1, 1, 0]);
 
     // Logo Specific Cinematic Transforms (In-Place Reveal)
-    const logoScale = useTransform(progress, [0, 0.01, 0.04], [0.25, 0.25, 1]);
+    const logoScale = useTransform(progress, isMobile ? [0, 1] : [0, 0.01, 0.04], isMobile ? [1, 1] : [0.25, 0.25, 1]);
     const logoRotate = useTransform(progress, [0.01, 0.04], [isMobile ? 0 : -10, 0]);
-    const logoY = useTransform(progress, [0, 0.01, 0.04], [isMobile ? 20 : 50, isMobile ? 20 : 50, 0]);
+    const logoY = useTransform(progress, isMobile ? [0, 1] : [0, 0.01, 0.04], isMobile ? [0, 0] : [isMobile ? 20 : 50, isMobile ? 20 : 50, 0]);
     const logoX = useTransform(progress, [0, 0.01, 0.04], ["0px", "0px", "0px"]);
     const dividerHeight = useTransform(progress, [0.01, 0.04], ["0%", "80%"]);
 
@@ -301,7 +301,7 @@ const IntroSequence = () => {
 
                 {/* Corner Branding: Vertical Layout (Aligned below Certifications icon) - Hidden on Mobile */}
                 <motion.div
-                    style={{ opacity: introOpacity }}
+                    style={{ opacity: isMobile ? 0 : introOpacity }}
                     className="hidden md:flex absolute top-8 md:top-10 left-12 md:left-24 z-[95] flex-col items-center pointer-events-none"
                 >
                     <img
@@ -312,16 +312,18 @@ const IntroSequence = () => {
                 </motion.div>
 
                 {/* Layer 1: Interactive Sketch Image (Slides Left) */}
-                <motion.div
-                    style={{
-                        opacity: introOpacity,
-                        x: sketchX,
-                        scale: sketchScale
-                    }}
-                    className="absolute inset-0 w-full h-full transform-gpu origin-center"
-                >
-                    <InteractiveHotspotLayer isMobile={isMobile} />
-                </motion.div>
+                {!isMobile && (
+                    <motion.div
+                        style={{
+                            opacity: introOpacity,
+                            x: sketchX,
+                            scale: sketchScale
+                        }}
+                        className="absolute inset-0 w-full h-full transform-gpu origin-center"
+                    >
+                        <InteractiveHotspotLayer isMobile={isMobile} />
+                    </motion.div>
+                )}
 
                 {/* Layer 2: Editorial Branding Reveal (Adaptive Layout) */}
                 <motion.div
@@ -365,7 +367,7 @@ const IntroSequence = () => {
                         {/* Right Side: Editorial Headline (Responsive Scaling) */}
                         <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-12 lg:pl-20">
                             <motion.h1
-                                style={{ opacity: useTransform(progress, [0.01, 0.04], [0, 1]) }}
+                                style={{ opacity: isMobile ? 1 : useTransform(progress, [0.01, 0.04], [0, 1]) }}
                                 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-6 md:mt-0"
                             >
                                 <AnimatedText text="Crafting" shouldStart={shouldStartTyping} />
@@ -398,19 +400,21 @@ const IntroSequence = () => {
                 </motion.div>
 
                 {/* Tutorial Hint: Hover/Touch to Explore */}
-                <motion.div
-                    style={{ opacity: tutorialOpacity }}
-                    className="absolute bottom-10 md:bottom-12 left-1/2 -translate-x-1/2 z-[90] flex flex-col items-center gap-3 pointer-events-none"
-                >
-                    <p className="text-black/40 text-[10px] md:text-[12px] font-bold uppercase tracking-[0.3em] font-['Outfit']">
-                        {isMobile ? "Touch to Explore" : "Hover to Explore"}
-                    </p>
+                {!isMobile && (
                     <motion.div
-                        animate={{ y: [0, 5, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        className="w-[1px] h-8 bg-black/20"
-                    />
-                </motion.div>
+                        style={{ opacity: tutorialOpacity }}
+                        className="absolute bottom-10 md:bottom-12 left-1/2 -translate-x-1/2 z-[90] flex flex-col items-center gap-3 pointer-events-none"
+                    >
+                        <p className="text-black/40 text-[10px] md:text-[12px] font-bold uppercase tracking-[0.3em] font-['Outfit']">
+                            {isMobile ? "Touch to Explore" : "Hover to Explore"}
+                        </p>
+                        <motion.div
+                            animate={{ y: [0, 5, 0] }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                            className="w-[1px] h-8 bg-black/20"
+                        />
+                    </motion.div>
+                )}
             </div>
         </section>
     );
