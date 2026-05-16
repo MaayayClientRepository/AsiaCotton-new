@@ -60,6 +60,8 @@ export default function BounceCards({
         }
     };
 
+    const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
+
     const pushSiblings = hoveredIdx => {
         if (!enableHover || !containerRef.current) return;
 
@@ -81,7 +83,7 @@ export default function BounceCards({
                     overwrite: 'auto'
                 });
             } else {
-                const offsetX = i < hoveredIdx ? -100 : 100;
+                const offsetX = i < hoveredIdx ? (isMobile ? -60 : -100) : (isMobile ? 60 : 100);
                 const pushedTransform = getPushedTransform(baseTransform, offsetX);
 
                 const distance = Math.abs(hoveredIdx - i);
@@ -131,7 +133,7 @@ export default function BounceCards({
             {data.map((item, idx) => (
                 <div
                     key={idx}
-                    className={`card card-${idx} absolute w-60 h-80 bg-white border-2 border-neutral-100 rounded-[3rem] shadow-2xl flex flex-col items-center justify-center text-center p-8 transition-shadow duration-500 hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)]`}
+                    className={`card card-${idx} absolute ${isMobile ? 'w-40 h-56 rounded-[2rem] p-4' : 'w-60 h-80 rounded-[3rem] p-8'} bg-white border-2 border-neutral-100 shadow-2xl flex flex-col items-center justify-center text-center transition-shadow duration-500 hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)]`}
                     style={{
                         transform: transformStyles[idx] || 'none',
                         zIndex: 20 + idx
@@ -139,8 +141,8 @@ export default function BounceCards({
                     onMouseEnter={() => pushSiblings(idx)}
                     onMouseLeave={resetSiblings}
                 >
-                    <span className="text-6xl mb-6 filter drop-shadow-lg">{item.icon}</span>
-                    <h4 className="text-[#1A1A1A] text-xs font-black uppercase tracking-[0.2em] leading-tight max-w-[150px]">{item.title}</h4>
+                    <span className={`${isMobile ? 'text-4xl mb-3' : 'text-6xl mb-6'} filter drop-shadow-lg`}>{item.icon}</span>
+                    <h4 className="text-[#1A1A1A] text-[10px] md:text-xs font-black uppercase tracking-[0.2em] leading-tight max-w-[120px] md:max-w-[150px]">{item.title}</h4>
                 </div>
             ))}
         </div>

@@ -13,8 +13,13 @@ import { AnimatedTestimonials } from '../components/ui/animated-testimonials';
 import BackgroundGrid from '../components/BackgroundGrid';
 
 const AboutPage = () => {
+    const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
+
     useEffect(() => {
         window.scrollTo(0, 0);
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const features = [
@@ -49,6 +54,20 @@ const AboutPage = () => {
             designation: "Rigorous Testing",
             src: factory4
         }
+    ];
+
+    const mobileTransformStyles = [
+        'rotate(-8deg) translate(-120px, 10px)',
+        'rotate(-4deg) translate(-40px, -5px)',
+        'rotate(4deg) translate(40px, -5px)',
+        'rotate(8deg) translate(120px, 10px)'
+    ];
+
+    const desktopTransformStyles = [
+        'rotate(-10deg) translate(-250px, 20px)',
+        'rotate(-5deg) translate(-120px, -10px)',
+        'rotate(5deg) translate(120px, -10px)',
+        'rotate(10deg) translate(250px, 20px)'
     ];
 
     return (
@@ -145,11 +164,12 @@ const AboutPage = () => {
                         </p>
                     </div>
 
-                    <div className="w-full flex justify-center overflow-hidden scale-75 sm:scale-90 md:scale-100 origin-top">
+                    <div className="w-full flex justify-center overflow-hidden scale-90 sm:scale-90 md:scale-100 origin-top">
                         <BounceCards
                             data={features}
                             containerWidth="100%"
-                            containerHeight={400}
+                            containerHeight={isMobile ? 300 : 400}
+                            transformStyles={isMobile ? mobileTransformStyles : desktopTransformStyles}
                         />
                     </div>
                 </div>
