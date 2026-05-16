@@ -102,7 +102,7 @@ const Certifications = () => {
                         itemScale={0.02}
                         itemStackDistance={20}
                         baseScale={0.92}
-                        stackPosition={typeof window !== 'undefined' && window.innerWidth < 1024 ? "25%" : "15%"}
+                        stackPosition="15%"
                         className="h-full"
                     >
                         {certificationData.map((cert, idx) => (

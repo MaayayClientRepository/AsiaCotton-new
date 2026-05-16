@@ -211,7 +211,7 @@ const Products = () => {
                                 key={category.id}
                                 className="flex flex-col items-center justify-center border-b border-r border-black/[0.03] last:border-r-0 p-3 md:p-4 hover:bg-white/10 transition-colors duration-300"
                             >
-                                <div className="h-[150px] md:h-[200px] lg:h-[240px] w-full flex items-center justify-center relative mb-2 md:mb-4">
+                                <div className="h-[200px] lg:h-[240px] w-full flex items-center justify-center relative mb-2 md:mb-4">
                                     {activeFolderId === category.id ? (
                                         <div className="w-full h-full" />
                                     ) : (
@@ -223,7 +223,7 @@ const Products = () => {
                                                 color={category.color}
                                                 title={category.title}
                                                 images={category.allImages}
-                                                size={typeof window !== 'undefined' && window.innerWidth < 480 ? 1.0 : (window.innerWidth < 768 ? 1.2 : 1.6)}
+                                                size={1.6}
                                                 onFolderClick={() => setActiveFolderId(category.id)}
                                             />
                                         </motion.div>
@@ -364,11 +364,11 @@ const Products = () => {
                                 {/* Right Side: ScrollStack of product images */}
                                 <div className="w-full lg:w-[65%] h-[45vh] sm:h-[50vh] md:h-[55vh] lg:h-full relative z-10">
                                     <ScrollStack
-                                        itemDistance={typeof window !== 'undefined' && window.innerWidth < 768 ? 60 : 150}
+                                        itemDistance={140}
                                         itemScale={0}
                                         itemStackDistance={0}
                                         baseScale={1}
-                                        stackPosition={typeof window !== 'undefined' && window.innerWidth < 1024 ? "15%" : "12%"}
+                                        stackPosition="12%"
                                         className="h-full"
                                     >
                                         {activeCategory.allImages.map((img, idx) => (

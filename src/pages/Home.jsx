@@ -8,8 +8,6 @@ import ScrollReveal from '../components/ScrollReveal';
 import BackgroundGrid from '../components/BackgroundGrid';
 import { ArrowRight, History, Factory, Globe, Leaf, ShieldCheck } from 'lucide-react';
 import Folder from '../components/Folder';
-import GlassIcons from '../components/GlassIcons';
-
 import cottonBg from '../assets/factory/cotton-bg.png';
 
 const Home = () => {
@@ -145,7 +143,7 @@ const Home = () => {
 
                         <ScrollReveal
                             as="h2"
-                            textClassName="text-white font-black serif-title leading-tight text-4xl md:text-6xl"
+                            textClassName="text-white font-black serif-title leading-tight text-2xl md:text-6xl"
                             containerClassName="mb-10 md:mb-20 max-w-4xl mx-auto"
                         >
                             Quality and excellence measured through decades of dedication.

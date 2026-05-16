@@ -98,8 +98,8 @@ const AboutPage = () => {
                     <div className="absolute top-1/2 -right-20 w-80 h-80 bg-white/10 rounded-full blur-[120px] opacity-10 transform-gpu"></div>
 
                     <div className="relative z-10 w-full max-w-xl mx-auto flex flex-col h-full justify-center">
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-8">
-                            <div className="space-y-4 transform-gpu flex-1">
+                        <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-8 mb-8">
+                            <div className="space-y-4 transform-gpu flex-1 text-center md:text-left">
                                 <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight">Our <span className="text-[#FACC15]">Factory</span></h2>
                                 <p className="text-white/60 text-sm md:text-base leading-relaxed">
                                     Our state-of-the-art manufacturing facility is equipped with advanced technology.
@@ -107,7 +107,7 @@ const AboutPage = () => {
                             </div>
 
                             {/* Integrated Compact Stats */}
-                            <div className="flex gap-4 shrink-0">
+                            <div className="flex justify-center md:justify-start gap-4 shrink-0">
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
                                     whileInView={{ opacity: 1, y: 0 }}
@@ -120,31 +120,14 @@ const AboutPage = () => {
                             </div>
                         </div>
 
-                        {/* Interactive Folder Animation for Factory Showcase - Desktop */}
-                        <div className="hidden lg:flex w-full items-center justify-center relative transform-gpu bg-gradient-to-b from-white/5 to-transparent p-1 rounded-2xl border border-white/5">
+                        {/* Interactive Folder Animation for Factory Showcase */}
+                        <div className="flex w-full items-center justify-center relative transform-gpu bg-gradient-to-b from-white/5 to-transparent p-1 rounded-2xl border border-white/5">
                             <div className="w-full overflow-hidden rounded-xl">
                                 <AnimatedTestimonials
                                     testimonials={factoryImagesData}
                                     autoplay={true}
                                 />
                             </div>
-                        </div>
-
-                        {/* Mobile Fallback or simpler view */}
-                        <div className="lg:hidden relative group perspective-1000 transform-gpu max-w-lg mx-auto w-full">
-                            <motion.div
-                                whileHover={{ rotateY: 5, rotateX: 5 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                                className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white/10 transform-gpu will-change-transform aspect-video"
-                            >
-                                <img src={factoryExteriorImg} alt="Factory Exterior" className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-[1s] ease-in-out transform-gpu" />
-
-                                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#6a6664]/90 to-transparent translate-y-6 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-500 transform-gpu">
-                                    <p className="text-[#FACC15] font-bold tracking-widest text-[10px] uppercase mb-1">Facility Node 01</p>
-                                    <h3 className="text-lg font-bold text-white">State-of-the-Art Hub</h3>
-                                </div>
-                            </motion.div>
-                            <div className="absolute inset-0 border-2 border-white/20 translate-x-4 translate-y-4 rounded-2xl -z-10 group-hover:translate-x-6 group-hover:translate-y-6 transition-all duration-500 transform-gpu"></div>
                         </div>
                     </div>
                 </div>
