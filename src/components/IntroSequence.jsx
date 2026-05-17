@@ -335,9 +335,9 @@ const IntroSequence = () => {
     const mobileHeadlineOpacity = useTransform(progress, [0, 0.7, 0.92], [1, 1, 0]);
 
     return (
-        <section ref={containerRef} className="relative h-[115vh] w-full bg-white z-[60]">
+        <section ref={containerRef} className={`relative ${isMobile ? 'h-screen' : 'h-[115vh]'} w-full bg-white z-[60]`}>
             {/* Sticky Container - Keeps everything centered while scrolling the travel distance */}
-            <div className="sticky top-0 h-screen w-full overflow-hidden z-[60] bg-white flex flex-col items-center justify-center transform-gpu">
+            <div className={`${isMobile ? 'relative h-full' : 'sticky top-0 h-screen'} w-full overflow-hidden z-[60] bg-white flex flex-col items-center justify-center transform-gpu`}>
 
                 {/* Corner Branding: Vertical Layout (Aligned below Certifications icon) - Hidden on Mobile */}
                 <motion.div
@@ -355,10 +355,9 @@ const IntroSequence = () => {
                 {isMobile && (
                     <motion.div
                         style={{ 
-                            opacity: mobileLogoOpacity,
-                            scale: mobileLogoScale,
-                            y: mobileLogoY,
-                            willChange: "transform, opacity"
+                            opacity: 1,
+                            scale: 1,
+                            y: 0
                         }}
                         className="absolute top-24 left-1/2 -translate-x-1/2 z-[95] flex justify-center pointer-events-none w-full px-6 origin-center"
                     >
@@ -372,8 +371,12 @@ const IntroSequence = () => {
 
                 {/* Layer 1: Interactive Sketch Image (Slides Left) */}
                 <motion.div
-                    style={{
-                        opacity: isMobile ? mobileSketchOpacity : introOpacity,
+                    style={isMobile ? {
+                        opacity: 1,
+                        x: "0%",
+                        scale: 1
+                    } : {
+                        opacity: introOpacity,
                         x: sketchX,
                         scale: sketchScale
                     }}
@@ -386,10 +389,9 @@ const IntroSequence = () => {
                 {isMobile && (
                     <motion.div
                         style={{ 
-                            opacity: mobileHeadlineOpacity,
-                            scale: mobileHeadlineScale,
-                            y: mobileHeadlineY,
-                            willChange: "transform, opacity"
+                            opacity: 1,
+                            scale: 1,
+                            y: 0
                         }}
                         className="absolute bottom-24 left-0 right-0 z-[95] flex flex-col items-center justify-center pointer-events-none px-6 origin-center"
                     >
