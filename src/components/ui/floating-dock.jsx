@@ -192,7 +192,7 @@ const FloatingDockMobile = ({
                             {/* Footer Info */}
                             <div className="relative z-10 border-t border-white/5 pt-6 flex flex-col gap-3">
                                 <div className="flex justify-between items-center text-[10px] font-bold tracking-widest text-[#E11D48] uppercase select-none">
-                                    <span>SINCE 1995</span>
+                                    <span>SINCE 1997</span>
                                     <span>ASIA COTTON INC.</span>
                                 </div>
                                 <div className="flex justify-between items-center text-[11px] text-neutral-400 font-medium">
@@ -202,7 +202,7 @@ const FloatingDockMobile = ({
                                         <span>·</span>
                                         <span className="hover:text-[#E11D48] transition-colors cursor-pointer">LN</span>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                         </motion.div>
                     )}
