@@ -5,7 +5,7 @@ import path from "path"
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/AsiaCotton-new/",
+  base: "./",   // ✅ IMPORTANT FIX
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
