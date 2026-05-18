@@ -212,19 +212,11 @@ const FloatingDockMobile = ({
             
             <button
                 onClick={() => setOpen(!open)}
-                className="h-14 w-14 rounded-full bg-gradient-to-r from-[#E11D48] to-[#9F1239] text-white flex items-center justify-center shadow-[0_12px_30px_rgba(225,29,72,0.4)] border border-white/20 active:scale-95 transition-all duration-300 transform-gpu cursor-pointer relative overflow-hidden group"
+                className="h-14 w-14 rounded-full bg-gradient-to-r from-[#E11D48] to-[#9F1239] text-white flex items-center justify-center border border-white/20 active:scale-95 transition-all duration-300 transform-gpu cursor-pointer relative overflow-hidden group"
             >
-                {!open && (
-                    <motion.div
-                        animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.1, 0.4] }}
-                        transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-                        className="absolute -inset-1 rounded-full bg-[#E11D48]/35 blur-md pointer-events-none"
-                    />
-                )}
-
                 <div className="relative w-5 h-4 flex flex-col justify-between items-center z-10">
                     <span className="w-5 h-[2px] bg-white rounded-full transition-transform duration-300" />
-                    <span className="w-4 h-[2px] bg-white rounded-full transition-all duration-300 group-hover:w-5" />
+                    <span className="w-5 h-[2px] bg-white rounded-full transition-all duration-300" />
                     <span className="w-5 h-[2px] bg-white rounded-full transition-transform duration-300" />
                 </div>
             </button>
