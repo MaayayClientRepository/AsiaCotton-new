@@ -196,7 +196,7 @@ const FloatingDockMobile = ({
                                     <span>ASIA COTTON INC.</span>
                                 </div>
                                 <div className="flex justify-between items-center text-[11px] text-neutral-400 font-medium">
-                                    <a href="mailto:info@asiacotton.in" className="hover:text-[#E11D48] transition-colors">sales@asiacotton.com</a>
+                                    <a href="mailto:info@asiacotton.in" className="hover:text-[#E11D48] transition-colors">info@asiacotton.in</a>
                                     <div className="flex gap-3 text-neutral-500">
                                         <span className="hover:text-[#E11D48] transition-colors cursor-pointer">IG</span>
                                         <span>·</span>
