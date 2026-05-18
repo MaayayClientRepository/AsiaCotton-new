@@ -13,7 +13,6 @@ const Sustainability = () => {
 
     const indicators = [
         { to: 85, suffix: "%", label: "Water reduction since 2015" },
-        { to: 500, suffix: "+", label: "Artisans employed" },
         { to: 65, suffix: "%", label: "Renewable energy use" },
         { to: 100, suffix: "%", label: "Organic by 2025" }
     ];
@@ -131,7 +130,7 @@ const Sustainability = () => {
                             <BackgroundGrid color="#FFFFFF" opacity={0.1} />
                         </div>
                         
-                        <div className="w-full lg:max-w-[704px] relative z-10 flex flex-col items-start justify-center py-10 md:py-16 lg:py-40 px-6 md:px-12 lg:px-10 lg:pl-12 min-h-[auto] lg:min-h-[50vh] xl:px-16 xl:pl-16">
+                        <div className="w-full lg:max-w-[704px] relative z-10 flex flex-col lg:flex-row items-center lg:items-start justify-center py-10 md:py-16 lg:py-40 px-6 md:px-12 lg:px-10 lg:pl-12 min-h-[auto] lg:min-h-[50vh] xl:px-16 xl:pl-16 gap-8 lg:gap-0">
                             {/* Icons Column */}
                             <div className="w-full lg:w-2/5 xl:w-1/3 flex justify-center lg:justify-end xl:pr-6 mb-10 lg:mb-0 pl-0">
                                 <GlassIcons
@@ -208,7 +207,7 @@ const Sustainability = () => {
                 {/* Stats Section */}
                 <section className="bg-[#6a6664] py-16 md:py-32 px-6 md:px-12 lg:px-24 text-white transform-gpu relative overflow-hidden">
                     <BackgroundGrid color="#FFFFFF" opacity={0.1} />
-                    <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-12 text-center relative z-10">
+                    <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-12 text-center relative z-10">
                         {indicators.map((stat, idx) => (
                             <motion.div
                                 key={idx}
