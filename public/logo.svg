@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <defs>
+    <!-- Premium Gradients -->
+    <linearGradient id="cottonBlue" x1="0" y1="128" x2="128" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1E3E5B" />
+      <stop offset="100%" stop-color="#3B6790" />
+    </linearGradient>
+    <linearGradient id="cottonGold" x1="0" y1="128" x2="128" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#C5A880" />
+      <stop offset="100%" stop-color="#E6C594" />
+    </linearGradient>
+  </defs>
+
+  <!-- Modern minimalist emblem representing Asia Cotton -->
+  <!-- We create a beautifully stylized 'A' with textile lines and a cotton flower motif -->
+  
+  <!-- Outer glowing accent ring -->
+  <circle cx="64" cy="64" r="60" stroke="url(#cottonBlue)" stroke-width="2" stroke-dasharray="8 4" opacity="0.4" />
+  
+  <!-- Stylized Left Leg of 'A' (Textile Ribbon) -->
+  <path d="M35 100 L60 28 C61 25, 63 25, 64 28 L72 52 L57 85 L47 100 Z" fill="url(#cottonBlue)" />
+  
+  <!-- Stylized Right Leg of 'A' (Dark Slate Bar) -->
+  <path d="M64 28 L89 100 L77 100 L58 48 Z" fill="#1A1A1A" />
+  
+  <!-- Elegant Cotton Boll nested in the center of the 'A' -->
+  <g transform="translate(64, 72)">
+    <!-- Cotton flower petals -->
+    <circle cx="-8" cy="-6" r="10" fill="#FFFFFF" stroke="#3B6790" stroke-width="2" />
+    <circle cx="8" cy="-6" r="10" fill="#FFFFFF" stroke="#3B6790" stroke-width="2" />
+    <circle cx="0" cy="6" r="11" fill="#FFFFFF" stroke="#3B6790" stroke-width="2" />
+    <!-- Calyx (sepals) underneath the cotton pods -->
+    <path d="M-10 -2 C-5 10, 5 10, 10 -2 C5 6, -5 6, -10 -2 Z" fill="#C5A880" />
+    <path d="M0 6 L0 18" stroke="#C5A880" stroke-width="3" stroke-linecap="round" />
+  </g>
+
+  <!-- Fine textile layer lines on the right side -->
+  <path d="M72 64 L96 64" stroke="#1A1A1A" stroke-width="3.5" stroke-linecap="round" />
+  <path d="M77 78 L98 78" stroke="url(#cottonGold)" stroke-width="3.5" stroke-linecap="round" />
+</svg>
