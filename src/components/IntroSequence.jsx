@@ -342,12 +342,12 @@ const IntroSequence = () => {
                 {/* Corner Branding: Vertical Layout (Aligned below Certifications icon) - Hidden on Mobile */}
                 <motion.div
                     style={{ opacity: introOpacity }}
-                    className="hidden md:flex absolute top-8 md:top-10 left-12 md:left-24 z-[95] flex-col items-center pointer-events-none"
+                    className="hidden md:flex absolute top-8 md:top-[72px] left-12 md:left-32 z-[95] flex-col items-center pointer-events-none"
                 >
                     <img
                         src={logo}
                         alt="Asia Cotton"
-                        className="w-48 h-48 md:w-72 md:h-72 lg:w-80 lg:h-80 object-contain"
+                        className="w-36 h-36 md:w-56 md:h-56 lg:w-64 lg:h-64 object-contain"
                     />
                 </motion.div>
 
@@ -364,7 +364,7 @@ const IntroSequence = () => {
                         <img
                             src={logo}
                             alt="Asia Cotton"
-                            className="h-32 w-auto object-contain drop-shadow-sm"
+                            className="h-24 w-auto object-contain drop-shadow-sm"
                         />
                     </motion.div>
                 )}
@@ -435,7 +435,7 @@ const IntroSequence = () => {
                                         <img
                                             src={logo}
                                             alt="Asia Cotton"
-                                            className="h-64 md:h-[50vh] lg:h-[65vh] xl:h-[75vh] 2xl:h-[80vh] w-auto drop-shadow-2xl will-change-transform object-contain"
+                                            className="h-52 md:h-[40vh] lg:h-[55vh] xl:h-[65vh] 2xl:h-[70vh] w-auto drop-shadow-2xl will-change-transform object-contain"
                                         />
 
                                     </motion.div>
