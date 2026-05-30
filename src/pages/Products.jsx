@@ -362,7 +362,7 @@ const Products = () => {
                                 </AnimatePresence>
 
                                 {/* Right Side: ScrollStack of product images */}
-                                <div className="w-full lg:w-[65%] h-[45vh] sm:h-[50vh] md:h-[55vh] lg:h-full relative z-10">
+                                <div className="w-full lg:w-[65%] flex-1 min-h-0 lg:h-full relative z-10">
                                     <ScrollStack
                                         itemDistance={140}
                                         itemScale={0}
@@ -374,7 +374,7 @@ const Products = () => {
                                         {activeCategory.allImages.map((img, idx) => (
                                             <ScrollStackItem
                                                 key={idx}
-                                                itemClassName="!h-auto !p-3 md:!p-6 !rounded-[20px] md:!rounded-[28px] bg-white border border-black/5 max-w-[85vw] md:max-w-sm lg:max-w-md mx-auto shadow-2xl transition-shadow duration-500"
+                                                itemClassName="!h-auto !p-3 md:!p-6 !rounded-[20px] md:!rounded-[28px] bg-white border border-black/5 max-w-[280px] md:max-w-sm lg:max-w-md mx-auto shadow-2xl transition-shadow duration-500"
                                             >
                                                 <div
                                                     className="flex items-center justify-center cursor-pointer group"
