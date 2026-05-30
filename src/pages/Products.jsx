@@ -9,7 +9,7 @@ import ScrollStack, { ScrollStackItem } from '../components/ScrollStack';
 import Folder from '../components/Folder';
 
 // Use Vite's glob import to get all images in the products directory
-const allProductImages = import.meta.glob('../assets/products/**/*.{jpg,jpeg,png}', {
+const allProductImages = import.meta.glob('../assets/products/**/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}', {
     eager: true,
     query: '?url',
     import: 'default'
@@ -67,7 +67,7 @@ const categoriesData = [
         tagline: 'GENTLE CARE',
         description: 'Ultra-soft organic cotton baby textiles designed with love for the most delicate skin.',
         color: '#9333EA',
-        folder: 'baby',
+        folder: 'Kids',
         items: ["Baby Blankets", "Swaddle Wraps", "Hooded Towels", "Crib Sheets"]
     }
 ];

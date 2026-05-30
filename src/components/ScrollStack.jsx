@@ -26,6 +26,7 @@ const ScrollStack = ({
     rotationAmount = 0,
     blurAmount = 0,
     useWindowScroll = false,
+    preventUnpin = true,
     onStackComplete
 }) => {
     const scrollerRef = useRef(null);
@@ -112,7 +113,7 @@ const ScrollStack = ({
             const triggerStart = cardTop - stackPositionPx - itemStackDistance * i;
             const triggerEnd = cardTop - scaleEndPositionPx;
             const pinStart = cardTop - stackPositionPx - itemStackDistance * i;
-            const pinEnd = endElementTop - containerHeight / 2;
+            const pinEnd = preventUnpin ? Infinity : (endElementTop - containerHeight / 2);
 
             const scaleProgress = calculateProgress(scrollTop, triggerStart, triggerEnd);
             const targetScale = baseScale + i * itemScale;
@@ -179,7 +180,7 @@ const ScrollStack = ({
         baseScale,
         rotationAmount,
         blurAmount,
-        useWindowScroll,
+        preventUnpin,
         onStackComplete,
         calculateProgress,
         parsePercentage,
@@ -284,6 +285,7 @@ const ScrollStack = ({
         const updatePadding = () => {
             if (!inner || !cards.length) return;
 
+            inner.style.paddingBottom = '0px';
             updateOffsets(); // Refresh cached offsets before calculation
             const lastCard = cards[cards.length - 1];
             const { containerHeight } = getScrollData();
@@ -294,11 +296,15 @@ const ScrollStack = ({
 
             const requiredMaxScroll = Math.max(0, lastCardOffsetTop - lastCardTargetTop);
 
-            inner.style.paddingBottom = '0px';
             const contentHeight = inner.offsetHeight;
             const targetPaddingBottom = Math.max(0, (requiredMaxScroll + containerHeight) - contentHeight);
 
             inner.style.paddingBottom = `${targetPaddingBottom}px`;
+
+            const endElement = useWindowScroll
+                ? document.querySelector('.scroll-stack-end')
+                : scrollerRef.current?.querySelector('.scroll-stack-end');
+            endElementOffsetRef.current = endElement ? getElementOffset(endElement) : 0;
 
             if (lenisRef.current) {
                 lenisRef.current.resize();
@@ -343,6 +349,7 @@ const ScrollStack = ({
         rotationAmount,
         blurAmount,
         useWindowScroll,
+        preventUnpin,
         onStackComplete,
         setupLenis,
         updateCardTransforms,

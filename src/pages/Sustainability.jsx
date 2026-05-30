@@ -55,7 +55,7 @@ const Sustainability = () => {
             description: 'We ensure 100% transparency in our supply chain, prioritizing organic and BCI certified cotton to minimize environmental impact from the ground up.',
             icon: <Leaf size="24" />,
             color: 'green',
-            points: ["Organic & BCI Certified", "Non-toxic Dyes", "Recycled Materials"]
+            points: ["Organic & BCI Certified", "Oekotex Certified", "Recycled Materials"]
         },
         {
             id: 'production',
