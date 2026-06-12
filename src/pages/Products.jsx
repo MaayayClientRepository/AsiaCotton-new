@@ -76,6 +76,16 @@ const Products = () => {
     const [activeFolderId, setActiveFolderId] = useState(null);
     const [viewedImage, setViewedImage] = useState(null);
     const [showTutorial, setShowTutorial] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     useEffect(() => {
         if (activeFolderId) {
@@ -162,6 +172,27 @@ const Products = () => {
                     overflow: hidden !important;
                     height: 100vh !important;
                     height: 100dvh !important;
+                }
+                .product-stack-card {
+                    width: 100%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    max-width: min(250px, 35vh);
+                }
+                @media (min-width: 640px) {
+                    .product-stack-card {
+                        max-width: min(320px, 38vh);
+                    }
+                }
+                @media (min-width: 768px) {
+                    .product-stack-card {
+                        max-width: min(380px, 44vh);
+                    }
+                }
+                @media (min-width: 1024px) {
+                    .product-stack-card {
+                        max-width: min(448px, 50vh);
+                    }
                 }
             `}</style>
 
@@ -294,7 +325,7 @@ const Products = () => {
                                 exit={{ opacity: 0, scale: 0.95, y: 30 }}
                                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                                 style={{ backgroundColor: activeCategory.color, willChange: 'transform, opacity' }}
-                                className="relative z-10 w-[98vw] md:w-[96vw] max-w-[1600px] h-[92vh] md:h-[90vh] mx-auto my-auto rounded-[20px] md:rounded-[48px] border border-white/10 shadow-[0_80px_200px_rgba(0,0,0,0.4)] flex flex-col lg:flex-row overflow-hidden cursor-default transform-gpu"
+                                className="relative z-10 w-[98vw] md:w-[96vw] max-w-[1600px] h-[92vh] h-[92dvh] md:h-[90vh] md:h-[90dvh] mx-auto my-auto rounded-[20px] md:rounded-[48px] border border-white/10 shadow-[0_80px_200px_rgba(0,0,0,0.4)] flex flex-col lg:flex-row overflow-hidden cursor-default transform-gpu"
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <BackgroundGrid color="#FFFFFF" opacity={0.08} />
@@ -310,25 +341,25 @@ const Products = () => {
                                 </motion.button>
 
                                 {/* Left Side: Category Info */}
-                                <div className="w-full lg:w-[35%] flex flex-col justify-start lg:justify-center px-5 md:px-12 lg:px-14 pt-10 pb-4 md:pt-12 md:pb-6 lg:py-0 relative z-20">
+                                <div className="w-full lg:w-[35%] flex flex-col justify-start lg:justify-center px-5 md:px-12 lg:px-14 pt-8 pb-3 md:pt-12 md:pb-6 lg:py-0 relative z-20">
                                     <motion.div
                                         initial={{ opacity: 0, x: -30 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                                         className="transform-gpu will-change-transform text-center lg:text-left"
                                     >
-                                        <div className="flex items-center gap-2 mb-4 opacity-50 justify-center lg:justify-start">
+                                        <div className="flex items-center gap-2 mb-2 lg:mb-4 opacity-50 justify-center lg:justify-start">
                                             <div className="h-[1px] w-6 bg-white"></div>
                                             <span className="text-[9px] font-black tracking-[0.3em] uppercase text-white">
                                                 Category 0{categories.findIndex(c => c.id === activeFolderId) + 1}
                                             </span>
                                         </div>
 
-                                        <h1 className="text-[clamp(2rem,5vw,4.5rem)] font-black leading-[0.85] tracking-tighter text-white mb-4 md:mb-8">
+                                        <h1 className="text-[clamp(1.8rem,4.5vw,4rem)] lg:text-[clamp(2rem,5vw,4.5rem)] font-black leading-[0.85] tracking-tighter text-white mb-2 lg:mb-8">
                                             {activeCategory.title.toLowerCase()}
                                         </h1>
 
-                                        <p className="text-sm md:text-lg text-white/70 max-w-md mx-auto lg:mx-0 leading-relaxed font-medium mb-6 md:mb-10">
+                                        <p className="text-xs sm:text-sm md:text-lg text-white/70 max-w-md mx-auto lg:mx-0 leading-relaxed font-medium mb-4 lg:mb-10">
                                             {activeCategory.description}
                                         </p>
 
@@ -368,13 +399,15 @@ const Products = () => {
                                         itemScale={0}
                                         itemStackDistance={0}
                                         baseScale={1}
-                                        stackPosition="12%"
+                                        stackPosition={isMobile ? "6%" : "12%"}
+                                        innerPaddingTop={isMobile ? "pt-[4vh]" : "pt-[12vh]"}
+                                        innerPaddingX={isMobile ? "px-4" : "px-6 md:px-20"}
                                         className="h-full"
                                     >
                                         {activeCategory.allImages.map((img, idx) => (
                                             <ScrollStackItem
                                                 key={idx}
-                                                itemClassName="!h-auto !p-3 md:!p-6 !rounded-[20px] md:!rounded-[28px] bg-white border border-black/5 max-w-[280px] md:max-w-sm lg:max-w-md mx-auto shadow-2xl transition-shadow duration-500"
+                                                itemClassName="product-stack-card !h-auto !p-3 md:!p-6 !rounded-[20px] md:!rounded-[28px] bg-white border border-black/5 shadow-2xl transition-shadow duration-500"
                                             >
                                                 <div
                                                     className="flex items-center justify-center cursor-pointer group"

@@ -27,7 +27,9 @@ const ScrollStack = ({
     blurAmount = 0,
     useWindowScroll = false,
     preventUnpin = true,
-    onStackComplete
+    onStackComplete,
+    innerPaddingTop = 'pt-[8vh] md:pt-[20vh]',
+    innerPaddingX = 'px-6 md:px-20'
 }) => {
     const scrollerRef = useRef(null);
     const stackCompletedRef = useRef(false);
@@ -380,7 +382,7 @@ const ScrollStack = ({
 
     return (
         <div className={containerClassName} ref={scrollerRef} style={containerStyles}>
-            <div className="scroll-stack-inner pt-[8vh] md:pt-[20vh] px-6 md:px-20 min-h-screen">
+            <div className={`scroll-stack-inner ${innerPaddingTop} ${innerPaddingX} ${useWindowScroll ? 'min-h-screen' : 'min-h-full'}`}>
                 {children}
                 <div className="scroll-stack-end w-full h-px" />
             </div>
