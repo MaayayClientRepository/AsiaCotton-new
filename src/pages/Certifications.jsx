@@ -82,8 +82,18 @@ const certificationData = [
 ];
 
 const Certifications = () => {
+    const [isMobileLandscape, setIsMobileLandscape] = React.useState(false);
+
     useEffect(() => {
         window.scrollTo(0, 0);
+        const handleResize = () => {
+            setIsMobileLandscape(
+                window.innerWidth < 1024 && window.innerHeight < 600 && window.innerWidth > window.innerHeight
+            );
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     return (
@@ -93,41 +103,69 @@ const Certifications = () => {
                 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
             `}</style>
 
-            <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen lg:overflow-hidden">
+            <div className={`flex lg:flex-row lg:h-screen lg:overflow-hidden ${
+                isMobileLandscape 
+                    ? "flex-row h-screen overflow-hidden" 
+                    : "flex-col min-h-screen"
+            }`}>
                 {/* Left Side: Title and Content */}
-                <div className="w-full lg:w-[40%] flex flex-col justify-center px-6 md:px-12 lg:px-24 pt-24 pb-8 md:pt-28 md:pb-12 lg:py-0 relative z-20">
+                <div className={`flex flex-col justify-center relative z-20 ${
+                    isMobileLandscape 
+                        ? "w-[40%] h-full px-8 py-4 justify-center" 
+                        : "w-full lg:w-[40%] px-6 md:px-12 lg:px-24 pt-24 pb-8 md:pt-28 md:pb-12 lg:py-0"
+                }`}>
                     <motion.div
                         initial={{ opacity: 0, x: -30, scale: 0.98 }}
                         animate={{ opacity: 1, x: 0, scale: 1 }}
                         transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                        className="transform-gpu will-change-transform text-center lg:text-left"
+                        className={`transform-gpu will-change-transform ${
+                            isMobileLandscape ? "text-right items-end" : "text-center lg:text-left"
+                        }`}
                     >
-                        <h1 className="text-[clamp(2rem,6vw,5.5rem)] font-bold leading-[0.85] tracking-tighter text-black mb-6 md:mb-12">
-                            our <br className="hidden lg:block" /> accreditations
+                        <h1 className={`${
+                            isMobileLandscape 
+                                ? "text-xl sm:text-2xl mb-2" 
+                                : "text-[clamp(2rem,6vw,5.5rem)] mb-6 md:mb-12"
+                        } font-bold leading-[0.85] tracking-tighter text-black font-['Outfit']`}>
+                            our <br className={isMobileLandscape ? "hidden" : "hidden lg:block"} /> accreditations
                         </h1>
-                        <p className="text-base md:text-xl text-black/70 max-w-md mx-auto lg:mx-0 leading-relaxed font-medium">
+                        <p className={`${
+                            isMobileLandscape 
+                                ? "text-[10px] leading-relaxed max-w-xs" 
+                                : "text-base md:text-xl text-black/70 max-w-md mx-auto lg:mx-0 leading-relaxed font-medium"
+                        } font-['Outfit']`}>
                             Each certification represents our unwavering commitment to excellence, quality, and sustainable practices in the textile industry.
                         </p>
                     </motion.div>
                 </div>
 
                 {/* Right Side: Scroll Stack of Certificates */}
-                <div className="w-full lg:w-[60%] h-[65vh] md:h-[70vh] lg:h-full relative z-10">
+                <div className={`relative z-10 ${
+                    isMobileLandscape ? "w-[60%] h-full" : "w-full lg:w-[60%] h-[65vh] md:h-[70vh] lg:h-full"
+                }`}>
                     <ScrollStack
-                        itemDistance={40}
+                        itemDistance={isMobileLandscape ? 30 : 40}
                         itemScale={0.02}
-                        itemStackDistance={20}
+                        itemStackDistance={15}
                         baseScale={0.92}
-                        stackPosition="15%"
+                        stackPosition={isMobileLandscape ? "5%" : "15%"}
                         className="h-full"
+                        innerPaddingTop={isMobileLandscape ? "pt-[4vh]" : "pt-[8vh] md:pt-[20vh]"}
+                        innerPaddingX={isMobileLandscape ? "px-6" : "px-6 md:px-20"}
                     >
                         {certificationData.map((cert, idx) => (
                             <ScrollStackItem
                                 key={idx}
-                                itemClassName="!h-auto !p-6 md:!p-12 !rounded-[32px] bg-white border border-black/5 max-w-[280px] md:max-w-sm mx-auto shadow-2xl"
+                                itemClassName={`!h-auto !rounded-[24px] md:!rounded-[32px] bg-white border border-black/5 mx-auto shadow-2xl ${
+                                    isMobileLandscape 
+                                        ? "!p-4 max-w-[1800px] w-[180px]" 
+                                        : "!p-6 md:!p-12 max-w-[280px] md:max-w-sm w-full"
+                                }`}
                             >
                                 <div className="flex items-center justify-center">
-                                    <div className="w-24 h-24 md:w-48 md:h-48 flex-shrink-0 bg-white p-4 md:p-6 rounded-2xl shadow-sm border border-black/5 flex items-center justify-center">
+                                    <div className={`flex-shrink-0 bg-white rounded-xl shadow-sm border border-black/5 flex items-center justify-center ${
+                                        isMobileLandscape ? "w-20 h-20 p-2" : "w-24 h-24 md:w-48 md:h-48 p-4 md:p-6"
+                                    }`}>
                                         <img
                                             src={cert.image}
                                             alt={cert.name}

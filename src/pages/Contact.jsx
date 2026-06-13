@@ -4,8 +4,18 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 import BackgroundGrid from '../components/BackgroundGrid';
 
 const Contact = () => {
+    const [isMobileLandscape, setIsMobileLandscape] = React.useState(false);
+
     useEffect(() => {
         window.scrollTo(0, 0);
+        const handleResize = () => {
+            setIsMobileLandscape(
+                window.innerWidth < 1024 && window.innerHeight < 600 && window.innerWidth > window.innerHeight
+            );
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     const contactDetails = [
@@ -53,45 +63,62 @@ const Contact = () => {
                 }
             `}</style>
 
-            <main className="flex flex-col md:flex-row md:h-screen relative pt-16 md:pt-0">
+            <main className={`flex relative ${
+                isMobileLandscape 
+                    ? "flex-row h-screen pt-0" 
+                    : "flex-col md:flex-row md:h-screen pt-16 md:pt-0"
+            }`}>
                 {/* Left Side: Contact Content */}
-                <div className="w-full md:w-[40%] md:h-full px-6 py-8 md:p-8 lg:p-12 xl:p-20 flex flex-col justify-center bg-white/40 backdrop-blur-xl md:border-r border-[#2D6A6A]/10 z-20 relative overflow-y-auto hide-scrollbar">
+                <div className={`flex flex-col justify-center bg-white/40 backdrop-blur-xl border-r border-[#2D6A6A]/10 z-20 relative overflow-y-auto hide-scrollbar ${
+                    isMobileLandscape 
+                        ? "w-[40%] h-full px-6 py-4 justify-center" 
+                        : "w-full md:w-[40%] md:h-full px-6 py-8 md:p-8 lg:p-12 xl:p-20 md:border-r"
+                }`}>
                     <BackgroundGrid color="#2D6A6A" opacity={0.02} />
 
-                    <div className="relative z-10 text-left max-w-xl mx-auto w-full">
+                    <div className={`relative z-10 w-full max-w-xl mx-auto ${
+                        isMobileLandscape ? "text-right items-end flex flex-col" : "text-left"
+                    }`}>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
+                            className={isMobileLandscape ? "flex flex-col items-end" : ""}
                         >
-                            <h4 className="text-[#2D6A6A] text-[9px] font-black tracking-[0.4em] uppercase mb-1 md:mb-2">
+                            <h4 className="text-[#2D6A6A] text-[9px] font-black tracking-[0.4em] uppercase mb-1 font-['Outfit']">
                                 Connect with us
                             </h4>
-                            <h1 className="serif-title text-[#2D6A6A] text-3xl lg:text-5xl xl:text-7xl font-bold leading-none mb-3 md:mb-4">
-                                Get in <br className="hidden xl:block" /> Touch
+                            <h1 className={`serif-title text-[#2D6A6A] font-bold leading-none ${
+                                isMobileLandscape ? "text-2xl mb-2" : "text-3xl lg:text-5xl xl:text-7xl mb-3 md:mb-4"
+                            }`}>
+                                Get in <br className={isMobileLandscape ? "hidden" : "hidden xl:block"} /> Touch
                             </h1>
-                            <p className="text-xs lg:text-sm xl:text-base text-[#2D6A6A]/60 leading-relaxed mb-6 md:mb-8">
+                            <p className={`text-[#2D6A6A]/60 leading-relaxed font-['Outfit'] ${
+                                isMobileLandscape ? "text-[10px] mb-3 max-w-xs" : "text-xs lg:text-sm xl:text-base mb-6 md:mb-8"
+                            }`}>
                                 Have a specific requirement? Our team is ready to assist you.
                             </p>
 
                             {/* Contact Info Items - Compressed */}
-                            <div className="grid grid-cols-1 gap-y-4 md:gap-y-6 mb-6 md:mb-10">
+                            <div className={`grid grid-cols-1 ${isMobileLandscape ? "gap-y-2 mb-3" : "gap-y-4 md:gap-y-6 mb-6 md:mb-10"}`}>
                                 {contactDetails.map((detail, idx) => (
                                     <motion.div
                                         key={idx}
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: idx * 0.1 + 0.3 }}
-                                        className="flex gap-4 items-center"
+                                        className={`flex gap-4 items-center ${isMobileLandscape ? "flex-row-reverse" : ""}`}
                                     >
-                                        <div className="w-10 h-10 shrink-0 rounded-full bg-white border border-[#2D6A6A]/10 flex items-center justify-center text-[#2D6A6A] shadow-sm transform scale-90 md:scale-100">
-                                            {React.cloneElement(detail.icon, { size: 18 })}
+                                        <div className="w-8 h-8 md:w-10 md:h-10 shrink-0 rounded-full bg-white border border-[#2D6A6A]/10 flex items-center justify-center text-[#2D6A6A] shadow-sm transform scale-90">
+                                            {React.cloneElement(detail.icon, { size: 16 })}
                                         </div>
-                                        <div>
-                                            <h3 className="text-[8px] font-black tracking-[0.2em] uppercase text-[#2D6A6A]/40 mb-0.5">
+                                        <div className={isMobileLandscape ? "text-right" : ""}>
+                                            <h3 className="text-[8px] font-black tracking-[0.2em] uppercase text-[#2D6A6A]/40 mb-0.5 font-['Outfit']">
                                                 {detail.label}
                                             </h3>
-                                            <p className="text-base md:text-lg font-bold text-[#2D6A6A] leading-tight">
+                                            <p className={`font-bold text-[#2D6A6A] leading-tight font-['Outfit'] ${
+                                                isMobileLandscape ? "text-sm" : "text-base md:text-lg"
+                                            }`}>
                                                 {detail.value}
                                             </p>
                                         </div>
@@ -100,11 +127,13 @@ const Contact = () => {
                             </div>
 
                             {/* Location Block */}
-                            <div className="pt-4 md:pt-6 border-t border-[#2D6A6A]/10">
-                                <h3 className="text-[9px] font-black tracking-[0.2em] uppercase text-[#2D6A6A]/40 mb-2 md:mb-3">
+                            <div className={`pt-3 border-t border-[#2D6A6A]/10 w-full ${isMobileLandscape ? "text-right" : ""}`}>
+                                <h3 className="text-[9px] font-black tracking-[0.2em] uppercase text-[#2D6A6A]/40 mb-1.5 font-['Outfit']">
                                     Our Location
                                 </h3>
-                                <div className="space-y-0.5 md:space-y-1 text-[#2D6A6A]/70 text-[10px] md:text-xs lg:text-sm leading-snug font-medium">
+                                <div className={`text-[#2D6A6A]/70 leading-snug font-medium font-['Outfit'] ${
+                                    isMobileLandscape ? "text-[9px] space-y-0" : "text-[10px] md:text-xs lg:text-sm space-y-0.5 md:space-y-1"
+                                }`}>
                                     <p>9/236,237,NH-44, Kakkavadi pirivu,</p>
                                     <p>Thalapatti village, Karur-639003</p>
                                     <p>Tamil Nadu, India</p>
@@ -115,7 +144,11 @@ const Contact = () => {
                 </div>
 
                 {/* Right Side: Map */}
-                <div className="w-full md:w-[60%] h-[60vw] min-h-[300px] md:h-full relative overflow-hidden p-3 md:p-6 lg:p-10">
+                <div className={`relative overflow-hidden ${
+                    isMobileLandscape 
+                        ? "w-[60%] h-full p-4" 
+                        : "w-full md:w-[60%] h-[60vw] min-h-[300px] md:h-full p-3 md:p-6 lg:p-10"
+                }`}>
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -134,7 +167,6 @@ const Contact = () => {
                     </motion.div>
                 </div>
             </main>
-
         </div>
     );
 };

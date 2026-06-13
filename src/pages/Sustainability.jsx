@@ -87,36 +87,66 @@ const Sustainability = () => {
     ];
 
     const [activePillar, setActivePillar] = useState(pillars[0]);
+    const [isMobileLandscape, setIsMobileLandscape] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobileLandscape(
+                window.innerWidth < 1024 && window.innerHeight < 600 && window.innerWidth > window.innerHeight
+            );
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     return (
         <div className="min-h-screen bg-[#FDFBF2] font-['Outfit'] selection:bg-[#E11D48] selection:text-white">
             <main>
                 {/* Hero section: Sustainable Textile Excellence */}
-                <section className="min-h-screen flex flex-col lg:flex-row relative transform-gpu overflow-hidden">
+                <section className={`relative transform-gpu overflow-hidden flex ${
+                    isMobileLandscape 
+                        ? "flex-row h-screen" 
+                        : "min-h-screen flex-col lg:flex-row"
+                }`}>
                     {/* Left Column */}
-                    <div className="w-full lg:w-[45%] bg-[#FDFBF2] relative flex flex-col lg:items-end flex-grow">
+                    <div className={`relative flex flex-col flex-grow bg-[#FDFBF2] ${
+                        isMobileLandscape 
+                            ? "w-[45%] h-full justify-center" 
+                            : "w-full lg:w-[45%] lg:items-end"
+                    }`}>
                         <div className="absolute inset-0 z-0">
                             <BackgroundGrid color="#2D6A6A" opacity={0.05} />
                         </div>
                         
-                        <div className="w-full lg:max-w-[576px] relative z-10 flex flex-col justify-center pt-20 pb-12 md:pt-28 md:pb-20 lg:py-40 px-6 md:px-12 lg:px-10 lg:pr-12 text-left min-h-[auto] lg:min-h-[50vh] xl:px-16 xl:pr-16">
+                        <div className={`relative z-10 flex flex-col justify-center text-left min-h-[auto] ${
+                            isMobileLandscape 
+                                ? "w-full px-6 py-4" 
+                                : "w-full lg:max-w-[576px] pt-20 pb-12 md:pt-28 md:pb-20 lg:py-40 px-6 md:px-12 lg:px-10 lg:pr-12 lg:min-h-[50vh] xl:px-16 xl:pr-16"
+                        }`}>
                             <motion.div
                                 initial={{ opacity: 0, x: -30, scale: 0.98 }}
                                 animate={{ opacity: 1, x: 0, scale: 1 }}
                                 transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                                className="transform-gpu will-change-transform flex flex-col items-start"
+                                className={`transform-gpu will-change-transform flex flex-col ${isMobileLandscape ? "items-end text-right" : "items-start"}`}
                             >
                                 <h4 className="text-[#E11D48] text-sm font-black tracking-[0.2em] md:tracking-[0.3em] uppercase mb-4 ml-1">
                                     Sustainable cotton fields
                                 </h4>
-                                <h1 className="serif-title text-[#1A1A1A] text-[clamp(2rem,4vw,4.5rem)] font-bold leading-[1.05] mb-6 md:mb-8">
+                                <h1 className={`serif-title text-[#1A1A1A] font-bold leading-[1.05] ${
+                                    isMobileLandscape ? "text-xl sm:text-2xl mb-2" : "text-[clamp(2rem,4vw,4.5rem)] mb-6 md:mb-8"
+                                }`}>
                                     Sustainable Textile Excellence
                                 </h1>
-                                <p className="text-base md:text-xl text-black/80 max-w-md leading-relaxed mb-6 md:mb-8 font-medium ml-1">
+                                <p className={`${
+                                    isMobileLandscape 
+                                        ? "text-[10px] leading-relaxed mb-2 max-w-xs" 
+                                        : "text-base md:text-xl text-black/80 max-w-md leading-relaxed mb-6 md:mb-8 font-medium ml-1"
+                                }`}>
                                     At Asia Cotton, sustainability is more than a responsibility; it is a promise. Every time you choose Asia Cotton, you choose comfort with a conscience.
                                 </p>
-                                <div className="ml-1 pl-4 border-l-2 border-[#E11D48]">
-                                    <p className="text-lg text-black/60 max-w-sm leading-relaxed italic">
+                                <div className={`${isMobileLandscape ? "mr-1 pr-0 pl-0 border-r-2 border-l-0 border-[#E11D48]" : "ml-1 pl-4 border-l-2 border-[#E11D48]"}`}>
+                                    <p className={`${isMobileLandscape ? "text-[10px] max-w-xs" : "text-lg text-black/60 max-w-sm"} leading-relaxed italic`}>
                                         Bringing sustainable beauty to your home and dignity to the hands that create it.
                                     </p>
                                 </div>
@@ -125,51 +155,75 @@ const Sustainability = () => {
                     </div>
 
                     {/* Right Column */}
-                    <div className="w-full lg:w-[55%] bg-[#2D6A6A] relative flex flex-col lg:items-start flex-grow shadow-[inset_20px_0_40px_rgba(0,0,0,0.15)] max-lg:shadow-[inset_0_20px_40px_rgba(0,0,0,0.15)]">
+                    <div className={`relative flex flex-col flex-grow shadow-[inset_20px_0_40px_rgba(0,0,0,0.15)] max-lg:shadow-[inset_0_20px_40px_rgba(0,0,0,0.15)] bg-[#2D6A6A] ${
+                        isMobileLandscape 
+                            ? "w-[55%] h-full justify-center" 
+                            : "w-full lg:w-[55%] lg:items-start"
+                    }`}>
                         <div className="absolute inset-0 z-0 border-l border-white/5">
                             <BackgroundGrid color="#FFFFFF" opacity={0.1} />
                         </div>
                         
-                        <div className="w-full lg:max-w-[704px] relative z-10 flex flex-col lg:flex-row items-center lg:items-start justify-center py-10 md:py-16 lg:py-40 px-6 md:px-12 lg:px-10 lg:pl-12 min-h-[auto] lg:min-h-[50vh] xl:px-16 xl:pl-16 gap-8 lg:gap-0">
+                        <div className={`relative z-10 flex items-center justify-center min-h-[auto] gap-4 ${
+                            isMobileLandscape 
+                                ? "w-full px-6 py-4 flex-row" 
+                                : "w-full lg:max-w-[704px] flex-col lg:flex-row lg:items-start py-10 md:py-16 lg:py-40 px-6 md:px-12 lg:px-10 lg:pl-12 lg:min-h-[50vh] xl:px-16 xl:pl-16 lg:gap-0"
+                        }`}>
                             {/* Icons Column */}
-                            <div className="w-full lg:w-2/5 xl:w-1/3 flex justify-center lg:justify-end xl:pr-6 mb-10 lg:mb-0 pl-0">
+                            <div className={`flex justify-center pl-0 ${
+                                isMobileLandscape 
+                                    ? "w-2/5 shrink-0" 
+                                    : "w-full lg:w-2/5 xl:w-1/3 lg:justify-end xl:pr-6 mb-10 lg:mb-0"
+                            }`}>
                                 <GlassIcons
                                     items={pillars}
-                                    className="grid-cols-2 gap-8 lg:gap-10"
+                                    className={isMobileLandscape ? "grid-cols-2 gap-4" : "grid-cols-2 gap-8 lg:gap-10"}
                                     onHover={(item) => setActivePillar(item)}
                                 />
                             </div>
 
                             {/* Dynamic Content Container */}
-                            <div className="w-full lg:w-3/5 xl:w-2/3 pl-0 lg:pl-10 xl:pl-12 lg:border-l border-white/10 min-h-[240px] lg:min-h-[400px] flex items-start pt-4 text-white">
+                            <div className={`pl-0 lg:pl-10 xl:pl-12 lg:border-l border-white/10 flex items-start pt-4 text-white ${
+                                isMobileLandscape 
+                                    ? "w-3/5 min-h-[160px] pl-4 border-l border-white/10" 
+                                    : "w-full lg:w-3/5 xl:w-2/3 min-h-[240px] lg:min-h-[400px]"
+                            }`}>
                                 <motion.div
                                     key={activePillar.id}
                                     initial={{ opacity: 0, x: 20 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ duration: 0.4 }}
-                                    className="space-y-8"
+                                    className="space-y-3 lg:space-y-8"
                                 >
                                     <div>
-                                        <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight mb-3 text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">
+                                        <h2 className={`${
+                                            isMobileLandscape ? "text-lg mb-1.5" : "text-3xl md:text-5xl mb-3"
+                                        } font-black uppercase tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60 font-['Outfit']`}>
                                             {activePillar.title}
                                         </h2>
                                         <div className="h-1.5 w-16 rounded-full" style={{ backgroundColor: activePillar.color === 'green' ? '#4ade80' : activePillar.color === 'blue' ? '#60a5fa' : activePillar.color === 'orange' ? '#fbbf24' : '#f87171' }} />
                                     </div>
 
-                                    <p className="text-lg text-white/75 leading-relaxed font-light pr-4">
+                                    <p className={`${
+                                        isMobileLandscape ? "text-[10px] leading-relaxed" : "text-lg text-white/75 leading-relaxed font-light pr-4"
+                                    } font-['Outfit']`}>
                                         {activePillar.description}
                                     </p>
 
-                                    <ul className="space-y-5">
+                                    <ul className={isMobileLandscape ? "space-y-2" : "space-y-5"}>
                                         {activePillar.points.map((point, idx) => (
                                             <motion.li
                                                 key={idx}
                                                 initial={{ opacity: 0, y: 10 }}
                                                 animate={{ opacity: 1, y: 0 }}
                                                 transition={{ delay: 0.1 + (idx * 0.1) }}
-                                                className="flex items-center gap-4 text-sm font-bold tracking-[0.1em] uppercase text-white/90"
+                                                className={`flex items-center gap-2 font-bold tracking-[0.1em] uppercase text-white/90 ${
+                                                    isMobileLandscape ? "text-[8px]" : "text-sm"
+                                                }`}
                                             >
-                                                <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-xs shadow-inner">
+                                                <span className={`rounded-full bg-white/10 flex items-center justify-center shadow-inner ${
+                                                    isMobileLandscape ? "w-4 h-4 text-[7px]" : "w-8 h-8 text-xs"
+                                                }`}>
                                                     {idx + 1}
                                                 </span>
                                                 {point}

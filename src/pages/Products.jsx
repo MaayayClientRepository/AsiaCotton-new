@@ -77,10 +77,14 @@ const Products = () => {
     const [viewedImage, setViewedImage] = useState(null);
     const [showTutorial, setShowTutorial] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [isMobileLandscape, setIsMobileLandscape] = useState(false);
 
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth < 1024);
+            setIsMobileLandscape(
+                window.innerWidth < 1024 && window.innerHeight < 600 && window.innerWidth > window.innerHeight
+            );
         };
         handleResize();
         window.addEventListener('resize', handleResize);
@@ -192,6 +196,11 @@ const Products = () => {
                 @media (min-width: 1024px) {
                     .product-stack-card {
                         max-width: min(448px, 50vh);
+                    }
+                }
+                @media (max-height: 600px) and (orientation: landscape) {
+                    .product-stack-card {
+                        max-width: min(260px, 72vh) !important;
                     }
                 }
             `}</style>
@@ -325,7 +334,9 @@ const Products = () => {
                                 exit={{ opacity: 0, scale: 0.95, y: 30 }}
                                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                                 style={{ backgroundColor: activeCategory.color, willChange: 'transform, opacity' }}
-                                className="relative z-10 w-[98vw] md:w-[96vw] max-w-[1600px] h-[92vh] h-[92dvh] md:h-[90vh] md:h-[90dvh] mx-auto my-auto rounded-[20px] md:rounded-[48px] border border-white/10 shadow-[0_80px_200px_rgba(0,0,0,0.4)] flex flex-col lg:flex-row overflow-hidden cursor-default transform-gpu"
+                                className={`relative z-10 w-[98vw] md:w-[96vw] max-w-[1600px] h-[92vh] h-[92dvh] md:h-[90vh] md:h-[90dvh] mx-auto my-auto rounded-[20px] md:rounded-[48px] border border-white/10 shadow-[0_80px_200px_rgba(0,0,0,0.4)] flex overflow-hidden cursor-default transform-gpu ${
+                                    isMobileLandscape ? "flex-row" : "flex-col lg:flex-row"
+                                }`}
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <BackgroundGrid color="#FFFFFF" opacity={0.08} />
@@ -341,7 +352,11 @@ const Products = () => {
                                 </motion.button>
 
                                 {/* Left Side: Category Info */}
-                                <div className="w-full lg:w-[35%] flex flex-col justify-start lg:justify-center px-5 md:px-12 lg:px-14 pt-8 pb-3 md:pt-12 md:pb-6 lg:py-0 relative z-20">
+                                <div className={`flex flex-col justify-start lg:justify-center relative z-20 ${
+                                    isMobileLandscape 
+                                        ? "w-[40%] px-6 py-4 justify-center" 
+                                        : "w-full lg:w-[35%] px-5 md:px-12 lg:px-14 pt-8 pb-3 md:pt-12 md:pb-6 lg:py-0"
+                                }`}>
                                     <motion.div
                                         initial={{ opacity: 0, x: -30 }}
                                         animate={{ opacity: 1, x: 0 }}
@@ -350,16 +365,24 @@ const Products = () => {
                                     >
                                         <div className="flex items-center gap-2 mb-2 lg:mb-4 opacity-50 justify-center lg:justify-start">
                                             <div className="h-[1px] w-6 bg-white"></div>
-                                            <span className="text-[9px] font-black tracking-[0.3em] uppercase text-white">
+                                            <span className="text-[9px] font-black tracking-[0.3em] uppercase text-white font-['Outfit']">
                                                 Category 0{categories.findIndex(c => c.id === activeFolderId) + 1}
                                             </span>
                                         </div>
 
-                                        <h1 className="text-[clamp(1.8rem,4.5vw,4rem)] lg:text-[clamp(2rem,5vw,4.5rem)] font-black leading-[0.85] tracking-tighter text-white mb-2 lg:mb-8">
+                                        <h1 className={`${
+                                            isMobileLandscape
+                                                ? "text-[clamp(1.2rem,2.5vw,2rem)] mb-1"
+                                                : "text-[clamp(1.8rem,4.5vw,4rem)] lg:text-[clamp(2rem,5vw,4.5rem)] mb-2 lg:mb-8"
+                                        } font-black leading-[0.85] tracking-tighter text-white font-['Outfit']`}>
                                             {activeCategory.title.toLowerCase()}
                                         </h1>
 
-                                        <p className="text-xs sm:text-sm md:text-lg text-white/70 max-w-md mx-auto lg:mx-0 leading-relaxed font-medium mb-4 lg:mb-10">
+                                        <p className={`${
+                                            isMobileLandscape
+                                                ? "text-[9px] leading-relaxed mb-2 max-w-sm"
+                                                : "text-xs sm:text-sm md:text-lg max-w-md mb-4 lg:mb-10"
+                                        } text-white/70 mx-auto lg:mx-0 leading-relaxed font-medium font-['Outfit']`}>
                                             {activeCategory.description}
                                         </p>
 
@@ -367,7 +390,7 @@ const Products = () => {
                                             {activeCategory.items.map((item, idx) => (
                                                 <span
                                                     key={idx}
-                                                    className="text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase text-white/90 bg-white/10 px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm"
+                                                    className="text-[9px] md:text-[10px] font-bold tracking-[0.15em] uppercase text-white/90 bg-white/10 px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-sm font-['Outfit']"
                                                 >
                                                     {item}
                                                 </span>
@@ -385,7 +408,7 @@ const Products = () => {
                                             exit={{ opacity: 0, y: -20 }}
                                             className="absolute bottom-10 left-1/2 -translate-x-1/2 z-[4000] pointer-events-none"
                                         >
-                                            <p className="text-white text-xs font-black uppercase tracking-[0.4em] animate-pulse">
+                                            <p className="text-white text-xs font-black uppercase tracking-[0.4em] animate-pulse font-['Outfit']">
                                                 Scroll to explore
                                             </p>
                                         </motion.div>
@@ -393,15 +416,17 @@ const Products = () => {
                                 </AnimatePresence>
 
                                 {/* Right Side: ScrollStack of product images */}
-                                <div className="w-full lg:w-[65%] flex-1 min-h-0 lg:h-full relative z-10">
+                                <div className={`relative z-10 ${
+                                    isMobileLandscape ? "w-[60%] h-full" : "w-full lg:w-[65%] flex-1 min-h-0 lg:h-full"
+                                }`}>
                                     <ScrollStack
-                                        itemDistance={140}
+                                        itemDistance={isMobileLandscape ? 80 : 140}
                                         itemScale={0}
                                         itemStackDistance={0}
                                         baseScale={1}
-                                        stackPosition={isMobile ? "6%" : "12%"}
-                                        innerPaddingTop={isMobile ? "pt-[4vh]" : "pt-[12vh]"}
-                                        innerPaddingX={isMobile ? "px-4" : "px-6 md:px-20"}
+                                        stackPosition={isMobileLandscape ? "2%" : isMobile ? "6%" : "12%"}
+                                        innerPaddingTop={isMobileLandscape ? "pt-[2vh]" : isMobile ? "pt-[4vh]" : "pt-[12vh]"}
+                                        innerPaddingX={isMobileLandscape ? "px-6" : isMobile ? "px-4" : "px-6 md:px-20"}
                                         className="h-full"
                                     >
                                         {activeCategory.allImages.map((img, idx) => (

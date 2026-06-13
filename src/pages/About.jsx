@@ -14,10 +14,17 @@ import BackgroundGrid from '../components/BackgroundGrid';
 
 const AboutPage = () => {
     const [isMobile, setIsMobile] = React.useState(window.innerWidth < 768);
+    const [isMobileLandscape, setIsMobileLandscape] = React.useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+            setIsMobileLandscape(
+                window.innerWidth < 1024 && window.innerHeight < 600 && window.innerWidth > window.innerHeight
+            );
+        };
+        handleResize();
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
@@ -73,26 +80,42 @@ const AboutPage = () => {
     return (
         <div className="bg-[#F9FAFB] min-h-screen font-['Inter'] overflow-x-hidden transform-gpu">
             {/* Part 1: Integrated Hero Split View (Brand + Factory) */}
-            <section className="flex flex-col lg:flex-row min-h-[auto] md:min-h-[80vh] lg:min-h-[90vh] pt-0 pb-12 lg:pb-0 transform-gpu overflow-hidden">
+            <section className={`transform-gpu overflow-hidden flex ${
+                isMobileLandscape 
+                    ? "flex-row h-screen" 
+                    : "flex-col lg:flex-row min-h-[auto] md:min-h-[80vh] lg:min-h-[90vh] pt-0 pb-12 lg:pb-0"
+            }`}>
                 {/* Left Side: Brand Heritage (Cream) */}
-                <div className="w-full lg:w-1/2 bg-[#FDFCF0] px-6 py-10 md:px-12 lg:p-24 flex flex-col justify-center relative overflow-hidden transform-gpu pt-20 md:pt-24 lg:pt-24">
+                <div className={`bg-[#FDFCF0] flex flex-col justify-center relative overflow-hidden transform-gpu ${
+                    isMobileLandscape 
+                        ? "w-1/2 h-full px-6 py-4 justify-center" 
+                        : "w-full lg:w-1/2 px-6 py-10 md:px-12 lg:p-24 pt-20 md:pt-24 lg:pt-24"
+                }`}>
                     <BackgroundGrid color="#2D6A6A" opacity={0.05} />
                     {/* Decorative background elements */}
                     <div className="absolute top-1/4 -left-20 w-80 h-80 bg-[#2D6A6A] rounded-full blur-[120px] opacity-10 transform-gpu"></div>
 
-                    <div className="relative z-10 space-y-8 transform-gpu max-w-xl mx-auto text-center flex flex-col items-center">
+                    <div className={`relative z-10 space-y-4 transform-gpu max-w-xl mx-auto flex flex-col items-center ${
+                        isMobileLandscape ? "text-right items-end" : "text-center"
+                    }`}>
                         <motion.h1
                             initial={{ opacity: 0, x: -30 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                            className="text-[#2D6A6A] text-3xl md:text-6xl font-black leading-none tracking-tight transform-gpu will-change-transform"
+                            className={`text-[#2D6A6A] font-black leading-none tracking-tight transform-gpu will-change-transform font-['Outfit'] ${
+                                isMobileLandscape ? "text-xl sm:text-2xl" : "text-3xl md:text-6xl"
+                            }`}
                         >
                             MORE THAN <br /> FABRIC
                         </motion.h1>
 
-                        <div className="space-y-6 max-w-lg transform-gpu">
-                            <h2 className="text-[#2D6A6A] text-lg md:text-xl font-bold tracking-[0.2em] uppercase opacity-90">Our Textile Heritage</h2>
-                            <p className="text-[#1A1A1A]/70 text-base md:text-lg leading-relaxed font-medium">
+                        <div className={`transform-gpu ${isMobileLandscape ? "space-y-2 max-w-xs" : "space-y-6 max-w-lg"}`}>
+                            <h2 className={`text-[#2D6A6A] font-bold tracking-[0.2em] uppercase opacity-90 font-['Outfit'] ${
+                                isMobileLandscape ? "text-[10px]" : "text-lg md:text-xl"
+                            }`}>Our Textile Heritage</h2>
+                            <p className={`text-[#1A1A1A]/70 leading-relaxed font-medium font-['Outfit'] ${
+                                isMobileLandscape ? "text-[10px]" : "text-base md:text-lg"
+                            }`}>
                                 Since 1997 in Karur, we've been crafting premium textiles that blend traditional craftsmanship with modern innovation. Our journey reflects our commitment to quality and innovation.
                             </p>
                         </div>
@@ -101,26 +124,44 @@ const AboutPage = () => {
                             <motion.button
                                 whileHover={{ y: -5, scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="flex flex-col items-center gap-4 text-[#2D6A6A] font-black uppercase tracking-widest text-xs pt-4 group cursor-pointer transform-gpu outline-none"
+                                className={`flex flex-col items-center gap-2 text-[#2D6A6A] font-black uppercase tracking-widest pt-2 group cursor-pointer transform-gpu outline-none font-['Outfit'] ${
+                                    isMobileLandscape ? "text-[8px] mt-1" : "text-xs pt-4 mt-2"
+                                }`}
                             >
                                 <span className="underline decoration-2 underline-offset-8">Explore Our Journey</span>
-                                <span className="bg-[#2D6A6A] text-white rounded-full w-10 h-10 flex items-center justify-center group-hover:rotate-45 transition-transform duration-300 transform-gpu text-xl shadow-xl mt-2">→</span>
+                                <span className={`bg-[#2D6A6A] text-white rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-300 transform-gpu shadow-xl ${
+                                    isMobileLandscape ? "w-6 h-6 text-xs mt-1" : "w-10 h-10 text-xl mt-2"
+                                }`}>→</span>
                             </motion.button>
                         </Link>
                     </div>
                 </div>
 
                 {/* Right Side: Factory Showcase (Teal) */}
-                <div className="w-full lg:w-1/2 bg-[#2D6A6A] text-white px-6 py-10 md:px-12 lg:p-24 flex flex-col justify-center relative transform-gpu overflow-hidden">
+                <div className={`text-white flex flex-col justify-center relative transform-gpu overflow-hidden ${
+                    isMobileLandscape 
+                        ? "w-1/2 h-full px-6 py-4 justify-center" 
+                        : "w-full lg:w-1/2 bg-[#2D6A6A] px-6 py-10 md:px-12 lg:p-24"
+                }`}
+                style={isMobileLandscape ? { backgroundColor: '#2D6A6A' } : {}}
+                >
                     <BackgroundGrid color="#FFFFFF" opacity={0.08} />
                     {/* Decorative blur */}
                     <div className="absolute top-1/2 -right-20 w-80 h-80 bg-white/10 rounded-full blur-[120px] opacity-10 transform-gpu"></div>
 
                     <div className="relative z-10 w-full max-w-xl mx-auto flex flex-col h-full justify-center">
-                        <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-8 mb-8">
-                            <div className="space-y-4 transform-gpu flex-1 text-center md:text-left">
-                                <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight">Our <span className="text-[#FACC15]">Factory</span></h2>
-                                <p className="text-white/60 text-sm md:text-base leading-relaxed">
+                        <div className={`flex justify-between items-center gap-4 ${
+                            isMobileLandscape ? "flex-row mb-3" : "flex-col md:flex-row md:items-end mb-8"
+                        }`}>
+                            <div className={`space-y-2 transform-gpu flex-1 ${
+                                isMobileLandscape ? "text-left" : "text-center md:text-left"
+                            }`}>
+                                <h2 className={`font-black uppercase tracking-tight font-['Outfit'] ${
+                                    isMobileLandscape ? "text-sm sm:text-base" : "text-3xl md:text-4xl"
+                                }`}>Our <span className="text-[#FACC15]">Factory</span></h2>
+                                <p className={`text-white/60 leading-relaxed font-['Outfit'] ${
+                                    isMobileLandscape ? "text-[9px]" : "text-sm md:text-base"
+                                }`}>
                                     Our state-of-the-art manufacturing facility is equipped with advanced technology.
                                 </p>
                             </div>
@@ -130,17 +171,22 @@ const AboutPage = () => {
                                 <motion.div
                                     initial={{ opacity: 0, y: 10 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    className="p-3 bg-white/5 border border-white/10 rounded-lg backdrop-blur-sm transform-gpu"
+                                    className={`bg-white/5 border border-white/10 rounded-lg backdrop-blur-sm transform-gpu ${
+                                        isMobileLandscape ? "p-1.5" : "p-3"
+                                    }`}
                                 >
-                                    <h4 className="text-[#FACC15] text-xl font-black mb-1 leading-none"><CountUp to={100} suffix="%" duration={2} /></h4>
-                                    <p className="text-[9px] uppercase tracking-widest text-white/40">Quality</p>
+                                    <h4 className={`text-[#FACC15] font-black mb-0.5 leading-none font-['Outfit'] ${
+                                        isMobileLandscape ? "text-sm" : "text-xl"
+                                    }`}><CountUp to={100} suffix="%" duration={2} /></h4>
+                                    <p className="text-[7px] md:text-[9px] uppercase tracking-widest text-white/40 font-['Outfit']">Quality</p>
                                 </motion.div>
-
                             </div>
                         </div>
 
                         {/* Interactive Folder Animation for Factory Showcase */}
-                        <div className="flex w-full items-center justify-center relative transform-gpu bg-gradient-to-b from-white/5 to-transparent p-1 rounded-2xl border border-white/5">
+                        <div className={`flex w-full items-center justify-center relative transform-gpu bg-gradient-to-b from-white/5 to-transparent p-1 rounded-2xl border border-white/5 ${
+                            isMobileLandscape ? "max-h-[140px] overflow-hidden" : ""
+                        }`}>
                             <div className="w-full overflow-hidden rounded-xl">
                                 <AnimatedTestimonials
                                     testimonials={factoryImagesData}
@@ -168,7 +214,7 @@ const AboutPage = () => {
                         <BounceCards
                             data={features}
                             containerWidth="100%"
-                            containerHeight={isMobile ? 300 : 400}
+                            containerHeight={isMobileLandscape ? 220 : isMobile ? 300 : 400}
                             transformStyles={isMobile ? mobileTransformStyles : desktopTransformStyles}
                         />
                     </div>

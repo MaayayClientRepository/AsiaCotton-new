@@ -37,7 +37,7 @@ const hotspots = [
     { id: 'upperSheet', image: upperSheetImg, hoverPath: 'M38,58 L50,56 L62,56 L74,58 L74,68 L62,62 L50,61 L38,61 Z' }
 ];
 
-const InteractiveHotspotLayer = ({ isMobile }) => {
+const InteractiveHotspotLayer = ({ isMobile, isMobileLandscape }) => {
     const [hoveredId, setHoveredId] = useState(null);
     const [tappedId, setTappedId] = useState(null);
     const mouseX = useMotionValue(0);
@@ -87,13 +87,25 @@ const InteractiveHotspotLayer = ({ isMobile }) => {
     return (
         <div
             ref={imageContainerRef}
-            className={`absolute inset-0 w-full h-full z-10 overflow-hidden ${isMobile ? 'flex items-center justify-center bg-white' : ''}`}
+            className={`absolute inset-0 w-full h-full z-10 overflow-hidden ${
+                isMobileLandscape
+                    ? 'flex items-center justify-start pl-6 sm:pl-10 bg-white'
+                    : isMobile
+                    ? 'flex items-center justify-center bg-white'
+                    : ''
+            }`}
             onMouseMove={handleMouseMove}
         >
             <motion.div 
-                animate={{ y: (tappedId && isMobile) ? -45 : 0 }}
+                animate={{ y: (tappedId && isMobile && !isMobileLandscape) ? -45 : 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                className={isMobile ? "w-full aspect-video relative flex items-center justify-center overflow-hidden" : "absolute inset-0 w-full h-full"}
+                className={
+                    isMobileLandscape
+                        ? "w-[42vw] aspect-video relative flex items-center justify-center overflow-hidden"
+                        : isMobile
+                        ? "w-full aspect-video relative flex items-center justify-center overflow-hidden"
+                        : "absolute inset-0 w-full h-full"
+                }
             >
                 {/* Base Image */}
                 <img
@@ -184,12 +196,16 @@ const InteractiveHotspotLayer = ({ isMobile }) => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: tappedId && isMobile ? 1 : 0, y: tappedId && isMobile ? 0 : 10 }}
                 transition={transition}
-                className="absolute bottom-[210px] left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-1.5 bg-white/95 backdrop-blur-md border border-black/10 rounded-full px-6 py-2.5 shadow-xl whitespace-nowrap pointer-events-none"
+                className={`absolute z-40 flex flex-col items-center gap-1.5 bg-white/95 backdrop-blur-md border border-black/10 rounded-full px-6 py-2.5 shadow-xl whitespace-nowrap pointer-events-none ${
+                    isMobileLandscape
+                        ? "bottom-4 left-[24vw] -translate-x-1/2"
+                        : "bottom-[210px] left-1/2 -translate-x-1/2"
+                }`}
             >
-                <span className="text-[9px] font-extrabold tracking-[0.4em] text-[#E11D48] uppercase">
+                <span className="text-[9px] font-extrabold tracking-[0.4em] text-[#E11D48] uppercase font-['Outfit']">
                     {hotspotInfo[tappedId]?.label}
                 </span>
-                <span className="text-[13px] font-normal text-black/75 tracking-tight">
+                <span className="text-[13px] font-normal text-black/75 tracking-tight font-['Outfit']">
                     {hotspotInfo[tappedId]?.desc}
                 </span>
             </motion.div>
@@ -202,7 +218,11 @@ const InteractiveHotspotLayer = ({ isMobile }) => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 10 }}
                         transition={{ duration: 0.3 }}
-                        className="absolute bottom-[210px] left-1/2 -translate-x-1/2 z-40 flex items-center gap-2 bg-white/95 backdrop-blur-md border border-black/10 rounded-full px-5 py-2.5 shadow-lg whitespace-nowrap pointer-events-none"
+                        className={`absolute z-40 flex items-center gap-2 bg-white/95 backdrop-blur-md border border-black/10 rounded-full px-5 py-2.5 shadow-lg whitespace-nowrap pointer-events-none ${
+                            isMobileLandscape
+                                ? "bottom-4 left-[24vw] -translate-x-1/2"
+                                : "bottom-[210px] left-1/2 -translate-x-1/2"
+                        }`}
                     >
                         <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E11D48] opacity-75"></span>
@@ -273,9 +293,19 @@ const AnimatedText = ({ text, shouldStart, delay = 0, colorStyle = {} }) => {
 
 const IntroSequence = () => {
     const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
+    const [isMobileLandscape, setIsMobileLandscape] = useState(
+        typeof window !== 'undefined'
+            ? window.innerWidth < 1024 && window.innerHeight < 600 && window.innerWidth > window.innerHeight
+            : false
+    );
 
     useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 1024);
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024);
+            setIsMobileLandscape(
+                window.innerWidth < 1024 && window.innerHeight < 600 && window.innerWidth > window.innerHeight
+            );
+        };
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
@@ -352,7 +382,7 @@ const IntroSequence = () => {
                 </motion.div>
 
                 {/* Mobile-Only Top Logo (Fills top empty space initially) */}
-                {isMobile && (
+                {isMobile && !isMobileLandscape && (
                     <motion.div
                         style={{ 
                             opacity: 1,
@@ -382,11 +412,11 @@ const IntroSequence = () => {
                     }}
                     className="absolute inset-0 w-full h-full transform-gpu origin-center"
                 >
-                    <InteractiveHotspotLayer isMobile={isMobile} />
+                    <InteractiveHotspotLayer isMobile={isMobile} isMobileLandscape={isMobileLandscape} />
                 </motion.div>
 
                 {/* Mobile-Only Bottom Headline (Fills bottom empty space initially) */}
-                {isMobile && (
+                {isMobile && !isMobileLandscape && (
                     <motion.div
                         style={{ 
                             opacity: 1,
@@ -403,79 +433,107 @@ const IntroSequence = () => {
                     </motion.div>
                 )}
 
-                {/* Layer 2: Editorial Branding Reveal (Adaptive Layout) - Desktop/Tablet Only */}
-                {!isMobile && (
+                {/* Layer 2: Editorial Branding Reveal (Adaptive Layout) - Desktop/Tablet OR Mobile Landscape */}
+                {(!isMobile || isMobileLandscape) && (
                     <motion.div
-                        style={{
+                        style={isMobileLandscape ? {
+                            opacity: 1,
+                            x: "0%"
+                        } : {
                             opacity: brandingOpacity,
                             x: brandingX
                         }}
-                        className="absolute inset-0 z-[80] w-full h-full pointer-events-none transform-gpu flex items-center justify-center will-change-[transform,opacity]"
+                        className={isMobileLandscape
+                            ? "absolute inset-0 z-[80] w-full h-full pointer-events-none transform-gpu flex items-center justify-end"
+                            : "absolute inset-0 z-[80] w-full h-full pointer-events-none transform-gpu flex items-center justify-center will-change-[transform,opacity]"
+                        }
                     >
-                        <div className="grid grid-cols-1 md:grid-cols-[42%_58%] xl:grid-cols-[48%_52%] w-full max-w-[1800px] xl:max-w-[2200px] px-6 md:px-12 lg:px-24 h-auto md:h-screen items-center">
-
-                            {/* Left Side: Logo (Adaptive Size) */}
-                            <div className="relative flex flex-col items-center justify-center h-full md:pr-12 lg:pr-16 mb-4 md:mb-0">
-                                {/* Animated Vertical Divider */}
+                        {isMobileLandscape ? (
+                            <div className="w-[50%] h-full flex flex-col items-end justify-center pr-8 sm:pr-12 pointer-events-none select-none">
                                 <motion.div
-                                    style={{ height: dividerHeight }}
-                                    className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-[1.5px] bg-black/10 origin-center"
-                                />
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ duration: 0.6, ease: "easeOut" }}
+                                    className="flex flex-col items-end"
+                                >
+                                    <img
+                                        src={logo}
+                                        alt="Asia Cotton"
+                                        className="h-16 w-auto object-contain drop-shadow-sm mb-3"
+                                    />
+                                    <h1 className="text-right text-base sm:text-xl font-black text-black leading-snug tracking-wider uppercase font-['Outfit']">
+                                        Crafting <span className="text-[#E11D48]">Sustainable</span> <br />
+                                        <span className="text-[#E11D48]">Luxury</span> Since 1997
+                                    </h1>
+                                    <div className="w-12 h-[3px] bg-[#E11D48] mt-3" />
+                                </motion.div>
+                            </div>
+                        ) : (
+                            <div className="grid grid-cols-1 md:grid-cols-[42%_58%] xl:grid-cols-[48%_52%] w-full max-w-[1800px] xl:max-w-[2200px] px-6 md:px-12 lg:px-24 h-auto md:h-screen items-center">
 
-                                <div className="flex flex-col items-center">
+                                {/* Left Side: Logo (Adaptive Size) */}
+                                <div className="relative flex flex-col items-center justify-center h-full md:pr-12 lg:pr-16 mb-4 md:mb-0">
+                                    {/* Animated Vertical Divider */}
                                     <motion.div
-                                        style={{
-                                            scale: logoScale,
-                                            rotate: logoRotate,
-                                            y: logoY,
-                                            x: logoX
-                                        }}
-                                        className="flex flex-col items-center"
+                                        style={{ height: dividerHeight }}
+                                        className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-[1.5px] bg-black/10 origin-center"
+                                    />
+
+                                    <div className="flex flex-col items-center">
+                                        <motion.div
+                                            style={{
+                                                scale: logoScale,
+                                                rotate: logoRotate,
+                                                y: logoY,
+                                                x: logoX
+                                            }}
+                                            className="flex flex-col items-center"
+                                        >
+                                            <img
+                                                src={logo}
+                                                alt="Asia Cotton"
+                                                className="h-52 md:h-[40vh] lg:h-[55vh] xl:h-[65vh] 2xl:h-[70vh] w-auto drop-shadow-2xl will-change-transform object-contain"
+                                            />
+
+                                        </motion.div>
+
+                                    </div>
+                                </div>
+
+                                {/* Right Side: Editorial Headline (Responsive Scaling) */}
+                                <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-12 lg:pl-20">
+                                    <motion.h1
+                                        style={{ opacity: desktopHeadlineOpacity }}
+                                        className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-6 md:mt-0"
                                     >
-                                        <img
-                                            src={logo}
-                                            alt="Asia Cotton"
-                                            className="h-52 md:h-[40vh] lg:h-[55vh] xl:h-[65vh] 2xl:h-[70vh] w-auto drop-shadow-2xl will-change-transform object-contain"
+                                        <AnimatedText text="Crafting" shouldStart={shouldStartTyping} />
+                                        <br />
+                                        <AnimatedText
+                                            text="Sustainable"
+                                            shouldStart={shouldStartTyping}
+                                            delay={0.3}
+                                            colorStyle={{ color: highlightColor }}
                                         />
+                                        <br />
+                                        <AnimatedText
+                                            text="Luxury"
+                                            shouldStart={shouldStartTyping}
+                                            delay={0.6}
+                                            colorStyle={{ color: highlightColor }}
+                                        />
+                                        <br />
+                                        <AnimatedText text="Since 1997" shouldStart={shouldStartTyping} delay={0.9} />
+                                    </motion.h1>
 
-                                    </motion.div>
-
+                                    {/* Premium Accent */}
+                                    <motion.div
+                                        animate={shouldStartTyping ? { width: "5rem", opacity: 1 } : { width: 0, opacity: 0 }}
+                                        transition={{ duration: 1.5, ease: "circOut" }}
+                                        className="h-[4px] bg-[#E11D48] mt-4 md:mt-10"
+                                    />
                                 </div>
                             </div>
-
-                            {/* Right Side: Editorial Headline (Responsive Scaling) */}
-                            <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-12 lg:pl-20">
-                                <motion.h1
-                                    style={{ opacity: desktopHeadlineOpacity }}
-                                    className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-6 md:mt-0"
-                                >
-                                    <AnimatedText text="Crafting" shouldStart={shouldStartTyping} />
-                                    <br />
-                                    <AnimatedText
-                                        text="Sustainable"
-                                        shouldStart={shouldStartTyping}
-                                        delay={0.3}
-                                        colorStyle={{ color: highlightColor }}
-                                    />
-                                    <br />
-                                    <AnimatedText
-                                        text="Luxury"
-                                        shouldStart={shouldStartTyping}
-                                        delay={0.6}
-                                        colorStyle={{ color: highlightColor }}
-                                    />
-                                    <br />
-                                    <AnimatedText text="Since 1997" shouldStart={shouldStartTyping} delay={0.9} />
-                                </motion.h1>
-
-                                {/* Premium Accent */}
-                                <motion.div
-                                    animate={shouldStartTyping ? { width: "5rem", opacity: 1 } : { width: 0, opacity: 0 }}
-                                    transition={{ duration: 1.5, ease: "circOut" }}
-                                    className="h-[4px] bg-[#E11D48] mt-4 md:mt-10"
-                                />
-                            </div>
-                        </div>
+                        )}
                     </motion.div>
                 )}
 
