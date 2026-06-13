@@ -60,3 +60,24 @@ svg {
         linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 100px 100px, 20px 20px, 20px 20px;
 }
+
+/* Responsive Logo Sizes for Large Desktops (Width >= 1920px) */
+@media (min-width: 1920px) {
+    .intro-corner-logo {
+        width: 26rem !important; /* 416px */
+        height: 26rem !important; /* 416px */
+    }
+    .intro-central-logo {
+        height: 82vh !important;
+    }
+}
+
+@media (min-width: 1600px) and (max-width: 1919px) {
+    .intro-corner-logo {
+        width: 20rem !important; /* 320px */
+        height: 20rem !important; /* 320px */
+    }
+    .intro-central-logo {
+        height: 78vh !important;
+    }
+}

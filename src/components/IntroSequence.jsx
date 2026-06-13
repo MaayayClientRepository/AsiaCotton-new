@@ -377,7 +377,7 @@ const IntroSequence = () => {
                     <img
                         src={logo}
                         alt="Asia Cotton"
-                        className="w-36 h-36 md:w-56 md:h-56 lg:w-64 lg:h-64 object-contain"
+                        className="w-36 h-36 md:w-56 md:h-56 lg:w-64 lg:h-64 object-contain intro-corner-logo"
                     />
                 </motion.div>
 
@@ -492,7 +492,7 @@ const IntroSequence = () => {
                                             <img
                                                 src={logo}
                                                 alt="Asia Cotton"
-                                                className="h-52 md:h-[40vh] lg:h-[55vh] xl:h-[65vh] 2xl:h-[70vh] w-auto drop-shadow-2xl will-change-transform object-contain"
+                                                className="h-52 md:h-[40vh] lg:h-[55vh] xl:h-[65vh] 2xl:h-[70vh] w-auto drop-shadow-2xl will-change-transform object-contain intro-central-logo"
                                             />
 
                                         </motion.div>
