@@ -9,10 +9,7 @@ import cert3 from '../assets/cert/cert3.png';
 import cert4 from '../assets/cert/cert4.png';
 import cert5 from '../assets/cert/cert5.png';
 import cert6 from '../assets/cert/cert6.png';
-import cert7 from '../assets/cert/cert7.png';
 import cert8 from '../assets/cert/cert8.png';
-import cert9 from '../assets/cert/cert9.jpg';
-import cert10 from '../assets/cert/cert10.jpg';
 
 const certificationData = [
     {
@@ -52,32 +49,11 @@ const certificationData = [
         color: "#FDF2F8"
     },
     {
-        name: "Facility Authorization",
-        subtitle: "Facility Compliance",
-        desc: "Authorized manufacturing facility meeting rigorous global compliance standards.",
-        image: cert7,
-        color: "#F5F3FF"
-    },
-    {
         name: "Quality Management",
         subtitle: "Excellence Guaranteed",
         desc: "Strict adherence to international quality management systems and operational excellence.",
         image: cert8,
         color: "#EFF6FF"
-    },
-    {
-        name: "ISO 9001:2015",
-        subtitle: "Intertek Certified",
-        desc: "Internationally recognized quality management system certification ensuring consistent, high-quality processes.",
-        image: cert9,
-        color: "#F9FAFB"
-    },
-    {
-        name: "BEPI",
-        subtitle: "Environmental Performance",
-        desc: "Business Environmental Performance Initiative driving continuous improvement in environmental practices.",
-        image: cert10,
-        color: "#F0FFF4"
     }
 ];
 
