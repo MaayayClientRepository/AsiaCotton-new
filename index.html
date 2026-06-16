@@ -8,6 +8,65 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Leads AI Widget -->
+    <script
+      src="https://api-dev-leads.winssoft.com/widget/leadsai.js"
+      data-company="asia-cotton-9bad"
+      data-key="aHR0cHM6Ly9hcGktZGV2LWxlYWRzLndpbnNzb2Z0LmNvbQ=="
+      id="leadsai-embed-script"
+      defer
+    ></script>
+    <!-- Leads AI Widget Responsiveness Override -->
+    <script>
+      (function() {
+        const targetId = 'leadsai-host';
+        const styleContent = `
+          .chat-win {
+            max-height: calc(100vh - 120px) !important;
+            height: 600px !important;
+          }
+          @media (max-width: 480px) {
+            .chat-win {
+              width: calc(100vw - 32px) !important;
+              height: calc(100vh - 110px) !important;
+              max-height: calc(100vh - 110px) !important;
+              right: -8px !important;
+            }
+          }
+        `;
+
+        function tryInject() {
+          const host = document.getElementById(targetId);
+          if (host && host.shadowRoot) {
+            if (host.shadowRoot.getElementById('leadsai-custom-style')) return true;
+            const style = document.createElement('style');
+            style.id = 'leadsai-custom-style';
+            style.textContent = styleContent;
+            host.shadowRoot.appendChild(style);
+            return true;
+          }
+          return false;
+        }
+
+        function init() {
+          if (!tryInject()) {
+            const observer = new MutationObserver((mutations, obs) => {
+              if (tryInject()) {
+                obs.disconnect();
+              }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+            setTimeout(() => observer.disconnect(), 15000);
+          }
+        }
+
+        if (document.body) {
+          init();
+        } else {
+          document.addEventListener('DOMContentLoaded', init);
+        }
+      })();
+    </script>
     <script type="module" crossorigin src="./assets/index-CcqpH12W.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-Dnk37tRj.css">
   </head>
