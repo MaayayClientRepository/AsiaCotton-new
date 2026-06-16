@@ -21,9 +21,16 @@
       (function() {
         const targetId = 'leadsai-host';
         const styleContent = `
+          :host {
+            color-scheme: only light !important;
+          }
           .chat-win {
             max-height: calc(100vh - 120px) !important;
             height: 600px !important;
+            color-scheme: only light !important;
+          }
+          .launcher {
+            color-scheme: only light !important;
           }
           @media (max-width: 480px) {
             .chat-win {
@@ -38,6 +45,7 @@
         function tryInject() {
           const host = document.getElementById(targetId);
           if (host && host.shadowRoot) {
+            host.style.setProperty('color-scheme', 'only light', 'important');
             if (host.shadowRoot.getElementById('leadsai-custom-style')) return true;
             const style = document.createElement('style');
             style.id = 'leadsai-custom-style';
