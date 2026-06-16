@@ -21,16 +21,9 @@
       (function() {
         const targetId = 'leadsai-host';
         const styleContent = `
-          :host {
-            color-scheme: only light !important;
-          }
           .chat-win {
             max-height: calc(100vh - 120px) !important;
             height: 600px !important;
-            color-scheme: only light !important;
-          }
-          .launcher {
-            color-scheme: only light !important;
           }
           @media (max-width: 480px) {
             .chat-win {
@@ -40,12 +33,36 @@
               right: -8px !important;
             }
           }
+          /* Force blue color across all browsers */
+          .launcher {
+            background: linear-gradient(135deg, #2952e3, #00d4f5) !important;
+          }
+          .chat-header {
+            background: linear-gradient(135deg, #2952e3, #00d4f5) !important;
+          }
+          .send-btn {
+            background: linear-gradient(135deg, #2952e3, #00d4f5) !important;
+          }
+          .msg.assistant .bubble {
+            background: #2952e3 !important;
+          }
+          .msg.user .bubble {
+            background: #00d4f5 !important;
+          }
+          .msg-av {
+            background: #2952e3 !important;
+          }
+          .msg.user .msg-av {
+            background: #00d4f5 !important;
+          }
+          .pii-btn {
+            background: linear-gradient(135deg, #2952e3, #00d4f5) !important;
+          }
         `;
 
         function tryInject() {
           const host = document.getElementById(targetId);
           if (host && host.shadowRoot) {
-            host.style.setProperty('color-scheme', 'only light', 'important');
             if (host.shadowRoot.getElementById('leadsai-custom-style')) return true;
             const style = document.createElement('style');
             style.id = 'leadsai-custom-style';
