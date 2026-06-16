@@ -73,23 +73,36 @@
           return false;
         }
 
-        function init() {
-          if (!tryInject()) {
-            const observer = new MutationObserver((mutations, obs) => {
-              if (tryInject()) {
-                obs.disconnect();
-              }
-            });
-            observer.observe(document.body, { childList: true, subtree: true });
-            setTimeout(() => observer.disconnect(), 15000);
+        // Run immediately
+        if (tryInject()) return;
+
+        // Fallback polling + MutationObserver to be 100% sure it catches it
+        const interval = setInterval(() => {
+          if (tryInject()) clearInterval(interval);
+        }, 100);
+
+        const observer = new MutationObserver(() => {
+          if (tryInject()) {
+            observer.disconnect();
+            clearInterval(interval);
           }
+        });
+
+        function startObserver() {
+          observer.observe(document.body, { childList: true, subtree: true });
         }
 
         if (document.body) {
-          init();
+          startObserver();
         } else {
-          document.addEventListener('DOMContentLoaded', init);
+          document.addEventListener('DOMContentLoaded', startObserver);
         }
+
+        // Clean up after 15 seconds to prevent memory leaks
+        setTimeout(() => {
+          clearInterval(interval);
+          observer.disconnect();
+        }, 15000);
       })();
     </script>
   </head>
