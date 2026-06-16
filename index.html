@@ -25,12 +25,35 @@
             max-height: calc(100vh - 120px) !important;
             height: 600px !important;
           }
+          @media (max-width: 767px) {
+            :host {
+              right: auto !important;
+              left: 24px !important;
+            }
+            .chat-win {
+              left: 0 !important;
+              right: auto !important;
+              transform-origin: bottom left !important;
+            }
+            .proactive {
+              left: 72px !important;
+              right: auto !important;
+              border-radius: 12px 12px 12px 2px !important;
+            }
+            .proactive::after {
+              left: -6px !important;
+              right: auto !important;
+              border-left-color: transparent !important;
+              border-right-color: white !important;
+            }
+          }
           @media (max-width: 480px) {
             .chat-win {
               width: calc(100vw - 32px) !important;
               height: calc(100vh - 110px) !important;
               max-height: calc(100vh - 110px) !important;
-              right: -8px !important;
+              left: -8px !important;
+              right: auto !important;
             }
           }
           /* Force blue color across all browsers */
