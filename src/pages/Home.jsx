@@ -37,7 +37,7 @@ const Home = () => {
                 <IntroSequence />
 
                 {/* 2. Unified Story & Factory Section */}
-                <section className="pb-16 md:pb-32 px-6 md:px-12 lg:px-24 bg-white overflow-hidden transform-gpu relative">
+                <section className="py-16 md:py-32 px-6 md:px-12 lg:px-24 bg-white overflow-hidden transform-gpu relative">
                     <BackgroundGrid color="#2D6A6A" opacity={0.05} />
                     <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start relative z-10">
                         {/* Left Side: Our Story */}

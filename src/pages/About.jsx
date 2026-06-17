@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import textileHeritageImg from '../assets/textile-heritage.png';
 import factoryExteriorImg from '../assets/factory-exterior.png';
 import factory1 from '../assets/factory/1.jpg';
@@ -64,17 +63,17 @@ const AboutPage = () => {
     ];
 
     const mobileTransformStyles = [
-        'rotate(-8deg) translate(-120px, 10px)',
-        'rotate(-4deg) translate(-40px, -5px)',
-        'rotate(4deg) translate(40px, -5px)',
-        'rotate(8deg) translate(120px, 10px)'
+        'rotate(-8deg) translate(-220px, 10px)',
+        'rotate(-4deg) translate(-73px, -5px)',
+        'rotate(4deg) translate(73px, -5px)',
+        'rotate(8deg) translate(220px, 10px)'
     ];
 
     const desktopTransformStyles = [
-        'rotate(-10deg) translate(-250px, 20px)',
-        'rotate(-5deg) translate(-120px, -10px)',
-        'rotate(5deg) translate(120px, -10px)',
-        'rotate(10deg) translate(250px, 20px)'
+        'rotate(-10deg) translate(-340px, 20px)',
+        'rotate(-5deg) translate(-115px, -10px)',
+        'rotate(5deg) translate(115px, -10px)',
+        'rotate(10deg) translate(340px, 20px)'
     ];
 
     return (
@@ -120,20 +119,6 @@ const AboutPage = () => {
                             </p>
                         </div>
 
-                        <Link to="/products">
-                            <motion.button
-                                whileHover={{ y: -5, scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className={`flex flex-col items-center gap-2 text-[#2D6A6A] font-black uppercase tracking-widest pt-2 group cursor-pointer transform-gpu outline-none font-['Outfit'] ${
-                                    isMobileLandscape ? "text-[8px] mt-1" : "text-xs pt-4 mt-2"
-                                }`}
-                            >
-                                <span className="underline decoration-2 underline-offset-8">Explore Our Journey</span>
-                                <span className={`bg-[#2D6A6A] text-white rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-300 transform-gpu shadow-xl ${
-                                    isMobileLandscape ? "w-6 h-6 text-xs mt-1" : "w-10 h-10 text-xl mt-2"
-                                }`}>→</span>
-                            </motion.button>
-                        </Link>
                     </div>
                 </div>
 
@@ -203,14 +188,14 @@ const AboutPage = () => {
                 <BackgroundGrid color="#000000" opacity={0.03} />
                 <div className="flex flex-col space-y-12 items-center transform-gpu relative z-10">
                     <div className="space-y-4 text-center max-w-2xl transform-gpu">
-                        <h2 className="text-[#1A1A1A] text-2xl md:text-5xl font-black uppercase tracking-tight leading-none">Our <br /><span className="text-[#2D6A6A]">Commitment</span></h2>
+                        <h2 className="text-[#2D6A6A] text-2xl md:text-5xl font-black uppercase tracking-tight leading-none">Our <br />Commitment</h2>
                         <div className="w-16 h-1 bg-[#2D6A6A] mx-auto"></div>
                         <p className="text-gray-600 text-lg leading-relaxed font-medium">
                             For over 25 years since our founding, we are driven by a passion to produce exceptional textiles while staying true to our values of responsibility, innovation, and integrity.
                         </p>
                     </div>
 
-                    <div className="w-full flex justify-center overflow-hidden scale-90 sm:scale-90 md:scale-100 origin-top">
+                    <div className="w-full flex justify-center overflow-hidden scale-[0.55] sm:scale-[0.75] md:scale-[0.9] lg:scale-100 origin-top">
                         <BounceCards
                             data={features}
                             containerWidth="100%"

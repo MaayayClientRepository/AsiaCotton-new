@@ -14,7 +14,6 @@ function AppContent() {
 
   return (
     <div className="relative">
-      <Navbar isHome={location.pathname === '/'} />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageTransition><Home /></PageTransition>} />
@@ -25,6 +24,7 @@ function AppContent() {
           <Route path="/contact" element={<PageTransition><Contact /></PageTransition>} />
         </Routes>
       </AnimatePresence>
+      <Navbar isHome={location.pathname === '/'} />
     </div>
   );
 }

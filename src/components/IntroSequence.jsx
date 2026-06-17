@@ -504,7 +504,7 @@ const IntroSequence = () => {
                                 <div className="flex flex-col items-center md:items-start justify-center h-full pl-0 md:pl-12 lg:pl-20">
                                     <motion.h1
                                         style={{ opacity: desktopHeadlineOpacity }}
-                                        className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[0.9] tracking-tighter text-center md:text-left mt-6 md:mt-0"
+                                        className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-black leading-[1.0] tracking-tighter text-center md:text-left mt-6 md:mt-0"
                                     >
                                         <AnimatedText text="Crafting" shouldStart={shouldStartTyping} />
                                         <br />

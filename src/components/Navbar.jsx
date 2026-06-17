@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { FloatingDock } from "@/components/ui/floating-dock";
 import { cn } from "@/lib/utils";
 import {
@@ -14,6 +15,7 @@ import logo from '../assets/logo-white.png';
 
 const Navbar = ({ isHome }) => {
     const [isVisible, setIsVisible] = useState(!isHome);
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -94,7 +96,7 @@ const Navbar = ({ isHome }) => {
 
     return (
         <div className={cn(
-            "fixed z-50 pointer-events-none transition-all duration-500 ease-in-out",
+            "fixed z-[9999] pointer-events-none transition-all duration-500 ease-in-out",
             "bottom-6 right-6 md:bottom-auto md:right-auto md:top-8 md:left-6",
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 md:translate-y-0 md:-translate-x-4"
         )}>
@@ -102,6 +104,7 @@ const Navbar = ({ isHome }) => {
                 <FloatingDock
                     items={links}
                     mobileDirection="up"
+                    currentPath={location.pathname}
                 />
             </div>
         </div>

@@ -15,15 +15,17 @@ export const FloatingDock = ({
     items,
     desktopClassName,
     mobileClassName,
-    mobileDirection = "down"
+    mobileDirection = "down",
+    currentPath
 }) => {
     return (
         <>
-            <FloatingDockDesktop items={items} className={desktopClassName} />
+            <FloatingDockDesktop items={items} className={desktopClassName} currentPath={currentPath} />
             <FloatingDockMobile
                 items={items}
                 className={mobileClassName}
                 direction={mobileDirection}
+                currentPath={currentPath}
             />
         </>
     );
@@ -32,7 +34,8 @@ export const FloatingDock = ({
 const FloatingDockMobile = ({
     items,
     className,
-    direction = "up"
+    direction = "up",
+    currentPath
 }) => {
     const [open, setOpen] = useState(false);
 
@@ -151,6 +154,7 @@ const FloatingDockMobile = ({
                                 {menuItems.map((item, idx) => {
                                     const serial = String(idx + 1).padStart(2, "0");
                                     const caption = captions[item.title] || "premium textile solutions";
+                                    const isActive = currentPath === item.href;
 
                                     return (
                                         <motion.div
@@ -161,24 +165,39 @@ const FloatingDockMobile = ({
                                             <Link
                                                 to={item.href}
                                                 onClick={() => setOpen(false)}
-                                                className="flex items-center gap-5 py-3.5 px-4 rounded-3xl transition-all duration-300 group active:scale-[0.97] border border-transparent hover:border-[#E11D48]/20 hover:bg-white/5 transform-gpu relative overflow-hidden"
+                                                className={cn(
+                                                    "flex items-center gap-5 py-3.5 px-4 rounded-3xl transition-all duration-300 group active:scale-[0.97] border border-transparent hover:border-[#E11D48]/20 hover:bg-white/5 transform-gpu relative overflow-hidden",
+                                                    isActive && "border-[#E11D48]/30 bg-white/5"
+                                                )}
                                             >
                                                 <span className="absolute inset-0 bg-gradient-to-r from-[#E11D48]/10 to-[#881337]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
                                                 
-                                                <span className="text-lg font-serif italic text-[#E11D48] group-hover:text-white transition-colors duration-300 select-none">
+                                                <span className={cn(
+                                                    "text-lg font-serif italic transition-colors duration-300 select-none",
+                                                    isActive ? "text-white" : "text-[#E11D48] group-hover:text-white"
+                                                )}>
                                                     {serial}
                                                 </span>
 
                                                 <div className="flex flex-col gap-0.5">
-                                                    <span className="text-lg font-black tracking-widest uppercase text-white/80 group-hover:text-[#FF4E7E] group-hover:translate-x-1.5 transition-all duration-300">
+                                                    <span className={cn(
+                                                        "text-lg font-black tracking-widest uppercase text-white/80 group-hover:text-[#FF4E7E] group-hover:translate-x-1.5 transition-all duration-300",
+                                                        isActive && "text-[#FF4E7E] translate-x-1.5"
+                                                    )}>
                                                         {item.title}
                                                     </span>
-                                                    <span className="text-[9px] font-medium tracking-wider text-neutral-400 group-hover:text-[#FF8DAF] transition-colors duration-300 select-none">
+                                                    <span className={cn(
+                                                        "text-[9px] font-medium tracking-wider text-neutral-400 transition-colors duration-300 select-none",
+                                                        isActive ? "text-[#FF8DAF]" : "group-hover:text-[#FF8DAF]"
+                                                    )}>
                                                         {caption}
                                                     </span>
                                                 </div>
 
-                                                <div className="ml-auto opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                                                <div className={cn(
+                                                    "ml-auto transition-all duration-300",
+                                                    isActive ? "opacity-100 translate-x-0" : "opacity-0 translate-x-[-10px] group-hover:opacity-100 group-hover:translate-x-0"
+                                                )}>
                                                     <svg className="w-4 h-4 stroke-[#E11D48] group-hover:stroke-[#FF4E7E]" fill="none" viewBox="0 0 24 24" strokeWidth="2.5">
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                                                     </svg>
@@ -227,11 +246,12 @@ const FloatingDockMobile = ({
 const FloatingDockDesktop = ({
     items,
     className,
+    currentPath
 }) => {
     let mouseX = useMotionValue(Infinity);
     return (
         <motion.div
-            onMouseMove={(e) => mouseX.set(e.pageX)}
+            onMouseMove={(e) => mouseX.set(e.clientX)}
             onMouseLeave={() => mouseX.set(Infinity)}
             className={cn(
                 "hidden md:flex h-16 gap-4 items-end rounded-2xl bg-gray-50 dark:bg-neutral-900 px-4 pb-3",
@@ -239,7 +259,7 @@ const FloatingDockDesktop = ({
             )}
         >
             {items.map((item) => (
-                <IconContainer mouseX={mouseX} key={item.title} {...item} />
+                <IconContainer mouseX={mouseX} key={item.title} {...item} currentPath={currentPath} />
             ))}
         </motion.div>
     );
@@ -251,6 +271,7 @@ function IconContainer({
     icon,
     href,
     className,
+    currentPath
 }) {
     let ref = useRef(null);
 
@@ -275,9 +296,10 @@ function IconContainer({
     });
 
     const [hovered, setHovered] = useState(false);
+    const isActive = currentPath === href && title !== "Asia Cotton";
 
     return (
-        <Link to={href}>
+        <Link to={href} className="block pointer-events-auto relative">
             <motion.div
                 ref={ref}
                 style={{ width, height }}
@@ -304,6 +326,9 @@ function IconContainer({
                     {icon}
                 </motion.div>
             </motion.div>
+            {isActive && (
+                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-5 h-1 bg-[#E11D48] rounded-full" />
+            )}
         </Link>
     );
 }
