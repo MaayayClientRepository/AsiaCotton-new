@@ -86,12 +86,14 @@
         function tryInject() {
           const host = document.getElementById(targetId);
           if (host && host.shadowRoot) {
-            if (host.shadowRoot.getElementById('leadsai-custom-style')) return true;
-            const style = document.createElement('style');
-            style.id = 'leadsai-custom-style';
-            style.textContent = styleContent;
-            host.shadowRoot.appendChild(style);
-            return true;
+            const styleEl = host.shadowRoot.querySelector('style');
+            if (styleEl) {
+              if (styleEl.textContent.includes('/* Custom Responsiveness Override */')) {
+                return true;
+              }
+              styleEl.textContent += '\n/* Custom Responsiveness Override */\n' + styleContent;
+              return true;
+            }
           }
           return false;
         }
