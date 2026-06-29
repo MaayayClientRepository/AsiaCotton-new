@@ -81,3 +81,11 @@ svg {
         height: 78vh !important;
     }
 }
+
+/* Position chat widget host on the bottom-left on mobile to prevent overlap with the bottom-right Navbar */
+@media (max-width: 767px) {
+    #leadsai-host {
+        right: auto !important;
+        left: 24px !important;
+    }
+}
