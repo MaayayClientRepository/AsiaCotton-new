@@ -86,12 +86,14 @@
         function tryInject() {
           const host = document.getElementById(targetId);
           if (host && host.shadowRoot) {
-            if (host.shadowRoot.getElementById('leadsai-custom-style')) return true;
-            const style = document.createElement('style');
-            style.id = 'leadsai-custom-style';
-            style.textContent = styleContent;
-            host.shadowRoot.appendChild(style);
-            return true;
+            const styleEl = host.shadowRoot.querySelector('style');
+            if (styleEl) {
+              if (styleEl.textContent.includes('/* Custom Responsiveness Override */')) {
+                return true;
+              }
+              styleEl.textContent += '\n/* Custom Responsiveness Override */\n' + styleContent;
+              return true;
+            }
           }
           return false;
         }
@@ -128,8 +130,8 @@
         }, 15000);
       })();
     </script>
-    <script type="module" crossorigin src="./assets/index-CQq6g47L.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CXwBLGd_.css">
+    <script type="module" crossorigin src="./assets/index-DWgN-9o_.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BmwLQKYh.css">
   </head>
   <body class="bg-[#FDFCFB] text-[#1A1A1A]">
     <div id="root"></div>
